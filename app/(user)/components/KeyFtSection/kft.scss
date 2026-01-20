@@ -1,0 +1,112 @@
+.KeyFtSection-container-main {
+    .KeyFtSection-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.1em;
+        .left-section-container,
+        .right-section-container.feature-grid {
+            width: calc(50% - 1.05em);
+            flex-grow: 1;
+        }
+        .left-section-container {
+            // Styles for h2, h5, p remain the same
+            h2 {
+                color: $primary-green;
+                font-family: Aeonik;
+                font-size: 3.4375rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                @media(max-width: 639.98px) {
+                    font-size: 2.7rem;
+                }
+            }
+            h5 {
+                color: $primary-green;
+                font-family: Aeonik;
+                font-size: 1.625rem;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                margin-top: 0.7em;
+                margin-bottom: 0.3em;
+                @media(max-width: 639.98px) {
+                    font-size: 1.3rem;
+                }
+            }
+            p {
+                color: var(--grey-text, #585858);
+                font-family: Aeonik;
+                font-size: 1.0625rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5625rem;
+                @media(max-width: 639.98px) {
+                    font-size: 1rem;
+                }
+            }
+        }
+        .right-section-container.feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5em;
+            .feature-item {
+                position: relative;
+                border-radius: 1rem;
+                overflow: hidden;
+                // background-image: url('/images/hero-img.png'); // REMOVED - Handled by inline styles now
+                background-size: cover; // Keep these general background styles
+                background-position: center; // Keep these general background styles
+                aspect-ratio: 1 / 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 1em;
+                .feature-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background-color: rgba(0, 0, 0, 0.4);
+                    z-index: 1;
+                }
+                .feature-text-container {
+                    position: relative;
+                    z-index: 2;
+                    text-align: center;
+                    h6 {
+                        color: $white;
+                        text-align: center;
+                        font-family: Aeonik;
+                        font-size: 1.375rem;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: normal;
+                        margin: 0; // Added margin: 0; back
+                    }
+                }
+            }
+        }
+        // --- Responsiveness ---
+        // Media queries remain the same
+        @media (max-width: 1024px) {
+            .left-section-container {
+                width: calc(45% - 1.05em);
+            }
+            .right-section-container.feature-grid {
+                width: calc(55% - 1.05em);
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 767px) {
+            .left-section-container,
+            .right-section-container.feature-grid {
+                width: 100%;
+            }
+            .right-section-container.feature-grid {
+                // This is the key change for the two-column layout
+                grid-template-columns: repeat(2, 1fr);
+                // You can adjust the gap for mobile if needed, e.g., 1em
+                gap: 1em;
+            }
+        }
+    }
+}

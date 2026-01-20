@@ -1,0 +1,231 @@
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey, $light-pink
+// are globally available or imported.
+$fab-border-radius: 0.8rem;
+$triangle-size: 10px;
+$popup-width-desktop: 380px;
+$popup-gap: 18px;
+$idle-bubble-animation-duration: 0.3s; // Matches FADE_ANIMATION_DURATION in JS
+
+// Main container for positioning
+.faq-fab-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 30;
+    width: 85px;
+    height: 70px;
+}
+
+// The floating button itself
+.faq-fab-button {
+    width: 100%;
+    height: 100%;
+    background-color: $primary-green;
+    border-top-left-radius: $fab-border-radius;
+    border-top-right-radius: $fab-border-radius;
+    border-bottom-left-radius: $fab-border-radius;
+    border-bottom-right-radius: 0;
+    border: none;
+    padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1001;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-radius 0.1s linear 0.1s;
+
+    img { width: 70%; height: auto; object-fit: contain; transition: opacity 0.2s ease-in-out; }
+    &:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
+
+    &::after {
+        content: ''; position: absolute;
+        bottom: -$triangle-size; right: 0;
+        width: 0; height: 0; border-style: solid;
+        border-width: $triangle-size $triangle-size * 1.5 0 0;
+        border-color: $primary-green transparent transparent transparent;
+        opacity: 1; visibility: visible;
+        transition: opacity 0.15s ease-in-out, visibility 0s linear 0s;
+    }
+
+    &::before {
+        content: ''; position: absolute;
+        left: -$triangle-size;
+        top: 15px;
+        width: 0; height: 0; border-style: solid;
+        border-width: $triangle-size * 0.8 $triangle-size $triangle-size * 0.8 0;
+        border-color: transparent $primary-green transparent transparent;
+        opacity: 0; visibility: hidden;
+        transition: opacity 0.2s ease-in-out 0.15s, visibility 0s linear 0.3s;
+        z-index: 1002;
+    }
+}
+
+// The popup window
+.faq-popup {
+    position: absolute;
+    right: calc(100% + #{$popup-gap});
+    bottom: 0;
+    width: $popup-width-desktop;
+    background-color: $white;
+    border-radius: 1rem;
+    border: 1px solid $cloud-grey;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 1rem;
+    opacity: 0;
+    transform: scale(0.9) translateX($popup-gap * 0.8);
+    transform-origin: bottom right;
+    visibility: hidden;
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0s linear 0.25s;
+    z-index: 1000;
+
+    &.open {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+        visibility: visible;
+        transition-delay: 0s;
+    }
+
+    h5 { color: $black; font-family: Aeonik, sans-serif; font-size: 1.3rem; font-weight: 600; margin: 0; text-align: center; }
+    .subtitle { color: $grey-text; font-family: Aeonik, sans-serif; font-size: 0.9rem; margin: -0.5rem 0 0.5rem 0; text-align: center; }
+    .steps-row { display: flex; justify-content: space-around; align-items: flex-start; gap: 0.8rem; padding-bottom: 1rem; border-bottom: 1px solid $cloud-grey; }
+    .step { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1;
+        .step-icon { height: 35px; width: auto; margin-bottom: 0.5rem; object-fit: contain; filter: brightness(0) saturate(100%) invert(26%) sepia(27%) saturate(1313%) hue-rotate(121deg) brightness(95%) contrast(91%); }
+        p { color: $black; font-family: Aeonik, sans-serif; font-size: 0.85rem; font-weight: 500; line-height: 1.3; margin: 0; }
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .faq-item { display: block; padding: 0.7rem 1rem; background-color: transparent; border: 1px solid $cloud-grey; border-radius: 0.6rem; color: $grey-text; font-family: Aeonik, sans-serif; font-size: 0.9rem; font-weight: 400; text-decoration: none; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        &:hover { background-color: $light-pink;color: $primary-green; }
+    }
+    .view-all-btn { display: block; margin-top: 0.5rem; background-color: $primary-green; color: $white; border: none; border-radius: 0.6rem; padding: 0.8rem 1rem; text-align: center; font-family: Aeonik, sans-serif; font-size: 0.95rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: background-color 0.2s ease;
+        &:hover { background-color: $light-pink; color: $primary-green;  }
+    }
+}
+
+// State change when popup is open
+.faq-fab-container.popup-open {
+    .faq-fab-button {
+        border-bottom-right-radius: $fab-border-radius;
+        &::after { opacity: 0; visibility: hidden; transition-delay: 0s; }
+        &::before { opacity: 1; visibility: visible; transition-delay: 0.15s; }
+    }
+}
+
+// --- Styles for Idle Message Bubble ---
+.idle-message-bubble {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    width: max-content;
+    max-width: 280px;
+    background-color: $white;
+    color: $grey-text;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid $cloud-grey;
+    font-family: Aeonik, sans-serif;
+    font-size: 0.9rem;
+    text-align: left;
+    z-index: 999; // Below FAB button and main popup
+
+    // Initial (hidden) state
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    visibility: hidden;
+    transform-origin: bottom center;
+
+    // Transition for both fade-in and fade-out
+    // Opacity and transform take $idle-bubble-animation-duration.
+    // Visibility changes after $idle-bubble-animation-duration when hiding (to ensure fade-out is seen).
+    // Visibility changes immediately when showing.
+    transition: opacity $idle-bubble-animation-duration ease-out,
+                transform $idle-bubble-animation-duration ease-out,
+                visibility 0s linear $idle-bubble-animation-duration;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        visibility: visible;
+        // Ensure visibility transition is immediate when becoming visible
+        transition: opacity $idle-bubble-animation-duration ease-out,
+                    transform $idle-bubble-animation-duration ease-out,
+                    visibility 0s linear 0s;
+    }
+
+    .idle-message-text {
+        display: inline-block;
+        // Animation for text appearing within the bubble
+        animation: textFadeIn $idle-bubble-animation-duration + 0.1s ease-out forwards;
+    }
+}
+
+@keyframes textFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// --- Responsiveness ---
+@media (max-width: 500px) {
+     .faq-fab-container {
+         width: 75px;
+         height: 60px;
+         bottom: 1rem;
+         right: 1rem;
+     }
+     .faq-fab-button{
+         border-top-left-radius: $fab-border-radius * 0.8;
+         border-top-right-radius: $fab-border-radius * 0.8;
+         border-bottom-left-radius: $fab-border-radius * 0.8;
+
+         &::after {
+              bottom: -$triangle-size * 0.8;
+              border-width: $triangle-size * 0.8 $triangle-size * 1.2 0 0;
+         }
+          &::before {
+              display: none;
+          }
+     }
+
+    .faq-popup {
+        width: calc(100vw - 2rem);
+        max-width: 340px;
+        right: 0;
+        left: auto;
+        bottom: calc(100% + 10px);
+        transform-origin: bottom right;
+        opacity: 0;
+        transform: scale(0.9) translateY(15px);
+        &.open { opacity: 1; transform: scale(1) translateY(0); }
+        padding: 1.2rem; gap: 0.8rem;
+        h5 { font-size: 1.1rem; }
+        .subtitle { font-size: 0.8rem;}
+        .steps-row{ gap: 0.5rem; }
+        .step .step-icon { height: 30px; }
+        .step p { font-size: 0.7rem; }
+        .faq-item { font-size: 0.8rem; padding: 0.5rem 0.7rem;}
+        .view-all-btn { font-size: 0.85rem; padding: 0.6rem 1rem;}
+    }
+
+    .faq-fab-container.popup-open {
+        .faq-fab-button {
+             border-bottom-right-radius: $fab-border-radius * 0.8;
+            &::before { opacity: 0; visibility: hidden; display: none; }
+            &::after { opacity: 0; visibility: hidden; }
+        }
+    }
+
+    .idle-message-bubble {
+        max-width: calc(100vw - 3rem);
+        font-size: 0.8rem;
+        padding: 0.7rem 1rem;
+        bottom: calc(100% + 8px);
+    }
+}

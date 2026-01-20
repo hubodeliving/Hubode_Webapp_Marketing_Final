@@ -1,0 +1,248 @@
+// File: app/(admin)/all-users/style.scss
+@import '../../variables.scss'; // Your admin variables
+.all-users-page {
+    font-family: $font-family-sans;
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: $text-dark;
+        margin-bottom: 1.5rem;
+    }
+}
+
+// Reusing .filters-container and .search-filter-group styles from rent-management/style.scss
+// or define them here if you want them to be distinct. For simplicity, assuming reuse.
+// If you copied rent-management/style.scss, these will already be styled.
+// For clarity, here's what the relevant parts would look like if defined specifically:
+.filters-container {
+    display: flex;
+    margin-bottom: 1.5rem;
+    // Only search is present, so no need for flex-wrap or extensive gap here
+    // if it's just one search input.
+    .search-filter-group {
+        flex-grow: 1; // Allow search to take available space, or set a max-width
+        max-width: 400px; // Or adjust as preferred
+        position: relative;
+        .search-input {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid $border-color;
+            border-radius: 6px;
+            background-color: $white;
+            font-size: 0.875rem;
+            color: $text-dark;
+            &::placeholder {
+                color: $text-light;
+            }
+            &:focus {
+                outline: none;
+                border-color: $primary-green;
+                box-shadow: 0 0 0 2px rgba($primary-green, 0.1);
+            }
+        }
+    }
+}
+
+// Table styles - can be very similar to previous tables
+.users-table-wrapper {
+    background-color: $white;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px; // Adjust min-width as needed
+    th,
+    td {
+        padding: 0.875rem 1rem;
+        text-align: left;
+        font-size: 0.875rem;
+        border-bottom: 1px solid $border-color;
+    }
+    thead {
+        tr {
+            background-color: $primary-green; // Dark green header
+            th {
+                color: $white;
+                font-weight: 600;
+                font-size: 0.9rem;
+                border-bottom: none;
+                &:first-child {
+                    border-top-left-radius: 8px;
+                }
+                &:last-child {
+                    border-top-right-radius: 8px;
+                }
+            }
+        }
+    }
+    tbody {
+        tr {
+            &:last-child {
+                td {
+                    border-bottom: none;
+                }
+            }
+            &:hover {
+                background-color: lighten($sidebar-bg, 2%); // Light hover effect
+            }
+            td {
+                color: $text-dark;
+                vertical-align: middle;
+            }
+        }
+    }
+    .details-button {
+        // Reusing style from registrations page
+        background-color: $primary-green;
+        color: $white;
+        border: none;
+        padding: 0.5rem 0.875rem;
+        border-radius: 6px;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        min-width: 90px; // Give it some width
+        text-align: center;
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+    .status-action-button {
+        // Styles for "Make Inmate" / "Make Normal" button
+        border: none;
+        padding: 0.5rem 0.875rem;
+        border-radius: 6px; // Slightly less rounded than pill badges
+        font-size: 0.8125rem;
+        font-weight: 600; // Bolder like status badges
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        min-width: 110px; // Ensure buttons have similar width
+        text-align: center;
+        &.make-inmate {
+            // Green button
+            background-color: $status-new-bg; // Using status green
+            color: $status-new-text; // White text
+        }
+        &.make-normal {
+            // Red button
+            background-color: $status-cancelled-bg; // Using status red
+            color: $status-cancelled-text; // White text
+        }
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+    .no-results-message {
+        text-align: center;
+        padding: 2rem;
+        color: $text-light;
+        font-style: italic;
+    }
+}
+
+// --- Responsive Table (similar to other pages) ---
+@media (max-width: $breakpoint-md) {
+    // Approx 768px
+    .filters-container .search-filter-group {
+        max-width: none; // Allow search to take full width if it's the only filter
+    }
+    .users-table {
+        thead {
+            display: none;
+        }
+        tr {
+            display: block;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid $border-color;
+            box-shadow: 0 1px 3px rgba($black, 0.05);
+            background-color: $white;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        td {
+            display: block;
+            text-align: right;
+            padding-left: 50%; // Adjust as needed for label space
+            position: relative;
+            border-bottom: 1px solid lighten($border-color, 5%);
+            min-height: 40px; // Ensure cells have some height
+            display: flex; // Use flex to align items better in mobile card view
+            align-items: center;
+            justify-content: flex-end; // Align button/text to the right
+            &:last-child {
+                border-bottom: none;
+            }
+            &::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                width: calc(50% - 1.5rem); // Adjust width
+                text-align: left;
+                font-weight: 600;
+                color: $text-dark;
+                display: flex; // Allow vertical centering of label
+                align-items: center;
+                height: 100%; // Make pseudo-element take full cell height
+            }
+        }
+        // Ensure buttons in mobile card view are not overly wide
+        .details-button,
+        .status-action-button {
+            width: auto; // Let them size by content + padding
+            display: inline-block;
+            margin-left: 0.5rem; // Add some spacing if multiple buttons in one cell (not the case here but good practice)
+        }
+    }
+}
+
+@media (max-width: $breakpoint-sm) {
+    // Approx 576px
+    .all-users-page .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .users-table td {
+        padding-left: 40%; // Further adjust for smaller screens
+        &::before {
+            width: calc(40% - 1.25rem); // Adjust label width
+        }
+    }
+}
+
+.status-action-button {
+    // Common styles for these buttons (padding, border, font, etc.)
+    // For example:
+    padding: $spacing-unit ($spacing-unit * 1.5);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: $white; // Default text color for these buttons
+    cursor: pointer;
+    font-weight: 500;
+    min-width: 120px; // Ensures buttons have a decent minimum width
+    text-align: center;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    // Specific style for the "On-board User" button (Green)
+    &.action-onboard {
+        background-color: $primary-green; // Use your defined green variable
+        &:hover:not(:disabled) {
+            background-color: darken($primary-green, 5%);
+        }
+    }
+    // Specific style for the "Off-board User" button (Red)
+    &.action-offboard {
+        background-color: $status-cancelled-bg; // Use your defined red variable
+        &:hover:not(:disabled) {
+            background-color: darken($status-cancelled-bg, 5%);
+        }
+    }
+}

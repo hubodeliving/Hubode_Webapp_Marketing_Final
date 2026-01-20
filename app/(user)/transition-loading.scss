@@ -1,0 +1,32 @@
+// File: app/(main)/transition-loading.scss
+// Styles for the global page transition loading indicator.
+
+// Define or import your variable. Ensure this is accessible.
+
+// --- Fullscreen Overlay Container ---
+.transition-loading-container { // Updated class name
+  background-color: $primary-green; // Your desired background color
+  height: 100vh; // Full viewport height
+  width: 100vw;  // Full viewport width
+  position: fixed; // Position relative to the viewport to cover everything
+  inset: 0; // Shortcut for top: 0, left: 0, bottom: 0, right: 0
+  z-index: 10000; // High z-index to ensure it's on top during transition
+  display: flex; // Use flexbox for centering the GIF
+  justify-content: center; // Center child horizontally
+  align-items: center;    // Center child vertically
+  overflow: hidden; // Prevent potential scrollbars
+
+  // --- Container for the GIF (Nested) ---
+  // Often doesn't need specific styles when parent uses flex for centering
+  .transition-loading-gif-container { // Updated class name
+      // Add specific container styles here only if necessary
+  }
+
+  // --- Styles for the GIF Image (Nested) ---
+  .transition-loading-gif { // Updated class name
+    display: block; // Removes extra space below the image
+    width: 100%; // Make the image responsive within its container/viewport width
+    max-width: 150px; // <<< Set the desired maximum width for your GIF. Adjust as needed!
+    height: auto; // Maintain the image's aspect ratio automatically
+  }
+}

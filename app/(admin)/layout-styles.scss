@@ -1,0 +1,30 @@
+// File: app/(admin)/layout-styles.scss
+@import './variables.scss'; // Assuming you have a variables file for colors, etc.
+
+.admin-dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: $admin-bg-light; // Example: #F9FAFB or white
+}
+
+.admin-main-content {
+    flex-grow: 1;
+    padding: 2rem; // Adjust padding as needed
+    overflow-y: auto; // Allow content to scroll if it exceeds viewport height
+}
+
+// Responsive adjustments for the layout
+@media (max-width: $breakpoint-md) { // Example: 768px
+    .admin-dashboard-layout {
+        flex-direction: column;
+    }
+    .admin-main-content {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: $breakpoint-sm) { // Example: 576px
+    .admin-main-content {
+        padding: 1rem;
+    }
+}

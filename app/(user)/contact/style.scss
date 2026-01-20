@@ -1,0 +1,289 @@
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+// ==============================
+// START: Contact Top Section Styles (Existing)
+// ==============================
+.topsection-container-main.contact-hero { // Added contact-hero class
+    min-height: 50vh;
+    height: auto;
+    border-radius: 0rem 0rem 2.1875rem 2.1875rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 3rem; // Example standard margin if needed
+
+    &::before { content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 1; }
+    .topsection-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-start; position: relative; z-index: 2; }
+
+    .content-container {
+        width: 50%; max-width: 650px; padding-left: 2em;
+        h1 { color: $white; font-family: Aeonik, sans-serif; font-size: 2.8rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+
+        @media (max-width: 767px) {
+            h1{
+                margin-bottom: 0.7rem!important;
+            }
+        }
+
+            .subtext {
+                color: $white;
+                font-family: Aeonik;
+                font-size: 1.125rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5; // Adjusted for better readability
+                margin: 0; // Remove default margin if any
+                opacity: 0.9; // Slightly less prominent subtext
+                margin-bottom: 1.4rem;
+
+                @media (max-width: 767px) {
+                    margin-bottom: 1rem;
+                }
+            }
+
+        .btn-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .email-btn, .whatsapp-btn { display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.8rem 1.5rem; border-radius: 0.8rem; border: none; cursor: pointer; font-family: Aeonik, sans-serif; font-size: 0.95rem; font-weight: 500; line-height: 1.2; transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            img { width: 1.25rem; height: 1.25rem; object-fit: contain; }
+            p { margin: 0; }
+            &:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        }
+        .email-btn {
+            background-color: $white;
+            color: $black;
+            p { color: $black; } // lock text color to the intended green button palette
+            &:hover { background-color: darken($white, 5%); }
+        }
+        .whatsapp-btn {
+            background-color: $primary-green;
+            color: $white;
+            img { filter: brightness(0) invert(1); }
+            p { color: $white; }
+            &:hover { background-color: darken($primary-green, 8%); }
+        }
+    }
+
+    @media (max-width: 992px) { .topsection-container .content-container { width: 70%; padding-left: 1.5em; h1 { font-size: 2.4rem; } .btn-row { gap: 0.8rem; } .email-btn, .whatsapp-btn { padding: 0.7rem 1.2rem; font-size: 0.9rem; img { width: 1.1rem; height: 1.1rem; } } } }
+    @media (max-width: 767px) { min-height: 55vh; .topsection-container { justify-content: center; align-items: flex-end; padding-bottom: 3rem; text-align: center; } .content-container { width: 100%!important; padding: 1em 1em 0 1em; display: flex; flex-direction: column; align-items: center; h1 { font-size: 2rem; margin-bottom: 1.2rem; } .btn-row { flex-direction: column; gap: 1rem; width: 100%; align-items: stretch; } .email-btn, .whatsapp-btn { justify-content: center; width: 100%; max-width: 350px; padding: 0.8rem 1rem; } } } // Adjusted min-height and padding
+    @media (max-width: 480px) { .content-container { h1 { font-size: 1.8rem; } .email-btn, .whatsapp-btn { font-size: 0.85rem; } } }
+}
+// ==============================
+// END: Contact Top Section Styles
+// ==============================
+
+
+// ==============================
+// START: Contact Form Section Styles (NEW)
+// ==============================
+.contact-form-section-container {
+}
+
+.contact-form-section.container {
+    display: flex;
+    gap: 3rem; // Gap between left (text) and right (form) sections
+    align-items: flex-start; // Align items to the top
+    // Ensure container handles max-width and padding
+}
+
+.left-section,
+.right-section {
+    flex-basis: 50%; // Each section takes half the width
+    flex-grow: 1;
+}
+
+// Styles for Left Text Section
+.left-section {
+    h5 { // "Hey There"
+        color: $grey-text; // Use your grey text variable
+        font-family: Aeonik, sans-serif;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 0 0 0.5rem 0; // Space below
+    }
+
+    h2 { // "We'd Love To Hear From You"
+        color: $primary-green; // Use your primary color
+        font-family: Aeonik, sans-serif;
+        font-size: 2.5rem; // Adjust size as needed
+        font-weight: 700;
+        line-height: 1.3;
+        margin: 0 0 1rem 0; // Space below
+    }
+
+    p {
+        color: $grey-text;
+        font-family: Aeonik, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+}
+
+// Styles for Right Form Section
+.right-section {
+    .contact-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem; // Vertical gap between form rows
+    }
+
+    .form-row {
+        width: 100%;
+    }
+
+    .form-row-split {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); // Two equal columns
+        gap: 1.5rem; // Gap between Name and Phone fields
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem; // Space between label and input
+    }
+
+    label {
+        color: $black;
+        font-family: Aeonik, sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border: 1px solid $cloud-grey; // Use your light grey border color
+        border-radius: 0.8rem; // Rounded corners like UI
+        background-color: #FBFBFB;
+        font-family: Aeonik, sans-serif;
+        font-size: 0.95rem;
+        color: $black;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        box-sizing: border-box; // Ensure padding doesn't increase size
+
+        &::placeholder {
+            color: lighten($grey-text, 15%); // Lighter placeholder text
+            opacity: 1;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $primary-green; // Highlight border on focus
+            box-shadow: 0 0 0 2px lighten($primary-green, 40%); // Optional focus ring
+        }
+    }
+
+    textarea {
+        resize: vertical; // Allow vertical resize only
+        min-height: 120px; // Minimum height for message box
+    }
+
+    .form-row-submit {
+        display: flex; // To allow button alignment if needed
+        justify-content: flex-start; // Align button to the left
+    }
+
+    .submit-button {
+        background-color: $primary-green; // Use primary color
+        color: $white;
+        border: none;
+        border-radius: 0.6rem; // Slightly less rounded than inputs maybe
+        padding: 0.9rem 2.5rem; // Adjust padding
+        font-family: Aeonik, sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            background-color: darken($primary-green, 8%);
+            transform: translateY(-2px);
+        }
+    }
+}
+
+// --- Responsiveness for Contact Form ---
+@media (max-width: 767px) { // Mobile
+    .contact-form-section.container {
+        flex-direction: column; // Stack left and right sections
+        gap: 2rem; // Adjust vertical gap
+    }
+
+    .left-section,
+    .right-section {
+        flex-basis: auto; // Reset basis
+        width: 100%;
+    }
+
+    .left-section {
+        text-align: center; // Center align text on mobile
+        h2 { font-size: 2rem; }
+    }
+
+    .right-section .form-row-split {
+        grid-template-columns: 1fr; // Stack Name and Phone fields
+        gap: 1.5rem; // Keep vertical gap
+    }
+
+    .right-section .form-row-submit {
+         justify-content: center; // Center the submit button
+    }
+    .right-section .submit-button {
+        width: 100%; // Make button full width
+        max-width: 300px; // Optional max-width
+    }
+
+}
+
+
+// Assume variables like $cloud-grey are globally available or imported.
+
+// Styles for the new Map Section
+.map-section-container {
+    padding-top: 3rem; // Adjust spacing as needed
+    padding-bottom: 3rem;
+    // Use flex/justify/align from parent class if needed
+}
+
+.map-section.container {
+    // Container likely handles max-width and padding
+}
+
+.map-iframe-wrapper {
+    width: 100%;
+    position: relative; // Needed for absolute positioning of iframe or aspect ratio padding trick
+    padding-bottom: 50%; // <<< Aspect Ratio Trick (e.g., 50% = 2:1 aspect ratio, adjust as needed)
+    height: 0; // Required for aspect ratio trick
+    border-radius: 1rem; // Apply border radius here
+    overflow: hidden; // Clip the iframe to the rounded corners
+    background-color: $cloud-grey; // Background while map loads
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0; // Ensure no border
+    }
+}
+
+// --- Responsive Adjustments for Map Aspect Ratio/Height ---
+@media (max-width: 767px) {
+    .map-iframe-wrapper {
+        padding-bottom: 65%; // Make map taller on mobile (adjust percentage)
+    }
+}
+// --- End Contact Form Responsiveness ---
+// ==============================
+// END: Contact Form Section Styles
+// ==============================

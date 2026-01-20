@@ -1,0 +1,163 @@
+
+
+:root {
+  --lightbox-bg-overlay: rgba(10, 10, 10, 0.9);
+  --lightbox-btn-size: 44px;
+  --lightbox-btn-bg: rgba(30, 30, 30, 0.6);
+  --lightbox-btn-bg-hover: rgba(50, 50, 50, 0.8);
+  --lightbox-btn-icon-size: 24px;
+  --lightbox-padding: 15px;
+  --lightbox-transition-duration: 0.3s;
+
+  // Define fixed image dimensions for DESKTOP
+  --lightbox-image-width-desktop: 70vw;
+  --lightbox-image-height-desktop: 80vh;
+}
+
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--lightbox-bg-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    padding: var(--lightbox-padding);
+    box-sizing: border-box;
+    animation: lightboxFadeIn var(--lightbox-transition-duration) ease forwards;
+
+    &.closing {
+        animation: lightboxFadeOut var(--lightbox-transition-duration) ease forwards;
+    }
+}
+
+.lightbox-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.lightbox-image-container {
+    // --- Apply fixed size for DESKTOP using variables ---
+    width: var(--lightbox-image-width-desktop);
+    height: var(--lightbox-image-height-desktop);
+    // --- Add max constraints based on overlay padding ---
+    max-width: calc(100% - (var(--lightbox-padding) * 2));
+    max-height: calc(100% - (var(--lightbox-padding) * 2));
+
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    // Aspect ratio is handled per breakpoint now
+
+    .lightbox-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Cover/crop the image
+        opacity: 0;
+        animation: imageFadeIn 0.4s ease forwards 0.1s;
+    }
+}
+
+
+.lightbox-btn {
+    position: absolute;
+    background: var(--lightbox-btn-bg);
+    border: none;
+    color: $white;
+    cursor: pointer;
+    border-radius: 50%;
+    width: var(--lightbox-btn-size);
+    height: var(--lightbox-btn-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 1001;
+
+    svg {
+        width: var(--lightbox-btn-icon-size);
+        height: var(--lightbox-btn-icon-size);
+        stroke: $white;
+    }
+
+    &:hover {
+        background: var(--lightbox-btn-bg-hover);
+        transform: scale(1.05);
+    }
+    &:active {
+         transform: scale(0.98);
+    }
+}
+
+.close-btn {
+    top: calc(var(--lightbox-padding) + 10px);
+    right: calc(var(--lightbox-padding) + 10px);
+}
+
+.nav-btn {
+    top: 50%;
+    transform: translateY(-50%);
+    &.prev { left: var(--lightbox-padding); }
+    &.next { right: var(--lightbox-padding); }
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: calc(var(--lightbox-padding) + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--lightbox-btn-bg);
+    color: $white;
+    padding: 0.4em 1em;
+    border-radius: 1em;
+    font-family: sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 1001;
+    white-space: nowrap;
+}
+
+// --- Animations ---
+@keyframes lightboxFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lightboxFadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes imageFadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+// --- Responsiveness ---
+@media (max-width: 767px) {
+    :root {
+       // Adjust button/padding variables for mobile
+       --lightbox-btn-size: 38px;
+       --lightbox-btn-icon-size: 20px;
+       --lightbox-padding: 10px;
+    }
+
+    .lightbox-image-container {
+        // Override desktop fixed size
+        width: 100%;          // Let it take available width within padding
+        height: auto;         // Height determined by aspect ratio
+        aspect-ratio: 16 / 9; // <<< Apply 16:9 aspect ratio on mobile
+        // Max constraints still apply from base styles, ensuring it fits viewport
+    }
+
+    .lightbox-counter {
+        font-size: 0.75rem;
+        padding: 0.3em 0.8em;
+        bottom: calc(var(--lightbox-padding) + 5px);
+    }
+    .close-btn {
+         top: calc(var(--lightbox-padding) + 5px);
+         right: calc(var(--lightbox-padding) + 5px);
+    }
+    .nav-btn.prev { left: 5px; }
+    .nav-btn.next { right: 5px; }
+}

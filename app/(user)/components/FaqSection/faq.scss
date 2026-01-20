@@ -1,0 +1,187 @@
+
+
+.faq-section-container-main {
+
+    .faq-section {
+
+        .questions-container {
+            margin-top: 3em;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+
+            .question-open-container {
+                display: flex;
+                border: 1px solid #EAEAEA;
+                border-radius: 1rem;
+                margin-bottom: 1em;
+                overflow: hidden;
+
+                .mascot-section {
+                    background-color: $primary-green;
+                    // padding: 1.5em; // REMOVED padding
+                    display: flex;
+                    align-items: flex-end; // Align image to bottom
+                    justify-content: flex-start; // Align image to left
+                    flex-shrink: 0;
+                    flex-basis: 30%;
+                    position: relative; // Keep relative positioning
+
+                    img {
+                        display: block;
+                        width: 80%; // <<< INCREASED width to 80%
+                        height: auto;
+                        // margin: 0; // Ensure no default margins interfere
+                        // Position slightly outside if needed visually due to no padding
+                        // margin-bottom: -5px; // Example slight overlap adjustment
+                        // margin-left: 5px; // Example slight indent adjustment
+                    }
+                }
+
+                .content-section {
+                    flex-grow: 1;
+                    flex-basis: 70%;
+                    background-color: $white;
+                    padding: 2em; // Keep padding for text content
+                    position: relative;
+
+                    // --- Callout Triangle ---
+                    // Adjust top position based on final visual alignment of mascot
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 45px; // <<< ADJUSTED - needs fine-tuning based on visual result
+                        left: 0;
+                        transform: translateX(-100%);
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 11px 11px 11px 0;
+                        border-color: transparent $white transparent transparent;
+                    }
+
+                    .content-wrapper {
+                        animation: fadeIn 0.4s ease-in-out;
+                    }
+
+                    h5 {
+                        color: $black;
+                            font-family: Aeonik;
+                            font-size: 1.3125rem;
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 130.8%; /* 1.71675rem */
+                            margin-bottom: 0.5rem;
+                    }
+
+                    p {
+                        color: $grey-text;
+                        font-family: Aeonik;
+                        font-size: 1rem;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5625rem; /* 156.25% */
+                    }
+                }
+            }
+
+            .question-close-container {
+                // Styles remain the same
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: $white;
+                border: 1px solid #EAEAEA;
+                border-radius: 1rem;
+                padding: 1.2em 1.5em;
+                margin-bottom: 1em;
+                cursor: pointer;
+                transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+                &:hover {
+                    background-color: #f9f9f9;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                }
+                p {
+                    color: $black;
+                    font-family: Aeonik;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    margin: 0;
+                }
+                img {
+                    width: 1.2em;
+                    height: 1.2em;
+                    transition: transform 0.3s ease;
+                }
+            }
+        }
+
+        .button-row-container {
+            margin-top: 3em;
+        }
+    }
+
+    // --- Responsiveness ---
+    @media (max-width: 767px) {
+        .faq-section {
+            .questions-container {
+                .question-open-container {
+                    flex-direction: column;
+
+                    .mascot-section,
+                    .content-section {
+                         flex-basis: auto;
+                    }
+
+                    .mascot-section {
+                        // Removed padding here too
+                        border-bottom: 1px solid #EAEAEA;
+                        align-items: center; // Center horizontally when stacked
+                        justify-content: center; // Center vertically when stacked (optional)
+                        padding: 1em 0; // Add minimal vertical padding if needed
+
+                         img {
+                             width: 60%; // Adjust percentage for mobile
+                             max-width: 100px; // Adjust max size for mobile
+                         }
+                    }
+
+                    .content-section {
+                        padding: 1.5em;
+
+                        // --- Callout Triangle (Mobile) ---
+                        &::before {
+                            top: 0;
+                            left: 50%;
+                            transform: translate(-50%, -100%);
+                            border-width: 0 11px 11px 11px;
+                            border-color: transparent transparent $white transparent;
+                        }
+
+                         h5 { font-size: 1.15rem; }
+                         p { font-size: 0.95rem; }
+                    }
+                }
+
+                 .question-close-container {
+                     padding: 1em 1.2em;
+                     p { font-size: 1rem;}
+                     img { width: 1em; height: 1em;}
+                 }
+            }
+        }
+    }
+}
+
+// --- Keyframes for Fade-in Animation ---
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

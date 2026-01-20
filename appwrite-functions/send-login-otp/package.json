@@ -1,0 +1,14 @@
+{
+  "name": "send-login-otp",
+  "version": "1.0.0",
+  "description": "Appwrite function to generate a token and send it as an OTP to the user's email.",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-appwrite": "^12.0.1"
+  },
+  "author": "",
+  "license": "ISC"
+}

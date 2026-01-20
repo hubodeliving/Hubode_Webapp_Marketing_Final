@@ -1,0 +1,118 @@
+// --- Variables for easier management (Optional but Recommended) ---
+$gap-desktop: 1.5em;
+$gap-desktop-row: 2.5em;
+$gap-large: 1.2em;
+$gap-large-row: 2em;
+$gap-medium: 1rem;
+$gap-medium-row: 2em;
+$gap-small: 0.8rem;
+$gap-small-row: 1.8em;
+
+$cols-desktop: 6;
+$cols-xl: 5;
+$cols-large: 4;
+$cols-medium: 3;
+$cols-small: 3; // Or 2 if you uncomment below
+
+
+.hfo-container.container {
+    text-align: center;
+}
+
+.hfo-features-container {
+    max-width: 1100px;
+    margin: 2.5em auto 0 auto;
+    display: flex;         // <--- Change to flex
+    flex-wrap: wrap;       // <--- Allow wrapping
+    justify-content: center; // <--- Center items horizontally (including last row)
+    gap: $gap-desktop-row $gap-desktop; // Use CSS gap property (works with flex too)
+
+    .hfo-feature {
+        // --- Calculate width based on columns and gap ---
+        // Formula: (100% / number_of_columns) - gap_adjustments
+        // We subtract the gap proportionally. Each item contributes to the gap.
+        // For 6 columns, there are 5 gaps between them. Each item takes up ~1/6th of the space minus ~5/6ths of a gap width.
+        // A simpler approximation often works: width: calc(100% / $cols_desktop - $gap_desktop);
+        // Let's use flex-basis for better control:
+        flex: 0 0 calc(#{100% / $cols-desktop} - #{$gap-desktop * ($cols-desktop - 1) / $cols-desktop});
+
+        // --- Keep existing styles ---
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 0; // Remove margin if gap handles spacing, adjust gap if needed
+
+        .icon {
+            margin-bottom: 0.8em;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                max-height: 100%;
+                width: auto;
+                object-fit: contain;
+            }
+        }
+
+        p {
+            color: $grey-text; // Make sure $grey-text is defined
+            font-family: Aeonik, sans-serif;
+            font-size: 0.9rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.4;
+            margin: 0;
+        }
+    }
+}
+
+
+// --- Responsiveness (Adjust flex-basis and gap) ---
+@media (max-width: 1200px) {
+    .hfo-features-container {
+        gap: $gap-large-row $gap-large;
+        .hfo-feature {
+            flex-basis: calc(#{100% / $cols-xl} - #{$gap-large * ($cols-xl - 1) / $cols-xl});
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .hfo-features-container {
+         gap: $gap-large-row $gap-large; // Reuse large gaps or define specific ones
+        .hfo-feature {
+            flex-basis: calc(#{100% / $cols-large} - #{$gap-large * ($cols-large - 1) / $cols-large});
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .hfo-features-container {
+        gap: $gap-medium-row $gap-medium;
+        margin-top: 2em;
+        .hfo-feature {
+            flex-basis: calc(#{100% / $cols-medium} - #{$gap-medium * ($cols-medium - 1) / $cols-medium});
+
+            .icon { height: 40px; margin-bottom: 0.7em; }
+            p { font-size: 0.85rem; }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .hfo-features-container {
+        gap: $gap-small-row $gap-small;
+        .hfo-feature {
+            flex-basis: calc(#{100% / $cols-small} - #{$gap-small * ($cols-small - 1) / $cols-small});
+            // --- Uncomment below if you want 2 columns on smallest screens ---
+            // $cols-small: 2;
+            // flex-basis: calc(#{100% / $cols-small} - #{$gap-small * ($cols-small - 1) / $cols-small});
+
+            .icon { height: 35px; margin-bottom: 0.6em; }
+            p { font-size: 0.8rem; }
+        }
+    }
+}

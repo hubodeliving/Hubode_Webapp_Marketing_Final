@@ -1,0 +1,75 @@
+// Assuming variables like $primary-green, $black, $grey-text, $white etc.
+// are globally available or imported above this file.
+
+.about-section-container {
+    // Keep potential container-level styles like background, full width etc. if needed
+     // margin-bottom: 3rem; // Example - Adjust as per your overall page layout needs
+}
+
+.about-section.container {
+    display: flex;
+    align-items: center; // Vertically align items in the middle
+    gap: 2rem; // Gap between text and image sections
+    flex-wrap: wrap; // Allow wrapping on smaller screens
+}
+
+.content-section,
+.image-section {
+    flex-basis: calc(50% - 1rem); // Each takes half the width minus half the gap
+    flex-grow: 1; // Allow them to grow if needed
+    min-width: 280px; // Prevent shrinking too much before wrapping
+}
+
+.content-section {
+    h3 {
+        color: $primary-green; // Use your primary green variable
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 2.25rem; // Adjust size as needed based on UI
+        font-weight: 700; // Bold heading
+        line-height: 1.3;
+        margin: 0 0 0.69rem 0; // Space below heading
+    }
+
+    p {
+        color: $grey-text; // Use your grey text variable
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 1rem; // Adjust size
+        line-height: 1.6;
+        margin: 0; // Reset default paragraph margin
+    }
+}
+
+.image-section {
+    img {
+        display: block; // Remove extra space below image
+        width: 100%;
+        height: auto; // Maintain aspect ratio
+        border-radius: 1rem; // Rounded corners like the UI
+        object-fit: cover; // Cover the area if aspect ratio differs
+    }
+}
+
+// --- Responsiveness ---
+@media (max-width: 767px) { // Adjust breakpoint if needed
+    .about-section.container {
+        flex-direction: column; // Stack columns on mobile
+        gap: 1.5rem; // Adjust vertical gap when stacked
+        align-items: stretch; // Allow items to take full width if needed
+    }
+
+    .content-section,
+    .image-section {
+        flex-basis: 100%; // Take full width when stacked
+        min-width: auto; // Reset min-width
+    }
+
+    // --- Handle reversed stacking ---
+    // When reverse is true, the image is rendered first in JSX.
+    // Default flex-direction: column keeps that order.
+    // No specific CSS needed for reversed stacking order.
+
+    .content-section {
+         h3 { font-size: 1.8rem; } // Slightly smaller heading on mobile
+         p { font-size: 0.95rem; } // Slightly smaller text on mobile
+    }
+}

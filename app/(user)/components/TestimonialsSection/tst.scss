@@ -1,0 +1,114 @@
+
+
+.testimonials-section-container-main {
+    background-color: $white; // Default background
+
+    .testimonials-section-container {
+        display: flex;
+        flex-wrap: wrap; // Allow wrapping on smaller screens
+        align-items: center; // Vertically align items in the center
+        gap: 3em; // Gap between left and right sections
+
+        .left-section-container,
+        .right-section-container {
+            flex: 1; // Allow both sections to grow and shrink
+            min-width: 280px; // Prevent excessive shrinking
+        }
+
+        .left-section-container {
+            h3 {
+                color: $primary-green;
+                font-family: Aeonik;
+                font-size: 3.4375rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                margin-bottom: 0.8rem;
+
+                @media(max-width: 639.98px){
+                    font-size: 2.7rem!important;
+                }
+            }
+
+            p {
+                color: $grey-text;
+                font-family: Aeonik;
+                font-size: 1.0625rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5625rem; /* 147.059% */
+
+                @media(max-width: 639.98px){
+                    font-size: 1rem!important;
+                }
+            }
+        }
+
+        .right-section-container {
+            position: relative; // For positioning the mute button
+            border-radius: 1rem; // Match UI corner rounding
+            overflow: hidden;    // Keep video and button inside rounded corners
+
+            video {
+                display: block; // Remove extra space below video
+                width: 100%;
+                height: 100%;
+                object-fit: cover; // Ensure video covers the container
+            }
+
+            .mute-toggle-button {
+                position: absolute;
+                bottom: 1em; // Position from bottom
+                right: 1em;  // Position from right
+                background-color: rgba(0, 0, 0, 0.4); // Semi-transparent background
+                border: none;
+                border-radius: 50%; // Make it circular
+                width: 40px;       // Button size
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                padding: 0;
+                color: $white; // Icon color
+                z-index: 2;
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.6);
+                }
+
+                svg { // Style the SVG icon inside
+                   width: 20px;
+                   height: 20px;
+                }
+            }
+        }
+
+        // --- Responsiveness ---
+        @media (max-width: 992px) { // Tablets
+            gap: 2em; // Reduce gap
+             .left-section-container h3 {
+                 font-size: 2.8rem; // Slightly smaller heading
+             }
+             .left-section-container p {
+                 font-size: 1rem; // Slightly smaller text
+             }
+        }
+
+        @media (max-width: 767px) { // Mobile
+            flex-direction: column; // Stack vertically
+            text-align: center; // Center text when stacked
+
+            .left-section-container {
+                 margin-bottom: 1.5em; // Add space below text when stacked
+                 h3, p {
+                     max-width: 100%; // Allow text full width when stacked
+                 }
+            }
+            .right-section-container {
+                 width: 100%; // Ensure video takes full width
+            }
+        }
+    }
+}

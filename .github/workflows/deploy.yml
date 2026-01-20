@@ -1,0 +1,59 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          script: |
+            # Load NVM environment
+            export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            
+            # Navigate to your project directory
+            cd /home/dadconcepts/Hubode_Webapp
+            
+            # Pull the latest changes
+            git pull origin master
+            
+            # Dynamically create the .env.local file from GitHub Secrets
+            echo "NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" > .env.local
+            echo "NEXT_PUBLIC_SANITY_DATASET=${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}" >> .env.local
+            echo "SANITY_API_WRITE_TOKEN=${{ secrets.SANITY_API_WRITE_TOKEN }}" >> .env.local
+            echo "NEXT_PUBLIC_SANITY_API_VERSION=${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_ENDPOINT=${{ secrets.NEXT_PUBLIC_APPWRITE_ENDPOINT }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_APPWRITE_PROJECT_ID }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_DATABASE_ID=${{ secrets.NEXT_PUBLIC_APPWRITE_DATABASE_ID }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_COLLECTION_ID=${{ secrets.NEXT_PUBLIC_APPWRITE_COLLECTION_ID }}" >> .env.local
+            echo "APPWRITE_API_KEY=${{ secrets.APPWRITE_API_KEY }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_EMAIL_CHANGE_COLLECTION_ID=${{ secrets.NEXT_PUBLIC_APPWRITE_EMAIL_CHANGE_COLLECTION_ID }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_PROFILES_COLLECTION_ID=${{ secrets.NEXT_PUBLIC_APPWRITE_PROFILES_COLLECTION_ID }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID=${{ secrets.NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID }}" >> .env.local
+            echo "NEXT_PUBLIC_RAZORPAY_KEY_ID=${{ secrets.NEXT_PUBLIC_RAZORPAY_KEY_ID }}" >> .env.local
+            echo "RAZORPAY_KEY_SECRET=${{ secrets.RAZORPAY_KEY_SECRET }}" >> .env.local
+            echo "NEXT_PUBLIC_APPWRITE_TENANCIES_COLLECTION_ID=${{ secrets.NEXT_PUBLIC_APPWRITE_TENANCIES_COLLECTION_ID }}" >> .env.local
+            echo "APPWRITE_ADMIN_SETTINGS_COLLECTION_ID=${{ secrets.APPWRITE_ADMIN_SETTINGS_COLLECTION_ID }}" >> .env.local
+            echo "NEXT_PUBLIC_ADMIN_SETTINGS_DOCUMENT_ID=${{ secrets.NEXT_PUBLIC_ADMIN_SETTINGS_DOCUMENT_ID }}" >> .env.local
+            
+            # Install dependencies and build the app
+            npm install
+            npm run build
+            
+            # This command will reload the app if it's running, or start it if it's not.
+            pm2 reload hubode-frontend || pm2 start npm --name "hubode-frontend" -- start
+            
+            
+            
+            

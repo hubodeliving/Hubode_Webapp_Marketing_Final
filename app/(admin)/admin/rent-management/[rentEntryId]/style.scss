@@ -1,0 +1,384 @@
+// File: app/(admin)/rent-management/[rentEntryId]/style.scss
+@import '../../../variables.scss'; // CRITICAL: Ensure $form-input-bg, $admin-bg-light, status colors etc. are defined
+
+// Main page container
+.admin-rent-payment-detail-page {
+    font-family: $font-family-sans;
+    padding: 1rem 2rem; // Consistent page padding
+
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: $text-dark;
+        margin-bottom: 2rem;
+        text-align: left; // Title is left-aligned
+    }
+}
+
+// Wrapper for all content below the page title
+.content-layout-wrapper {
+    width: 100%;
+    max-width: 900px; // Max width for the content area to accommodate two columns comfortably
+    // margin: 0 auto; // Uncomment if you want this entire block centered on very wide screens
+    padding: 0; // No padding on the wrapper itself, sections inside will have padding
+    background-color: transparent; // No distinct background for the wrapper
+    box-shadow: none; // No shadow on the wrapper
+}
+
+// User Header Section (Avatar + Name)
+.user-header-section {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem; // Space before Purchase History button
+
+    .profile-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: $primary-green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        font-size: 1.75rem;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+
+    .user-name-display h5 {
+        color: $text-dark;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.2;
+    }
+}
+
+// Purchase History Button Row
+.action-buttons-row {
+    margin-bottom: 2.5rem; // Space before the details grid
+    text-align: left; // Ensure button is left-aligned
+}
+
+// Generic styled button (base for Purchase History)
+.styled-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem; // Padding for buttons like "Purchase History"
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+    border: 1px solid $border-color;
+    background-color: $white;
+    color: $text-dark;
+    line-height: 1.2;
+
+    img, svg { // For icons inside buttons
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover:not(:disabled) { // Ensure hover only applies if not disabled
+        border-color: darken($border-color, 10%);
+        background-color: $admin-bg-light; // A light hover background
+    }
+    &:active:not(:disabled) {
+        transform: translateY(1px);
+    }
+    &:disabled { // General disabled style for all styled-buttons
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// Grid container for "Staying Property" and "Personal Details" sections
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr; // Default to single column (mobile-first)
+    gap: 2rem; // Gap between sections when stacked
+    margin-bottom: 2.5rem; // Space before the "Rent Payment [Year]" section
+
+    @media (min-width: $breakpoint-md) { // Apply two columns from medium screens up
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); // Responsive columns
+        // Or a fixed 2-column: grid-template-columns: 1fr 1fr;
+        gap: 2.5rem; // Wider gap for side-by-side columns
+    }
+}
+
+.details-column {
+    // Primarily for grid structure, can be empty if no specific column styling needed
+}
+
+// Section styling for "Staying Property Details", "Personal Details", "Rent Payment [Year]"
+.details-section {
+    text-align: left;
+    // No margin-bottom here, as the parent grid or flex container handles spacing between sections
+
+    h2 { // For headings like "Staying Property Details", "Personal Details", "Rent Payment [Year]"
+        font-size: 1.125rem; // Matching UI image
+        font-weight: 700;
+        color: $text-dark;
+        margin-top: 0; // No top margin for the heading itself
+        margin-bottom: 1.25rem; // Space below heading, before content
+        padding-bottom: 0.6rem; // Space for the underline
+        border-bottom: 1px solid $border-color; // Underline
+        display: inline-block; // Border only spans the text width
+    }
+}
+
+// Readonly form group styling
+.form-group.readonly {
+    margin-bottom: 1rem; // Space between each detail item
+    label {
+        display: block;
+        font-size: 0.8125rem; // Matching UI image
+        font-weight: 400;
+        color: $text-dark;
+        margin-bottom: 0.375rem;
+    }
+    input[type="text"], input[type="tel"], input[type="email"] {
+        width: 100%; // Take full width of their column
+        // max-width: 350px; // Removed max-width, let grid column define width
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+        color: $text-dark;
+        background-color: $form-input-bg; // Defined in variables.scss
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        box-sizing: border-box;
+        cursor: default;
+        &:focus { outline: none; }
+        &:disabled { // Style for disabled inputs (though they are readonly, isSaving might disable)
+             background-color: darken($form-input-bg, 2%);
+             opacity: 0.8;
+        }
+    }
+}
+
+// Rent display group (for ₹ 20,000 per month)
+.rent-display-group {
+    display: flex;
+    align-items: baseline;
+    width: 100%; // Take full width of its column
+    // max-width: 350px; // Removed max-width
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem; // Base size for "per month"
+    color: $text-dark;
+    background-color: $form-input-bg;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    box-sizing: border-box;
+    min-height: calc(0.75rem * 2 + (0.875rem * 1.2) + 2px); // Approximate height match with inputs
+
+    .currency-symbol.bold {
+        font-weight: 700;
+        font-size: 0.875rem; // Match base size
+        margin-right: 0.25rem;
+    }
+    .rent-amount.bold.large {
+        font-weight: 700;
+        font-size: 1.125rem; // Larger amount text
+        margin-right: 0.35rem;
+    }
+    .rent-suffix {
+        font-size: 0.8125rem; // Smaller "per month"
+        color: $text-light;
+    }
+}
+
+// Rent Payment Year Section specific styles (if any, beyond .details-section)
+.rent-payment-section {
+    // Inherits .details-section for heading style
+    margin-top: 0; // If it's the first item in a grid column or follows directly
+    margin-bottom: 2rem; // Space before action buttons
+}
+
+.months-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Two columns for checkboxes
+    gap: 0.75rem 1.5rem; // Row gap, Column gap
+    // max-width: 500px; // Can be removed if section takes column width
+
+    @media (min-width: $breakpoint-sm) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (min-width: $breakpoint-md) {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); // More adaptive columns
+        // max-width: 100%; // Let it fill its container
+    }
+     @media (min-width: $breakpoint-lg) { // Example for 4 columns on larger screens
+        // grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.month-checkbox-item {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0; // Add some vertical padding for better spacing
+
+    label {
+        font-size: 0.875rem;
+        color: $text-dark;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        user-select: none;
+        line-height: 1.2; // Ensure label text aligns well with checkbox
+    }
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: $primary-green;
+        border: 1px solid $border-color; // Custom border for unchecked state
+        border-radius: 3px;
+        cursor: pointer;
+        margin: 0; // Remove default margin
+        flex-shrink: 0; // Prevent checkbox from shrinking
+
+        &:disabled { cursor: not-allowed; opacity: 0.6; }
+        &:focus-visible { // More specific focus style
+            outline: 2px solid rgba($primary-green, 0.3);
+            outline-offset: 2px;
+        }
+    }
+}
+
+// Page-level error message
+.form-feedback.error.page-level-error {
+    // max-width: 650px; // If content wrapper is centered, align with it
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    margin-top: -1rem; // Pull it up a bit if it follows checkboxes
+}
+
+// Main Action Buttons Row (Save, Remove from Rent)
+.main-action-buttons-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem; // Space above these buttons
+    align-items: center;
+    flex-wrap: wrap; // Allow buttons to wrap
+    text-align: left; // Ensure buttons align left
+
+    .save-payments-button {
+        @extend .styled-button; // Use base styles
+        background-color: $primary-green;
+        color: $white;
+        border-color: $primary-green; // Or transparent
+        font-weight: 600;
+        padding: 0.7rem 1.5rem;
+        min-width: 100px; // Adjusted min-width
+        &:hover:not(:disabled) {
+            background-color: darken($primary-green, 8%);
+            border-color: darken($primary-green, 8%);
+        }
+    }
+
+    .remove-from-rent-button {
+        @extend .styled-button; // Use base styles
+        background-color: $white;
+        color: $status-cancelled-bg; // Red text
+        border: 1px solid $status-cancelled-bg; // Red border
+        font-weight: 500; // Normal weight for secondary action
+        padding: 0.7rem 1.5rem;
+        min-width: 160px;
+        &:hover:not(:disabled) {
+            background-color: lighten($status-cancelled-bg, 40%);
+            border-color: darken($status-cancelled-bg, 10%);
+            color: darken($status-cancelled-bg, 10%);
+        }
+    }
+}
+
+// Loading and Error States
+.loading-state, .error-state {
+    padding: 3rem 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: $text-light;
+    width: 100%;
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: $breakpoint-md) { // Approx 768px
+    .admin-rent-payment-detail-page {
+        padding: 1rem;
+        .page-title { text-align: center; }
+    }
+    .content-layout-wrapper { max-width: none; } // Full width for content block
+    .user-header-section { flex-direction: column; align-items: center; text-align: center; }
+    .action-buttons-row { text-align: center; .styled-button { width: auto; max-width: 250px; } }
+    
+    .details-grid { grid-template-columns: 1fr; gap: 1.5rem; } // Stack columns
+    .details-section {
+        margin-bottom: 1.5rem; // Add margin when sections stack
+        &:last-child { margin-bottom: 0; }
+        h2 { text-align: center; display: block; }
+    }
+    .form-group.readonly {
+        label { text-align: center; }
+        input[type="text"], input[type="tel"], input[type="email"], .rent-display-group {
+            max-width: 100%; // Full width for inputs
+        }
+    }
+    .rent-display-group { justify-content: center; } // Center items in rent display
+
+    .rent-payment-section {
+        margin-top: 1rem;
+        h2 { text-align: center; display: block; }
+    }
+    .months-checkbox-grid {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); // More adaptive columns
+        max-width: none;
+    }
+    .main-action-buttons-row {
+        flex-direction: column; // Stack buttons
+        align-items: stretch;   // Make buttons take full width of their container
+        .styled-button { width: 100%; max-width: 320px; margin: 0 auto 0.75rem auto; }
+    }
+    .form-feedback.error.page-level-error { text-align: center; margin-top: 0.5rem; }
+}
+
+@media (max-width: $breakpoint-sm) { // Approx 576px
+    .admin-rent-payment-detail-page {
+        padding: 1rem 0.75rem;
+        .page-title { font-size: 1.5rem; margin-bottom: 1.5rem;}
+    }
+    .user-header-section {
+        gap: 0.75rem; margin-bottom: 1.5rem;
+        .profile-icon { width: 50px; height: 50px; font-size: 1.5rem;}
+        .user-name-display h5 { font-size: 1.25rem;}
+    }
+    .action-buttons-row { margin-bottom: 2rem; }
+    .styled-button { padding: 0.5rem 0.875rem; font-size: 0.8rem;}
+
+    .details-grid { gap: 1rem; margin-bottom: 2rem; }
+    .details-section h2 { font-size: 1.05rem; margin-bottom: 1rem; padding-bottom: 0.5rem;}
+    .form-group.readonly {
+        margin-bottom: 0.75rem;
+        label { font-size: 0.75rem;}
+        input { padding: 0.65rem 0.875rem; font-size: 0.8125rem;}
+    }
+    .rent-display-group {
+        padding: 0.65rem 0.875rem;
+        .currency-symbol.bold { font-size: 0.8125rem; }
+        .rent-amount.bold.large { font-size: 1rem; }
+        .rent-suffix { font-size: 0.75rem; }
+    }
+    .rent-payment-section { margin-bottom: 1.5rem; }
+    .months-checkbox-grid {
+        gap: 0.5rem 1rem;
+        .month-checkbox-item label { font-size: 0.8125rem; margin-left: 0.35rem; }
+        .month-checkbox-item input[type="checkbox"] { width: 16px; height: 16px; }
+    }
+    .main-action-buttons-row {
+        margin-top: 0.5rem;
+        .styled-button { padding: 0.65rem 1rem; font-size: 0.875rem; }
+    }
+}
+

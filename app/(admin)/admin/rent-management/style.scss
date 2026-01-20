@@ -1,0 +1,224 @@
+// File: app/(admin)/admin/rent-management/style.scss
+@import '../../variables.scss'; // Your admin variables
+
+.rent-management-page {
+    font-family: $font-family-sans;
+
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: $text-dark;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.filters-container {
+    display: flex;
+    flex-wrap: wrap; // Allow filters to wrap on smaller screens
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center; // Align items vertically
+
+    .search-filter-group {
+        flex-grow: 1; // Allow search to take available space
+        min-width: 250px; // Minimum width for search input
+        position: relative; // For potential icon positioning
+
+        // .search-icon {
+        //     position: absolute;
+        //     left: 12px;
+        //     top: 50%;
+        //     transform: translateY(-50%);
+        //     color: $text-light;
+        //     width: 16px;
+        //     height: 16px;
+        // }
+
+        .search-input {
+            width: 100%;
+            padding: 0.625rem 0.875rem; // 10px 14px
+            // padding-left: 36px; // If using an icon
+            border: 1px solid $border-color;
+            border-radius: 6px;
+            background-color: $white;
+            font-size: 0.875rem;
+            color: $text-dark;
+
+            &::placeholder {
+                color: $text-light;
+            }
+
+            &:focus {
+                outline: none;
+                border-color: $primary-green;
+                box-shadow: 0 0 0 2px rgba($primary-green, 0.1);
+            }
+        }
+    }
+
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+        // Removed label as per UI
+
+        select {
+            padding: 0.625rem 0.875rem;
+            border: 1px solid $border-color;
+            border-radius: 6px;
+            background-color: $white;
+            font-size: 0.875rem;
+            color: $text-dark;
+            min-width: 160px; // Slightly less width for status/property filters
+            cursor: pointer;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-green;
+                box-shadow: 0 0 0 2px rgba($primary-green, 0.1);
+            }
+        }
+    }
+}
+
+// Table styles are virtually identical to registrations table
+// Using .rent-table and .rent-table-wrapper to allow for any minor future divergence if needed
+// but they inherit from a common base or just copy paste for now.
+.rent-table-wrapper {
+    background-color: $white;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.rent-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+
+    th, td {
+        padding: 0.875rem 1rem;
+        text-align: left;
+        font-size: 0.875rem;
+        border-bottom: 1px solid $border-color;
+    }
+
+    thead {
+        tr {
+            background-color: $primary-green;
+            th {
+                color: $white;
+                font-weight: 600;
+                font-size: 0.9rem;
+                border-bottom: none;
+                &:first-child { border-top-left-radius: 8px; }
+                &:last-child { border-top-right-radius: 8px; }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            &:last-child {
+                td { border-bottom: none; }
+            }
+            &:hover {
+                background-color: lighten($sidebar-bg, 2%);
+            }
+            td {
+                color: $text-dark;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .manage-button { // Style for the new "Manage" button
+        background-color: $primary-green; // Same as details button for consistency
+        color: $white;
+        border: none;
+        padding: 0.5rem 0.875rem;
+        border-radius: 6px;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+
+    .no-results-message {
+        text-align: center;
+        padding: 2rem;
+        color: $text-light;
+        font-style: italic;
+    }
+}
+
+
+// --- Responsive Table (same as registrations page) ---
+@media (max-width: $breakpoint-md) { // Approx 768px
+    .filters-container {
+        .search-filter-group {
+            min-width: 100%; // Search takes full width before other filters
+            order: -1; // Place search on top if wrapping
+        }
+        .filter-group {
+            min-width: calc(50% - 0.5rem); // Two dropdowns per row
+            select { width: 100%; }
+        }
+    }
+
+
+    .rent-table {
+        thead { display: none; }
+
+        tr {
+            display: block;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid $border-color;
+            box-shadow: 0 1px 3px rgba($black, 0.05);
+            background-color: $white;
+            &:last-child { margin-bottom: 0; }
+        }
+
+        td {
+            display: block;
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+            border-bottom: 1px solid lighten($border-color, 5%);
+            &:last-child { border-bottom: none; }
+
+            &::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                width: calc(50% - 1.5rem);
+                text-align: left;
+                font-weight: 600;
+                color: $text-dark;
+            }
+        }
+        .manage-button { width: auto; display: inline-block; }
+    }
+}
+
+@media (max-width: $breakpoint-sm) { // Approx 576px
+    .filters-container {
+        .filter-group {
+             min-width: 100%; // Each dropdown takes full width
+        }
+    }
+    .rent-management-page .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+     .rent-table td {
+        padding-left: 45%;
+        &::before {
+            width: calc(45% - 1.25rem);
+        }
+    }
+}

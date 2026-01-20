@@ -1,0 +1,474 @@
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+// ==============================
+// START: Support Top Section Styles
+// ==============================
+.topsection-container-main.support-hero {
+    min-height: 45vh; // Adjust min-height as needed
+    height: auto;
+    border-radius: 0rem 0rem 2.1875rem 2.1875rem;
+    background-color: $primary-green; // Your specified background color
+    // position: relative; // No longer strictly needed for this approach
+    overflow: hidden; // Still useful to clip potential overflow
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem; // Keep standard margin if needed
+    padding: 2em 0; // Add some vertical padding to the main container
+}
+
+.topsection-container.container { // This container becomes the main flex row
+    width: 100%;
+    display: flex;
+    align-items: center; // <<< Vertically center text and mascot container
+    justify-content: space-between; // <<< Space out text and mascot container
+    gap: 2rem; // Add gap between text and mascot areas
+    // position: relative; // No longer needed
+    // z-index: 2; // No longer needed
+}
+
+.content-container { // Text Block
+    flex-basis: 55%; // <<< Assign specific width percentage
+    max-width: 600px; // Max width for text block
+    flex-shrink: 1; // Allow shrinking if needed
+    padding: 0 0 0 1em; // Padding mainly on the left (relative to container padding)
+
+    h1 {
+        color: $white;
+        font-family: Aeonik, sans-serif;
+        font-size: 2.8rem; // Adjust size to match UI
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.25;
+        margin: 0 0 0.75rem 0; // Space below heading
+    }
+
+    p {
+        color: rgba($white, 0.9); // White with slight transparency
+        font-family: Aeonik, sans-serif;
+        font-size: 1.1rem; // Adjust size
+        font-weight: 400;
+        line-height: 1.6;
+        margin: 0;
+    }
+}
+
+.mascot-container { // Wrapper for the mascot image
+    flex-basis: 40%; // <<< Assign width percentage for mascot area
+    flex-shrink: 0; // Prevent mascot container from shrinking
+    display: flex;
+    justify-content: flex-end; // <<< Horizontally center the image within this container
+    align-items: center; // <<< Align image to the bottom of this container
+}
+
+.support-mascot { // The actual image
+    display: block;
+    // position: absolute; // <<< REMOVED absolute positioning
+    // bottom: 0; // Removed
+    // right: 5%; // Removed
+    // left: 50%; // Removed
+    // transform: translateX(-50%); // Removed
+    width: auto; // Let height control width primarily
+    height: 35vh; // <<< Control size with viewport height (adjust as needed)
+    margin-top: 5vh;
+    max-width: 100%; // Ensure it doesn't overflow its container
+    // z-index: 1; // No longer needed
+    user-select: none;
+    pointer-events: none;
+    transition: height 0.2s ease-out, max-height 0.2s ease-out; // Update transition
+}
+
+
+// --- Responsiveness for Support Hero ---
+@media (max-width: 992px) { // Tablets
+    .topsection-container.container {
+        gap: 1rem; // Reduce gap
+        align-items: center; // Keep vertical center
+    }
+    .content-container {
+        flex-basis: 60%;
+        padding: 0 0 0 0.5em;
+        h1 { font-size: 2.4rem; }
+        p { font-size: 1rem; }
+    }
+     .mascot-container {
+         flex-basis: 35%;
+    }
+    .support-mascot {
+        height: 16vh;
+        max-height: 180px;
+    }
+}
+
+ @media (max-width: 767px) { // Mobile (Stacked layout)
+    .topsection-container-main.support-hero {
+        min-height: auto;
+        padding: 6.5em 0 0 0; // Adjust padding T R B L (no bottom padding here)
+        border-radius: 0rem 0rem 1.5rem 1.5rem;
+    }
+     .topsection-container.container {
+         flex-direction: column; // <<< Stack text and mascot container
+         justify-content: flex-start; // Align to top
+         gap: 0.5rem; // Gap between text and mascot container
+     }
+
+     .content-container {
+          order: 1; // Text first
+          flex-basis: auto; // Reset basis
+          width: 90%; // Adjust width
+          max-width: 450px;
+          padding: 0 0 1em 0; // Padding below text
+          text-align: center; // Center text
+
+          h1 {
+              font-size: 2rem;
+              line-height: 1.3;
+          }
+          p {
+              font-size: 0.95rem;
+          }
+     }
+
+     .mascot-container {
+        order: 2; // Mascot second
+        flex-basis: auto; // Reset basis
+        width: 100%; // Take full width to allow centering
+        align-items: flex-end; // Keep alignment for image itself
+        justify-content: center;
+     }
+
+     .support-mascot {
+        position: static; // <<< Ensure static positioning
+        width: 55%; // <<< Control size via width
+        max-width: 200px; // <<< Max pixel width
+        height: auto; // Let width determine height
+        max-height: none; // <<< Reset max-height
+        margin: 0 auto; // Center horizontally
+        margin-top: -1.5rem; // <<< Keep slight overlap margin if desired
+        display: block;
+     }
+ }
+
+  @media (max-width: 480px) { // Smaller Mobile
+      .content-container {
+          h1 { font-size: 1.8rem; }
+          p { font-size: 0.9rem; }
+      }
+       .support-mascot {
+         width: 60%;
+         max-width: 180px;
+         margin-top: -1rem;
+     }
+  }
+ // End .topsection-container-main.support-hero
+
+
+.how-it-works-section.container {
+    // Container likely handles max-width and padding
+    // May need text-align: center; if SectionTitle isn't centered by default
+    text-align: center;
+}
+
+.steps-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 3 columns on desktop
+    gap: 1.5rem; // Gap between cards
+    margin-top: 3rem; // Space below SectionTitle subtext
+    text-align: left; // Reset text alignment for card content
+}
+
+.step-item {
+    background-color: $white; // White background for the card
+    border: 1px solid $cloud-grey; // Use your light grey border color
+    border-radius: 1rem; // Rounded corners
+    padding: 2rem 1.5rem; // Padding inside the card
+    display: flex;
+    flex-direction: column; // Stack content vertically
+    align-items: flex-start; // Align content to the start (left)
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+         box-shadow: 0 8px 16px rgba(0,0,0,0.08); // Subtle shadow on hover
+         transform: translateY(-5px); // Subtle lift effect
+    }
+
+    .icon-container {
+        // Using inline-flex so it only takes the width/height specified
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px; // Adjust size as needed
+        height: 70px;
+        background-color: $primary-green; // Use your primary dark green/teal
+        border-radius: 0.8rem; // Rounded corners for the icon background
+        margin-bottom: 1rem; // Space below the icon container
+
+        img {
+            width: 35px; // Size of the actual icon inside
+            height: 35px;
+            object-fit: contain;
+             // Adjust filter to get the light pink/lavender color for icons
+             filter: brightness(0) saturate(100%) invert(89%) sepia(18%) saturate(664%) hue-rotate(302deg) brightness(109%) contrast(94%);
+        }
+    }
+
+    .step-title { // Corresponds to h5 tag
+        color: $primary-green; // Use your primary dark green/teal
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 1.3rem; // Adjust size as needed
+        font-weight: 700; // Bold title
+        margin: 0 0 0.1rem 0; // Space below title
+        line-height: 1.3;
+    }
+
+    p { // Styles for the descriptive paragraph
+        color: $grey-text; // Use your defined grey text color
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 0.95rem; // Adjust size
+        line-height: 1.6;
+        margin: 0; // Reset default paragraph margin
+    }
+}
+
+// --- Responsiveness for Steps Grid ---
+@media (max-width: 992px) { // Tablets
+    .steps-cards-container {
+        grid-template-columns: repeat(2, 1fr); // 2 columns
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) { // Mobile
+    .steps-cards-container {
+        grid-template-columns: 1fr; // 1 column (stack)
+        gap: 1.5rem; // Vertical gap when stacked
+    }
+
+    .step-item {
+        padding: 1.5rem 1.2rem; // Slightly reduce padding on mobile
+        align-items: center; // Center content on mobile
+        text-align: center; // Center text on mobile
+
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.2rem;
+            img { width: 30px; height: 30px; }
+        }
+
+        .step-title { font-size: 1.2rem; }
+        p { font-size: 0.9rem; }
+    }
+}
+// --- End Steps Grid Responsiveness ---
+
+// ==============================
+// END: How it Works Section Styles
+// ==============================
+
+
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+// ==============================
+// START: Support Form Section Styles
+// ==============================
+.support-form-section-container {
+    padding-top: 3rem; // Adjust spacing as needed
+    padding-bottom: 4rem;
+}
+
+.support-form-section.container {
+     // Container likely handles max-width and padding
+     // Might need text-align: center; if SectionTitle isn't centered
+     text-align: center;
+}
+
+// Styles for Support Form Container & Form
+.support-form-container {
+    margin-top: 2.5rem; // Space below SectionTitle
+    width: 100%;
+    max-width: 80%; // <<< Limit width on desktop (adjust percentage)
+    margin-left: auto;  // <<< Center the container
+    margin-right: auto; // <<< Center the container
+    text-align: left; // <<< Reset text align for form content
+}
+
+.support-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; // Vertical gap between form rows
+}
+
+.support-form-status {
+    border: 1px dashed lighten($cloud-grey, 8%);
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: $white;
+    text-align: center;
+    font-family: Aeonik, sans-serif;
+    color: $grey-text;
+    line-height: 1.6;
+}
+
+.support-form-message {
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+    font-family: Aeonik, sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: -0.5rem 0 0;
+}
+
+.support-form-message.success {
+    background-color: lighten($primary-green, 47%);
+    border: 1px solid lighten($primary-green, 15%);
+    color: $primary-green;
+}
+
+.support-form-message.error {
+    background-color: #fff1f0;
+    border: 1px solid #ffd2cc;
+    color: #b42318;
+}
+
+.form-row { // Reusing class name from referral form for consistency
+    width: 100%;
+}
+
+// Styles for individual field groups (label + input/textarea)
+// Reusing class name from referral form
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem; // Space between label and input element
+}
+
+// Label Styles (excluding checkbox label)
+// Reusing label styles
+.support-form label:not([for="support-terms-agree"]) {
+    color: $black;
+    font-family: Aeonik, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+// Input and Textarea Styles
+// Reusing input/textarea styles
+input[type="text"], // Add other types like tel, email if needed later
+textarea {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid $cloud-grey;
+    border-radius: 0.8rem;
+    background-color: #F9F9F9; // Light grey background
+    font-family: Aeonik, sans-serif;
+    font-size: 0.95rem;
+    color: $black;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+
+    &::placeholder {
+        color: lighten($grey-text, 15%);
+        opacity: 1;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $primary-green;
+        box-shadow: 0 0 0 2px lighten($primary-green, 40%);
+    }
+}
+
+textarea {
+    resize: vertical;
+    min-height: 140px; // Slightly taller text area
+}
+
+// Styles for Terms and Conditions Row
+// Reusing class name from referral form
+.form-row-terms {
+    margin-top: 0.5rem;
+}
+
+// Reusing class name from referral form
+.form-group-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    input[type="checkbox"] {
+        width: 1.15em; height: 1.15em; border-radius: 0.25em;
+        border: 1.5px solid $cloud-grey; appearance: none; cursor: pointer;
+        position: relative; transition: background-color 0.2s ease, border-color 0.2s ease;
+
+        &:checked {
+            background-color: $primary-green; border-color: $primary-green;
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            background-size: 100% 100%; background-position: center; background-repeat: no-repeat;
+        }
+        &:focus { outline: none; box-shadow: 0 0 0 2px lighten($primary-green, 40%); }
+    }
+
+    label[for="support-terms-agree"] { // Use correct ID
+        color: $grey-text; font-family: Aeonik, sans-serif; font-size: 0.9rem;
+        font-weight: 400; cursor: pointer;
+        a { color: $black; text-decoration: underline; font-weight: 500;
+            &:hover { color: $primary-green; }
+        }
+    }
+}
+
+
+// Submit Button Row Styles
+// Reusing class name from referral form
+.form-row-submit {
+    display: flex;
+    justify-content: center; // Keep button centered
+    margin-top: 1rem;
+}
+
+// Reusing class name from referral form
+.submit-button {
+    background-color: $primary-green; color: $white; border: none;
+    border-radius: 0.6rem; padding: 0.9rem 4rem; // Keep wider padding
+    min-width: 180px; // Keep min-width
+    width: auto; // Allow button to size naturally
+    font-family: Aeonik, sans-serif; font-size: 1rem; font-weight: 500;
+    cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease;
+
+    &:hover { background-color: darken($primary-green, 8%); transform: translateY(-2px); }
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background-color: lighten($primary-green, 15%);
+        transform: none;
+    }
+}
+
+// --- Responsiveness for Support Form ---
+@media (max-width: 767px) { // Mobile
+    .support-form-container {
+        max-width: 100%; // <<< Take full width on mobile
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .support-form {
+        gap: 1.2rem;
+    }
+    // No need to change form-row-split as it doesn't exist here
+
+    .submit-button {
+        width: 100%; // <<< Make button full width again on mobile
+        max-width: 350px; // <<< Max width for mobile
+        padding: 0.9rem 1.5rem; // <<< Adjust mobile padding
+        min-width: auto; // <<< Reset min-width
+    }
+}
+// --- End Support Form Responsiveness ---
+// ==============================
+// END: Support Form Section Styles
+// ==============================

@@ -1,0 +1,43 @@
+// File: app/(admin)/components/StatusBadge/StatusBadge.scss
+@import '../../variables.scss'; // Make sure this path is correct and variables are defined
+
+.status-badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem; // 6px 12px
+    border-radius: 1rem; // Pill shape
+    font-size: 0.75rem; // 12px
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    min-width: 80px; // Give badge some min width for consistency
+
+    &.status-new {
+        background-color: $status-new-bg;
+        color: $status-new-text;
+    }
+    &.status-inprogress {
+        background-color: $status-inprogress-bg;
+        color: $status-inprogress-text;
+    }
+    &.status-closed {
+        background-color: $status-closed-bg;
+        color: $status-closed-text;
+    }
+    &.status-cancelled {
+        background-color: $status-cancelled-bg;
+        color: $status-cancelled-text;
+    }
+    // New styles for Rent Management statuses
+    &.status-paid {
+        background-color: $status-new-bg; // Using the same green as 'New' for 'Paid'
+        color: $status-new-text;         // Ensure $status-new-text is appropriate (e.g., white)
+    }
+    &.status-due {
+        background-color: $status-cancelled-bg; // Using the same red as 'Cancelled' for 'Due'
+        color: $status-cancelled-text;          // Ensure $status-cancelled-text is appropriate (e.g., white)
+    }
+    &.status-default {
+        background-color: $text-light; // A generic fallback
+        color: $white;
+    }
+}

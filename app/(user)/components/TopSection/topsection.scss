@@ -1,0 +1,72 @@
+
+
+.topsection-container-main {
+    height: 50vh; // Keep existing height
+    border-radius: 0rem 0rem 2.1875rem 2.1875rem; // Keep existing border-radius
+    // background: #834545; // REMOVED - Background is now set inline with gradient + image
+    // Add necessary background properties that work with the inline style
+    background-position: center; // Center the background image
+    background-size: cover;   // Make the background image cover the area
+    background-repeat: no-repeat; // Prevent image repetition
+
+    .topsection-container {
+        width: 100%;
+        height: 100%; // Ensure container takes full height for alignment
+        display: flex;
+        align-items: center; // Vertically center content
+        justify-content: flex-start; // Align content container to the lef  t
+
+        .content-container {
+            width: 40%; // Keep original width for desktop
+            padding-left: 2em; // Add some padding so text isn't glued to the edge (adjust as needed)
+
+            h1 {
+                color: $white;
+                font-family: Aeonik; // Assuming Aeonik is desired font
+                font-size: 2.5625rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 1.2; // Adjusted for better readability
+                margin-bottom: 0.94rem;
+            }
+
+            p {
+                color: $white;
+                font-family: Aeonik;
+                font-size: 1.125rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5; // Adjusted for better readability
+                margin: 0; // Remove default margin if any
+                opacity: 0.9; // Slightly less prominent subtext
+            }
+        }
+    }
+
+    // --- Responsiveness ---
+    @media (max-width: 992px) { // Tablets
+        .topsection-container {
+            .content-container {
+                width: 60%; // Allow content more width
+                padding-left: 1.5em;
+                 h1 { font-size: 2.2rem; }
+                 p { font-size: 1rem; }
+            }
+        }
+    }
+
+     @media (max-width: 767px) { // Mobile
+         height: 50vh; // Optionally reduce height on mobile
+         .topsection-container {
+             justify-content: center; // Center content on mobile
+             text-align: center; // Center text alignment
+
+             .content-container {
+                  width: 85%; // Allow content even more width
+                  padding-left: 0; // Remove specific padding when centered
+                  h1 { font-size: 1.8rem; }
+                  p { font-size: 0.95rem; }
+             }
+         }
+     }
+}

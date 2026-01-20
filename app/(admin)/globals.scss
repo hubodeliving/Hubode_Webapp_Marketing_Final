@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+// app/globals.scss
+
+// --- Aeonik Font Definitions ---
+
+// Thin (Weight 100)
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap; // Optional: Improves perceived performance
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-ThinItalic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Air (Weight 200 - Assuming 'Air' is lighter than 'Light')
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Air.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-AirItalic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Light (Weight 300)
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Regular (Weight 400 / normal)
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Regular.otf') format('opentype');
+  font-weight: 400; // or 'normal'
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-RegularItalic.otf') format('opentype');
+  font-weight: 400; // or 'normal'
+  font-style: italic;
+  font-display: swap;
+}
+
+// Medium (Weight 500)
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Bold (Weight 700 / bold)
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Bold.otf') format('opentype');
+  font-weight: 700; // or 'bold'
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-BoldItalic.otf') format('opentype');
+  font-weight: 700; // or 'bold'
+  font-style: italic;
+  font-display: swap;
+}
+
+// Black (Weight 900)
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/Aeonik-BlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+// --- End Aeonik Font Definitions ---
+
+
+// --- Apply the font globally (Example) ---
+body {
+  font-family: 'Aeonik', sans-serif; // Use 'Aeonik' as the primary font
+  // Default weight and style will be normal (Regular) unless specified otherwise
+}
+
+// --- Other global styles ---
+// ... (your existing Tailwind base/components/utilities imports, etc.)
+
+// app/styles/_responsive-spacing.scss
+
+// Define your breakpoints
+$breakpoint-lg: 1200px;
+$breakpoint-md: 992px;
+$breakpoint-sm: 768px;
+$breakpoint-xs: 480px;
+
+//—— Margin & Padding Utilities —————————————————————————————
+.margin-top {
+  margin-top: 6.25em; // desktop
+
+  @media (max-width: $breakpoint-lg) {
+    margin-top: 5em;
+  }
+  @media (max-width: $breakpoint-md) {
+    margin-top: 4em;
+  }
+  @media (max-width: $breakpoint-sm) {
+    margin-top: 3em;
+  }
+  @media (max-width: $breakpoint-xs) {
+    margin-top: 2em;
+  }
+}
+
+.margin-bottom {
+  margin-bottom: 6.25em;
+
+  @media (max-width: $breakpoint-lg) {
+    margin-bottom: 5em;
+  }
+  @media (max-width: $breakpoint-md) {
+    margin-bottom: 4em;
+  }
+  @media (max-width: $breakpoint-sm) {
+    margin-bottom: 3em;
+  }
+  @media (max-width: $breakpoint-xs) {
+    margin-bottom: 2em;
+  }
+}
+
+.padding-top {
+  padding-top: 6.25em;
+
+  @media (max-width: $breakpoint-lg) {
+    padding-top: 5em;
+  }
+  @media (max-width: $breakpoint-md) {
+    padding-top: 4em;
+  }
+  @media (max-width: $breakpoint-sm) {
+    padding-top: 3em;
+  }
+  @media (max-width: $breakpoint-xs) {
+    padding-top: 2em;
+  }
+}
+
+.padding-bottom {
+  padding-bottom: 6.25em;
+
+  @media (max-width: $breakpoint-lg) {
+    padding-bottom: 5em;
+  }
+  @media (max-width: $breakpoint-md) {
+    padding-bottom: 4em;
+  }
+  @media (max-width: $breakpoint-sm) {
+    padding-bottom: 3em;
+  }
+  @media (max-width: $breakpoint-xs) {
+    padding-bottom: 2em;
+  }
+}
+
+
+@media (max-width: 790.98px) { // Target screens just below 640px
+  .container {
+    padding-left: 1.5rem;  // Add 1rem (16px) padding on the left
+    padding-right: 1.5rem; // Add 1rem (16px) padding on the right
+    // Adjust the '1rem' value if you prefer different padding (e.g., 1.5rem)
+  }
+}

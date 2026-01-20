@@ -1,0 +1,159 @@
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+.topsection-container-main.faq-hero {
+    min-height: 45vh; // Keep desktop min-height
+    height: auto;
+    border-radius: 0rem 0rem 2.1875rem 2.1875rem;
+    background-color: $primary-green;
+    position: relative; // Keep for desktop absolute positioning
+    overflow: hidden; // Keep clipping mascot to corners on desktop
+    // Keep desktop flex settings
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    .topsection-container { // Holds the text content
+        width: 100%;
+        min-height: inherit; // Inherit height for vertical centering on desktop
+        display: flex;
+        align-items: inherit; // Inherit alignment from parent
+        justify-content: flex-start; // Align text left on desktop
+        position: relative; // Keep relative for z-index context on desktop
+        z-index: 2; // Ensure text container is above mascot on desktop
+    }
+
+    .content-container {
+        width: 50%; // Keep desktop width
+        max-width: 550px;
+        padding: 3em 0 3em 2em; // Keep desktop padding
+
+        h1 {
+            color: $white;
+            font-family: Aeonik, sans-serif;
+            font-size: 2.8rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1.25;
+            margin: 0;
+        }
+    }
+
+    .faq-mascot {
+        // Desktop styles
+        display: block;
+        position: absolute; // <<< Absolute on desktop
+        bottom: -6vh;
+        right: 1%;
+        width: auto;
+        height: 85%; // Keep desktop height
+        max-width: 50%;
+        z-index: 1;
+        user-select: none;
+        pointer-events: none;
+        transition: height 0.2s ease-out, right 0.2s ease-out, bottom 0.2s ease-out, max-width 0.2s ease-out, position 0s linear 0.1s; // Delay position change slightly if needed
+    }
+
+
+    // --- Desktop Responsiveness Adjustments (Keep Original) ---
+    @media (max-width: 1200px) {
+        .faq-mascot {
+            height: 85%; // Previous setting was 85, changed in last code? Reverting desktop height to 75% as per prev code. Let's use 80% as a compromise.
+            height: 80%;
+            right: -2%;
+            max-width: 55%;
+        }
+        .content-container {
+             width: 55%;
+        }
+    }
+
+    @media (max-width: 992px) { // Tablets (Still uses absolute positioning)
+        min-height: 40vh;
+        .content-container {
+            width: 60%;
+            padding: 2.5em 0 2.5em 1.5em;
+            h1 { font-size: 2.4rem; }
+        }
+        .faq-mascot {
+            height: 75%; // Adjusted height for tablet
+            max-width: 55%;
+            right: -5%;
+        }
+    }
+
+    // =======================================
+    // START: Mobile Adjustments (767px max) - STACKED LAYOUT
+    // =======================================
+     @media (max-width: 767px) {
+        min-height: auto; // Let content dictate height
+        padding-bottom: 0; // Remove padding if mascot touches bottom
+        border-radius: 0rem 0rem 1.5rem 1.5rem;
+        flex-direction: column; // <<< Stack items vertically
+        align-items: center; // Center items horizontally
+        justify-content: flex-start; // Align items to top
+        padding: 4em 0em 0em 0em;
+
+         .topsection-container { // Text container (Row 1)
+             order: 1; // Ensure text comes first
+             min-height: auto; // Reset min-height
+             height: auto;
+             width: 100%; // Take full width
+             justify-content: center; // Center text block
+             z-index: auto; // Reset z-index
+             position: static; // Reset position
+         }
+
+         .content-container {
+              width: 90%;
+              padding: 2.5em 1em 1.5em 1em; // Adjust padding (less bottom padding)
+              text-align: center; // Center text
+              margin-bottom: 0; // Remove previous margin
+
+              h1 {
+                  font-size: 2rem; // Keep adjusted size
+                  line-height: 1.3;
+                  text-align: center; // Ensure text is centered
+              }
+         }
+
+         .faq-mascot {
+             order: 2; // Ensure mascot comes second
+             position: static; // <<< Change position to static (normal flow)
+             height: auto; // Let width control height
+             width: 65%; // <<< Control size via width
+             max-width: 300px; // <<< Add a max-width in pixels
+             max-height: none; // <<< Reset max-height
+             margin: 0 auto; // Center the mascot horizontally
+             margin-top: -1rem; // <<< Optional: Negative margin to slightly pull mascot up over text background
+             padding-bottom: 0; // Ensure no extra space below
+             // Remove absolute positioning properties
+             bottom: auto;
+             right: auto;
+             z-index: auto;
+         }
+     }
+    // =======================================
+    // END: Mobile Adjustments (767px max)
+    // =======================================
+
+    // =======================================
+    // START: Small Mobile Adjustments (480px max) - Refine Stacked Layout
+    // =======================================
+      @media (max-width: 480px) {
+         .content-container {
+              padding: 2em 1em 1em 1em; // Further adjust padding
+              h1 { font-size: 1.7rem; } // Keep smaller size
+          }
+           .faq-mascot {
+             width: 75%; // Slightly larger width percentage
+             max-width: 280px; // Slightly smaller max pixel width
+             margin-top: -0.5rem; // Adjust negative margin if needed
+         }
+      }
+    // =======================================
+    // END: Small Mobile Adjustments (480px max)
+    // =======================================
+
+} // End .topsection-container-main

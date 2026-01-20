@@ -1,0 +1,77 @@
+.tof-container-main {
+    .tof-container {
+        // SectionTitle styles are handled by its own component/scss
+        margin-top: 2.5em; // Add margin if needed, maybe handled by SectionTitle already?
+        // Removed the extra wrapper div styling (.tof-cards-container-main)
+        .tof-cards-container {
+            // width: 80%; // REMOVED - Let the outer .container handle width/centering
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); // Default: 3 columns for desktop
+            gap: 1.5em;
+            .tof-card {
+                position: relative;
+                border-radius: 1rem;
+                overflow: hidden;
+                background-size: cover;
+                background-position: center;
+                height: 60vh; // Using fixed height
+                display: flex;
+                align-items: flex-end;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background-color: rgba(0, 0, 0, 0.25);
+                    z-index: 0;
+                }
+                .card-content-overlay {
+                    position: relative;
+                    width: 100%;
+                    padding: 1.2em 1.5em;
+                    z-index: 1;
+                    background-color: rgba(255, 255, 255, 0.4);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    h5 {
+                        color: $white;
+                        font-family: Aeonik;
+                        font-size: 1.375rem;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: normal;
+                        margin: 0;
+                        text-align: left;
+                        @media(max-width: 768px) {
+                            font-size: 1.15rem
+                        }
+                    }
+                }
+            }
+        }
+        // --- Responsiveness ---
+        @media (max-width: 992px) {
+            // Tablets
+            .tof-cards-container {
+                grid-template-columns: repeat(2, 1fr); // Switch to 2 columns
+                gap: 1.2em;
+                .tof-card {
+                    height: 50vh; // Optional: Adjust height for tablets
+                }
+            }
+        }
+        @media (max-width: 767px) {
+            // Mobile
+            .tof-cards-container {
+                // This is the key change for the two-column layout
+                grid-template-columns: repeat(2, 1fr);
+                // A slightly smaller gap looks better on mobile
+                gap: 1em;
+                .tof-card {
+                    // Using aspect-ratio is more responsive than a fixed height
+                    height: auto;
+                    aspect-ratio: 1 / 1.7; // Makes the card slightly taller than it is wide
+                }
+            }
+        }
+    }
+}

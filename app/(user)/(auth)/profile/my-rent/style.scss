@@ -1,0 +1,261 @@
+// Ensure your global variables ($primary-green, $black, $white, $grey-text, $cloud-grey etc.) are accessible
+// @import path/to/your/variables.scss; if not globally available
+.my-rent-page-wrapper {
+    min-height: 100vh;
+    padding: 2rem 0 4rem 0; // Added more bottom padding
+}
+
+.my-rent-container.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.page-title-container {
+    margin-bottom: 2.5rem;
+    h1 {
+        color: $black;
+        font-family: 'Aeonik', sans-serif; // Consistent with other titles
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 0;
+    }
+}
+
+.rent-summary-card {
+    background-color: $white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    .tenancy-details {
+        margin-bottom: 1rem;
+        p {
+            margin: 0.4rem 0;
+            font-size: 1rem;
+            color: $grey-text;
+            strong {
+                color: $black;
+                font-weight: 600;
+            }
+        }
+        .property-name {
+            font-size: 1.1rem;
+        }
+    }
+    .divider {
+        border: none;
+        border-top: 1px solid $cloud-grey;
+        margin: 1rem 0;
+    }
+    .next-payment-status {
+        .status-label {
+            font-size: 1.1rem;
+            color: $black;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: $white;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            &.status-paid {
+                background-color: $primary-green; // Your green
+            }
+            &.status-due {
+                background-color: #f39c12; // Amber/Orange for Due
+            }
+            &.status-overdue {
+                // If you implement this
+                background-color: #e74c3c; // Red for Overdue
+            }
+        }
+        .due-date-info {
+            font-size: 0.9rem;
+            color: $grey-text;
+            margin-top: 0.3rem;
+        }
+    }
+}
+
+.payment-history-section {
+    background-color: $white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    .history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        h2 {
+            font-size: 1.5rem;
+            color: $black;
+            font-weight: 600;
+            margin: 0;
+        }
+        .year-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            label {
+                font-size: 0.9rem;
+                color: $grey-text;
+            }
+            select {
+                padding: 0.4rem 0.6rem;
+                border: 1px solid $cloud-grey;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                background-color: $white;
+                &:focus {
+                    outline: none;
+                    border-color: $primary-green;
+                }
+            }
+        }
+    }
+    .months-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        .month-item {
+            padding: 1rem;
+            border: 1px solid $cloud-grey;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: #fdfdfd;
+            .paid-icon {
+                font-size: 1.2rem;
+                color: $primary-green;
+                display: block;
+                margin-bottom: 0.3rem;
+            }
+            .month-name {
+                display: block;
+                font-weight: 500;
+                color: $black;
+                margin-bottom: 0.25rem;
+            }
+            .month-status-text {
+                font-size: 0.8rem;
+                color: $grey-text;
+            }
+            &.paid {
+                border-color: lighten($primary-green, 40%);
+                background-color: lighten($primary-green, 65%);
+                .month-status-text {
+                    color: $primary-green;
+                    font-weight: 500;
+                }
+            }
+            &.not-paid {
+                .month-status-text {
+                    color: darken($grey-text, 10%);
+                }
+            }
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+            }
+        }
+    }
+}
+
+.payment-info-contact-section {
+    display: grid;
+    grid-template-columns: 1fr; // Default to 1 column
+    gap: 2rem;
+    h3 {
+        font-size: 1.3rem;
+        color: $black;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+    }
+    p {
+        font-size: 0.95rem;
+        color: $grey-text;
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
+    }
+    a {
+        color: $primary-green;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .contact-detail {
+        strong {
+            color: darken($grey-text, 20%);
+        }
+    }
+}
+
+// Responsive adjustments
+@media (min-width: 768px) {
+    .payment-info-contact-section {
+        grid-template-columns: 1fr 1fr; // 2 columns on larger screens
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title-container h1 {
+        font-size: 2.2rem;
+    }
+    .rent-summary-card,
+    .payment-history-section {
+        padding: 1.5rem;
+    }
+    .payment-history-section .history-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        h2 {
+            font-size: 1.3rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .my-rent-page-wrapper {
+        padding: 1.5rem 0 3rem 0;
+    }
+    .my-rent-container.container {
+        padding: 0 0.75rem;
+    }
+    .page-title-container h1 {
+        font-size: 2rem;
+    }
+    .rent-summary-card,
+    .payment-history-section {
+        padding: 1.25rem;
+        .tenancy-details .property-name {
+            font-size: 1rem;
+        }
+        .next-payment-status .status-label {
+            font-size: 1rem;
+        }
+    }
+    .payment-history-section .months-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.75rem;
+        .month-item {
+            padding: 0.75rem;
+        }
+    }
+    .payment-info-contact-section {
+        h3 {
+            font-size: 1.2rem;
+        }
+        p {
+            font-size: 0.9rem;
+        }
+    }
+}

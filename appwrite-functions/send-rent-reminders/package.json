@@ -1,0 +1,10 @@
+{
+    "name": "send-rent-reminders",
+    "version": "1.0.0",
+    "description": "Appwrite function to send rent reminders.",
+    "main": "src/main.js",
+    "type": "commonjs",
+    "dependencies": {
+        "node-appwrite": "^17.0.0"
+    }
+}

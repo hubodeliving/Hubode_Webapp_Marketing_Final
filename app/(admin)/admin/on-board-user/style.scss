@@ -1,0 +1,287 @@
+// File: app/(admin)/on-board-user/style.scss
+@import '../../variables.scss'; // Your admin variables
+// Main page container
+.onboard-user-page {
+    font-family: $font-family-sans;
+    padding: 1rem 2rem;
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: $text-dark;
+        margin-bottom: 2rem;
+        text-align: left;
+    }
+}
+
+// Wrapper for the main content
+.onboard-content-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+
+// User Header
+.user-header-section {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    .profile-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: $primary-green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        font-size: 1.75rem;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+    .user-name-display {
+        h5 {
+            color: $text-dark;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+    }
+}
+
+// Onboarding Form Styles
+.onboard-form {
+    h2 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: $text-dark;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid $border-color;
+        display: inline-block;
+    }
+}
+
+// Form group styling
+.form-group {
+    margin-bottom: 1.25rem;
+    label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $text-dark;
+        margin-bottom: 0.5rem;
+    }
+    // Styling for select elements
+    select {
+        width: 100%;
+        max-width: 400px;
+        padding: 0.8rem 1rem;
+        font-size: 0.875rem;
+        color: $text-dark;
+        background-color: $form-input-bg;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        box-sizing: border-box;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236B7280' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1em;
+        padding-right: 2.5rem;
+        &:focus {
+            outline: none;
+            border-color: $primary-green;
+            box-shadow: 0 0 0 2px rgba($primary-green, 0.1);
+        }
+        &:disabled {
+            background-color: darken($form-input-bg, 3%);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    }
+}
+
+// NEW/MODIFIED: Rent Display Group
+.rent-display-group {
+    display: flex;
+    align-items: baseline; // Align text based on their baseline for better visual flow
+    width: 100%;
+    max-width: 400px;
+    padding: 0.8rem 1rem; // Same padding as inputs/selects
+    font-size: 0.875rem; // Base font size for "per month"
+    color: $text-dark;
+    background-color: $form-input-bg; // Same background as inputs
+    border: 1px solid $border-color; // Same border
+    border-radius: 8px; // Same border radius
+    box-sizing: border-box;
+    min-height: calc(0.8rem * 2 + 0.875rem * 1.2 + 2px); // Match select height approx (padding + line-height + border)
+    .currency-symbol {
+        font-size: 0.875rem; // Match base font size of this group
+        color: $text-dark; // Or $primary-green if you want to highlight it
+        margin-right: 0.25rem; // Small space after symbol
+        &.bold {
+            font-weight: 700;
+        }
+    }
+    .rent-amount {
+        // font-size: 0.875rem; // Default size, will be overridden by .large
+        color: $text-dark;
+        margin-right: 0.35rem; // Space after amount
+        &.bold {
+            font-weight: 700;
+        }
+        &.large {
+            font-size: 1.125rem; // Slightly larger font for the amount (e.g., 18px if base is 14px)
+            // You can also use `1.2em` relative to its parent
+        }
+    }
+    .rent-suffix {
+        font-size: 0.8125rem; // Slightly smaller for "per month"
+        color: $text-light; // Lighter color for suffix
+    }
+}
+
+.form-feedback.error {
+    color: #D32F2F;
+    background-color: lighten(#D32F2F, 42%);
+    border: 1px solid lighten(#D32F2F, 35%);
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.25rem;
+    text-align: left;
+    max-width: 400px;
+}
+
+.form-actions {
+    margin-top: 2.5rem;
+    text-align: left;
+    .save-button {
+        background-color: $primary-green;
+        color: $white;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease, opacity 0.2s ease;
+        min-width: 120px;
+        &:hover:not(:disabled) {
+            background-color: darken($primary-green, 8%);
+        }
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.loading-state {
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: $text-light;
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: $breakpoint-md) {
+    .onboard-user-page {
+        padding: 1rem;
+        .page-title {
+            text-align: center;
+        }
+    }
+    .onboard-content-wrapper {
+        max-width: none;
+    }
+    .user-header-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .onboard-form h2 {
+        text-align: center;
+        display: block;
+        border-bottom-width: 1px;
+    }
+    .form-group {
+        label {
+            text-align: center;
+        }
+        select,
+        .rent-display-group {
+            // Apply max-width to rent display group as well
+            max-width: 100%;
+        }
+    }
+    .rent-display-group {
+        justify-content: center; // Center the items within the rent display group
+    }
+    .form-feedback.error {
+        max-width: 100%;
+    }
+    .form-actions {
+        text-align: center;
+        .save-button {
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-sm) {
+    .onboard-user-page {
+        padding: 1rem 0.75rem;
+        .page-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+    }
+    .user-header-section {
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+        }
+        .user-name-display h5 {
+            font-size: 1.25rem;
+        }
+    }
+    .onboard-form h2 {
+        font-size: 1.1rem;
+        margin-bottom: 1.25rem;
+    }
+    .form-group {
+        margin-bottom: 1rem;
+        label {
+            font-size: 0.8rem;
+        }
+        select {
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            padding-right: 2.5rem;
+        }
+    }
+    .rent-display-group {
+        padding: 0.75rem 1rem;
+        .currency-symbol {
+            font-size: 0.875rem;
+        }
+        .rent-amount.large {
+            font-size: 1rem;
+        } // Adjust large size for mobile
+        .rent-suffix {
+            font-size: 0.75rem;
+        }
+    }
+    .form-actions {
+        margin-top: 2rem;
+    }
+}

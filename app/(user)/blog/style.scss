@@ -1,0 +1,194 @@
+// Your existing SCSS file for the blog page (e.g., app/(user)/blog/style.scss)
+
+
+// --- TopSection Styles (Assuming they exist elsewhere) ---
+
+// --- Blog Items Section ---
+
+// Container likely handles max-width and padding
+.blog-items-section.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); // 4 columns on desktop
+    gap: 2rem 1.5rem; // Row gap, Column gap
+
+    // --- Styles for INDIVIDUAL Blog Items (UNCHANGED from your provided code) ---
+    .blog-item {
+        background-color: $white;
+        overflow: hidden; // Clip image corners
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+            cursor: pointer;
+            .image-section .arrow-icon {
+                 transform: scale(1.1);
+                 background-color: darken($primary-green, 5%);
+            }
+        }
+
+        .image-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10; // Adjust aspect ratio as needed
+            background-size: cover;
+            background-position: center;
+            background-color: $cloud-grey; // Placeholder color while image loads
+            border-radius: 1.2rem;
+
+            .arrow-icon {
+                position: absolute;
+                bottom: 1rem;
+                right: 1rem;
+                width: 40px; // Adjust size of circle
+                height: 40px;
+                background-color: $primary-green; // Your primary color
+                border-radius: 50%; // Make it a circle
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s ease, background-color 0.3s ease;
+                cursor: pointer; // Indicate it's clickable (assuming it links later)
+                text-decoration: none; // Remove underline if it's a link
+
+                img {
+                    width: 18px; // Adjust size of arrow inside circle
+                    height: 18px;
+                    object-fit: contain;
+                    filter: brightness(0) invert(1); // Make arrow white
+                }
+            }
+        }
+
+        .content-section { // Wrapper for text content
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; // Allow this section to grow if needed
+            gap: 0.8rem; // Spacing between title, date, text
+            margin-top: 0.8rem;
+            // Add padding if desired within the content area
+             padding: 0 0.5rem 0.5rem;
+        }
+
+        .blog-title { // Corresponds to h5
+            color: $primary-green; // Use your primary color
+            font-family: Aeonik, sans-serif; // Use your desired font
+            font-size: 1.1rem; // Adjust size
+            font-weight: 600; // Semi-bold
+            line-height: 1.4;
+            margin: 0; // Reset default margin
+             // --- Line Clamp for Title (2 lines) ---
+             overflow: hidden;
+             display: -webkit-box;
+             -webkit-box-orient: vertical;
+             -webkit-line-clamp: 2;
+        }
+
+        .date-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; // Space between icon and date text
+
+            img {
+                width: 16px; // Adjust icon size
+                height: 16px;
+                object-fit: contain;
+                filter: opacity(0.6); // Make calendar icon slightly muted grey
+            }
+
+            .date { // Corresponds to p.date
+                color: $grey-text; // Use your grey text variable
+                font-family: Aeonik, sans-serif;
+                font-size: 0.85rem;
+                font-weight: 400;
+                margin: 0;
+            }
+        }
+
+        .subtext { // Corresponds to p.subtext / excerpt
+            color: $grey-text; // Use your grey text variable
+            font-family: Aeonik, sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+            flex-grow: 1; // Allow text to take space, pushing date down if needed
+
+            // --- Line Clamp for Excerpt (4 lines) ---
+             display: -webkit-box;
+             -webkit-box-orient: vertical;
+             -webkit-line-clamp: 4; // Show max 4 lines (Adjusted from 3 in original)
+             overflow: hidden;
+        }
+    }
+    // --- END OF UNCHANGED .blog-item styles ---
+
+
+    // --- Styles for the "No Posts" message (ADD THIS BLOCK) ---
+    // Needs to be a peer to .blog-item within .blog-items-section.container
+    .no-events-message-container { // Using the class name from your TSX
+        grid-column: 1 / -1; // Crucial: Makes it span the full grid width
+
+        // Centering & Box Styling
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // Vertical centering
+        align-items: center; // Horizontal centering
+        padding: 4em 2em; // Generous padding
+        min-height: 250px; // Give it some minimum height
+        border-radius: 1rem; // Use same radius as blog items?
+
+        // Visual Style (matches the subtle style from community example)
+        background-color: rgba(0, 0, 0, 0.03); // Very subtle background
+        border: 1px dashed $cloud-grey; // Subtle dashed border using your variable
+
+        // Text Styling
+        p {
+            font-size: 1.15rem; // Make text readable
+            color: $grey-text; // Use your grey text variable
+            font-weight: 500;
+            font-family: Aeonik, sans-serif; // Use consistent font
+            line-height: 1.6;
+            margin: 0; // Reset default margin
+            max-width: 80%; // Prevent text line getting too long
+            text-align: center; // Ensure text itself is centered
+        }
+    }
+    // --- End of "No Posts" styles ---
+
+} // --- End of .blog-items-section.container ---
+
+
+// --- Responsiveness for Blog Grid (UNCHANGED from your provided code) ---
+@media (max-width: 1024px) { // Smaller Desktops / Large Tablets
+    .blog-items-section.container {
+        grid-template-columns: repeat(3, 1fr); // 3 columns
+        gap: 1.5rem 1.2rem;
+    }
+     .blog-item .blog-title { font-size: 1rem; }
+}
+
+@media (max-width: 767px) { // Tablets
+    .blog-items-section.container {
+        grid-template-columns: repeat(2, 1fr); // 2 columns
+        gap: 1.5rem 1rem;
+    }
+     .blog-item .subtext { -webkit-line-clamp: 4; } // Show more lines on tablet?
+}
+
+@media (max-width: 600px) { // Mobile
+    .blog-items-section.container {
+        grid-template-columns: 1fr; // 1 column (stack)
+        gap: 1.8rem; // Vertical gap
+
+         // Optionally adjust "no posts" message on mobile
+         .no-events-message-container {
+             padding: 3em 1em;
+             min-height: 200px;
+             p { font-size: 1rem; }
+         }
+    }
+     .blog-item .blog-title { font-size: 1.05rem; }
+     .blog-item .subtext { font-size: 0.85rem; }
+     .blog-item .image-section .arrow-icon { width: 35px; height: 35px; img { width: 16px; height: 16px;} }
+}
+// --- End Blog Grid Responsiveness ---

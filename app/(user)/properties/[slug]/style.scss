@@ -1,0 +1,874 @@
+// --- Keep ALL existing styles above this line exactly as they were ---
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are defined globally or imported above this file.
+
+
+// --- Image Gallery Section Styles (Keep original) ---
+.images-container-main { margin-bottom: 1.6rem; }
+.images-container.container {
+    display: flex; flex-wrap: wrap; gap: 1em;
+    .left-section, .right-section { flex-shrink: 1; }
+    .left-section {
+        flex-basis: calc(55% - 0.5em);
+        min-width: 280px;
+        display: flex;
+        flex-direction: column;
+
+        .featured-image {
+            flex: 1;
+            min-height: 100%;
+            height: 100%;
+        }
+    }
+    .right-section {
+        flex-basis: calc(45% - 0.5em);
+        min-width: 250px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 1em;
+    }
+    .img-item {
+        border-radius: 1rem;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        background-color: $cloud-grey;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        &:hover img { transform: scale(1.03); }
+    }
+    .image4 { position: relative; .all-image-icon { position: absolute; bottom: 1em; right: 1em; background-color: rgba(0, 0, 0, 0.6); color: $white; display: flex; align-items: center; gap: 0.5em; padding: 0.5em 0.8em; border-radius: 0.5rem; z-index: 2; cursor: pointer; transition: background-color 0.2s ease; img { width: 18px; height: 18px; object-fit: contain; transform: none !important; filter: brightness(0) invert(1); transition: none; } span { font-family: Aeonik, sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1; } &:hover { background-color: rgba(0, 0, 0, 0.8); } } }
+    @media (max-width: 1024px) {
+        .left-section, .right-section {
+            flex-basis: 100%;
+        }
+
+        .left-section {
+            .featured-image {
+                height: auto;
+                aspect-ratio: 16 / 10;
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .left-section, .right-section { flex-basis: 100%; }
+        .left-section .featured-image { aspect-ratio: 16 / 10; height: auto; }
+        .right-section { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, auto); }
+        .image4 .all-image-icon { bottom: 0.8em; right: 0.8em; padding: 0.4em 0.6em; img { width: 16px; height: 16px;} span { font-size: 0.8rem;} }
+    }
+}
+
+// ============================================
+// START: Sticky Fix
+// ============================================
+.main-content-container.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    // align-items: flex-start; // REMOVED THIS LINE
+    align-items: stretch; // ADDED THIS LINE (or remove align-items entirely)
+}
+// ============================================
+// END: Sticky Fix
+// ============================================
+
+
+// Keep original --- Left Content Section --- Styles
+.left-content-section {
+    flex-basis: calc(66.5% - 0.75rem); min-width: 280px;
+    display: flex; flex-direction: column; gap: 2.3rem; // Keep original gap
+
+    // Keep original .head-section styles
+    .head-section{ /* ... */ }
+    .property-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; h1{ color: $black; font-family: Aeonik, sans-serif; font-size: 2rem; font-weight: 700; line-height: normal; margin: 0; } .share-button { background-color: $primary-green; color: $white; border: none; border-radius: 0.5rem; padding: 0.6em 1.2em; display: inline-flex; align-items: center; gap: 0.9rem; font-family: Aeonik, sans-serif; cursor: pointer; transition: background-color 0.2s ease; font-size: 1.0rem; font-weight: 500; img { width: 1.4375rem; height: 1.4375rem; filter: brightness(0) invert(1); } &:hover { background-color: darken($primary-green, 5%); } } }
+    .property-location,
+    .property-bed-info{ img{ width: 1.25rem; height: 1.25rem; } p{ color: $black; font-family: Aeonik, sans-serif; font-size: 1rem; font-weight: 400; line-height: normal; } }
+    .detail-row { display: flex; align-items: center; gap: 0.6em; margin-bottom: 1rem; color: $grey-text; font-family: Aeonik, sans-serif; font-size: 0.95rem; img { width: 1.2em; height: 1.2em; flex-shrink: 0; } p { margin: 0; } }
+    .property-room-types { gap: 1.5em; .type { display: flex; align-items: center; gap: 0.5em; } img{ width: 1.25rem; height: 1.25rem; aspect-ratio: 1/1; } p{ color: $grey-text; text-align: center; font-family: Aeonik, sans-serif; font-size: 1rem; font-weight: 400; line-height: 1.5625rem; } }
+
+    // Keep original .description-section styles
+    .description-section {
+        h4 { color: $black; font-family: Aeonik, sans-serif; font-size: 1.4375rem; font-weight: 700; line-height: normal; margin-bottom: 1rem; }
+        .description-text { color: $grey-text; font-family: Aeonik, sans-serif; font-size: 1.0625rem; font-weight: 400; line-height: 1.625rem; margin-bottom: 0.8rem; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; max-height: calc(1.625rem * 4); transition: max-height 0.4s ease-out; &.expanded { -webkit-line-clamp: unset; max-height: 1000px; } }
+        .read-more-button { background: none; border: none; padding: 0; color: $primary-green; font-family: Aeonik, sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4em; .arrow { width: 1em; height: 1em; transition: transform 0.3s ease; &.up { transform: rotate(180deg); } } }
+    }
+
+    // Keep original Features/Amenities Section styles
+    .features-section {
+        .features-items-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem 1.5rem; margin-top: 1.5rem; overflow: hidden; transition: max-height 0.4s ease-in-out; max-height: 15rem; }
+        &.expanded { .features-items-container { max-height: 30rem; } }
+        .feature-item { display: flex; align-items: center; gap: 0.8rem; .feature-icon-container { flex-shrink: 0; } .feature-icon { width: 2.5rem; height: 2.5rem; object-fit: contain; display: block; } p { font-family: Aeonik, sans-serif; font-size: 0.95rem; color: $black; margin: 0; line-height: 1.3; font-weight: 400; } }
+        .view-all-amenities-button { display: inline-block; margin-top: 2rem; padding: 0.6rem 1.8rem; background-color: transparent; border: 1.5px solid $primary-green; color: $primary-green; border-radius: 0.5rem; font-family: Aeonik, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; text-align: center; transition: background-color 0.2s ease, color 0.2s ease; &:hover { background-color: lighten($primary-green, 50%); } }
+        @media (max-width: 992px) { .features-items-container { gap: 1.5rem 1.2rem; } }
+        @media (max-width: 767px) { .features-items-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; max-height: 18rem; } &.expanded .features-items-container { max-height: 40rem; } .feature-item { gap: 0.6rem; .feature-icon { width: 2rem; height: 2rem; } p { font-size: 0.9rem; } } .view-all-amenities-button { margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.9rem; } }
+        @media (max-width: 480px) { .features-items-container { gap: 1.2rem 0.8rem; } .feature-item p { font-size: 0.85rem; } }
+    }
+
+    // Keep original Location Access Section styles
+    .location-access-section {
+        .locations-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.0rem 1.5rem; margin-top: 1.5rem; }
+        .location-item { display: flex; align-items: center; gap: 0.8rem; img { width: 1.5rem; height: 1.5rem; object-fit: contain; flex-shrink: 0; } p { color: $black; font-family: Aeonik, sans-serif; font-size: 1.0rem; font-weight: 400; line-height: normal; margin: 0; } }
+        @media (max-width: 767px) { .locations-container { gap: 0.8rem 1rem; } .location-item { gap: 0.6rem; img { width: 1.3rem; height: 1.3rem; } p { font-size: 0.9rem; } } }
+        @media (max-width: 480px) { .locations-container { grid-template-columns: 1fr; gap: 0.75rem; } .location-item p { font-size: 0.85rem; } }
+    }
+
+    // Keep original Room Type Section styles
+    // --- Room Type Section styles ---
+
+    // File: app/(user)/properties/[slug]/style.scss
+/* ... Keep all styles ABOVE this section ... */
+
+// ===== START: Corrected Room Type Section Styles =====
+.roomtype-section {
+    .roomtype-group { margin-bottom: 2.5rem; &:last-child { margin-bottom: 0; } }
+    .roomtype-group-heading { color: $black; font-family: Aeonik, sans-serif; font-size: 1.3125rem; font-weight: 500; line-height: normal; margin: 0 0 0.87rem 0; }
+    .roomtype-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .roomtype-item { border: 1px solid $cloud-grey; border-radius: 0.8rem; overflow: hidden; background-color: $white; display: flex; flex-direction: column; transition: box-shadow 0.3s ease; &:hover { box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .roomtype-item-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            min-height: 230px;
+            background-color: $cloud-grey;
+            overflow: hidden;
+
+            .roomtype-image-button {
+                width: 100%;
+                height: 100%;
+                border: none;
+                padding: 0;
+                margin: 0;
+                background: none;
+                display: block;
+                cursor: pointer;
+                position: relative;
+
+                img { display: block; width: 100%; height: 100%; object-fit: cover; }
+            }
+
+            > img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .roomtype-image-overlay {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.45);
+                opacity: 0;
+                transition: opacity 0.25s ease;
+                pointer-events: none;
+            }
+
+            &.has-gallery:hover .roomtype-image-overlay {
+                opacity: 1;
+            }
+
+            .roomtype-gallery-indicator {
+                position: absolute;
+                left: 0.8rem;
+                bottom: 0.8rem;
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 0.6rem;
+                padding: 0.35rem 0.5rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+
+                img {
+                    width: 1rem;
+                    height: 1rem;
+                    object-fit: contain;
+                    filter: brightness(0) invert(1);
+                }
+            }
+
+            .sold-out-overlay {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.65);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $white;
+                font-family: Aeonik, sans-serif;
+                font-size: 1rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                z-index: 2;
+            }
+        }
+        .roomtype-item-content {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+
+            .room-sqft {
+                color: $grey-text;
+                font-family: Aeonik, sans-serif;
+                font-size: 0.8125rem;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0.25rem 0;
+            }
+
+            .room-features {
+                color: $grey-text;
+                font-family: Aeonik, sans-serif;
+                font-size: 0.875rem;
+                font-weight: 400;
+                line-height: 1.55;
+                margin: 0.15rem 0 0.35rem;
+                transition: max-height 0.3s ease;
+                flex-grow: 1;
+                overflow: hidden;
+
+                &.collapsed {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
+                    max-height: calc(1.55em * 3);
+                }
+
+                &.expanded {
+                    max-height: 1000px;
+                    -webkit-line-clamp: unset;
+                    display: block;
+                }
+            }
+
+            .room-features-toggle {
+                background: none;
+                border: none;
+                padding: 0;
+                color: $primary-green;
+                font-family: Aeonik, sans-serif;
+                font-size: 0.85rem;
+                font-weight: 500;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.3rem;
+                cursor: pointer;
+                margin-bottom: 0.35rem;
+
+                .arrow {
+                    width: 0.85rem;
+                    height: 0.85rem;
+                    transition: transform 0.2s ease;
+
+                    &.up {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            .roomtype-bunk-selector,
+            .roomtype-sqft-selector {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+                margin-bottom: 0.8rem;
+                position: relative;
+                z-index: 2;
+
+                &.open {
+                    z-index: 15;
+                }
+
+                label {
+                    font-family: Aeonik, sans-serif;
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    color: $black;
+                }
+
+                .bunk-dropdown-trigger {
+                    border: 1px solid rgba($primary-green, 0.35);
+                    border-radius: 0.65rem;
+                    padding: 0.65rem 0.95rem;
+                    font-family: Aeonik, sans-serif;
+                    font-size: 0.92rem;
+                    font-weight: 500;
+                    color: $black;
+                    background: $white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 0.75rem;
+                    cursor: pointer;
+                    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+
+                    &:focus {
+                        outline: none;
+                        border-color: $primary-green;
+                        box-shadow: 0 0 0 3px rgba($primary-green, 0.15);
+                    }
+                }
+
+                .dropdown-icon {
+                    width: 1.1rem;
+                    height: 1.1rem;
+                    flex-shrink: 0;
+                    background: url('/images/down-arrow-green.svg') no-repeat center / contain;
+                    transition: transform 0.25s ease;
+                }
+
+                &.open {
+                    .bunk-dropdown-trigger {
+                        border-color: $primary-green;
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+                    }
+
+                    .dropdown-icon {
+                        transform: rotate(180deg);
+                    }
+                }
+
+                .bunk-dropdown-menu {
+                    position: absolute;
+                    top: calc(100% + 0.35rem);
+                    left: 0;
+                    width: 100%;
+                    border-radius: 0.75rem;
+                    border: 1px solid rgba($primary-green, 0.25);
+                    background: $white;
+                    box-shadow: 0 20px 45px rgba(8, 38, 14, 0.18);
+                    overflow: hidden;
+                    max-height: 0;
+                    opacity: 0;
+                    transform: translateY(-6px);
+                    transition: max-height 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+                    pointer-events: none;
+                }
+
+                .bunk-dropdown-menu.open {
+                    max-height: 300px;
+                    opacity: 1;
+                    transform: translateY(0);
+                    pointer-events: auto;
+                }
+
+                .bunk-dropdown-option {
+                    width: 100%;
+                    border: none;
+                    border-bottom: 1px solid rgba($cloud-grey, 0.6);
+                    padding: 0.75rem 1rem;
+                    background: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 1rem;
+                    font-family: Aeonik, sans-serif;
+                    font-size: 0.92rem;
+                    color: $black;
+                    cursor: pointer;
+                    transition: background-color 0.2s ease;
+
+                    &:last-of-type {
+                        border-bottom: none;
+                    }
+
+                    &:hover,
+                    &:focus {
+                        outline: none;
+                        background-color: rgba($primary-green, 0.08);
+                    }
+
+                    &.selected {
+                        background-color: rgba($primary-green, 0.12);
+                        font-weight: 600;
+                    }
+                }
+
+                .check-indicator {
+                    width: 1.1rem;
+                    height: 1.1rem;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+            }
+        }
+        .roomtype-item-title { color: $black; font-family: Aeonik, sans-serif; font-size: 1.3125rem; font-weight: 500; line-height: normal; span{ color: $primary-green; } }
+        .price { color: $black; font-family: Aeonik, sans-serif; font-size: 1.125rem; font-weight: 500; line-height: normal; span { color: $primary-green; font-family: Aeonik, sans-serif; font-size: 1.125rem; font-weight: 700; line-height: normal; } }
+        .beds-left { color: $primary-green; font-family: Aeonik, sans-serif; font-size: 0.8125rem; font-weight: 400; line-height: normal; }
+        .select-button { display: block; width: 100%; background-color: $white; color: $primary-green; border: 1px solid $primary-green; border-radius: 0.5rem; padding: 0.7em 1em; color: $primary-green; font-family: Aeonik, sans-serif; font-size: 0.8125rem; font-weight: 500; line-height: normal; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; margin-top: auto; &:hover { background-color: $primary-green; color: $white; } }
+   }
+   @media (max-width: 992px) { .roomtype-row { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; } .roomtype-item .roomtype-item-title { font-size: 1rem; } .roomtype-item .room-features { font-size: 0.8rem; } .roomtype-item .price span { font-size: 1.1rem; } .roomtype-item .select-button { font-size: 0.85rem; padding: 0.6em 1em; } }
+    @media (max-width: 600px) { .roomtype-row { grid-template-columns: 1fr; gap: 1.5rem; } .roomtype-group-heading { font-size: 1.4rem; } }
+}
+// ===== END: Corrected Room Type Section Styles =====
+
+/* ... Keep all styles below this section ... */    
+
+    // Keep original Location Map Section styles
+    .location-map {
+         .map-container { width: 100%; margin-top: 1.5rem; border-radius: 1rem; overflow: hidden; position: relative; background-color: $cloud-grey; height: 400px;
+             iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+         }
+         @media (max-width: 767px) { .map-container { height: 300px; } }
+    }
+
+    // Keep original Shared Spaces Section styles
+    .shared-spaces-container {
+        p:not(.shared-item p) { color: $grey-text; font-family: Aeonik, sans-serif; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .shared-items-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+        .shared-item { position: relative; aspect-ratio: 3 / 4; border-radius: 1rem; overflow: hidden; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 1.2rem; box-sizing: border-box;
+            &::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(179deg, rgba(0, 0, 0, 0.00) 31.7%, rgba(0, 0, 0, 0.80) 98.83%); border-radius: inherit; z-index: 1; }
+            p { position: relative; z-index: 2; color: $white; font-family: Aeonik, sans-serif; font-size: 1.3rem; font-weight: 600; line-height: 1.2; margin: 0; }
+        }
+        @media (max-width: 1024px) { .shared-items-container { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; } .shared-item p { font-size: 1.2rem; } }
+        @media (max-width: 767px) { .shared-items-container { grid-template-columns: repeat(2, 1fr); gap: 1rem; } .shared-item p { font-size: 1.1rem; } .shared-item { padding: 1rem; } }
+        @media (max-width: 480px) { .shared-item p { font-size: 1rem; } }
+    }
+
+
+    // Keep original .scroll-test-box styles
+    .scroll-test-box { height: 800px; background-color: $cloud-grey; border-radius: 0.5rem; margin-top: 2rem; }
+
+} // End of .left-content-section
+
+
+// Keep original --- Right Sticky Section --- Styles
+// Assume variables $primary-green, $white, $black, $grey-text, $cloud-grey, $light-pink are available
+
+// ======================================
+// START: Right Sticky Section Styles
+// ======================================
+.right-sticky-section {
+    flex-basis: calc(33.5% - 0.75rem); // Desktop width
+    min-width: 250px;
+    // No position:fixed here for desktop
+
+    .roomtype-cta-container {
+        // --- Desktop Styles ---
+        background-color: $white;
+        border: 1px solid #EAEAEA; // Use $cloud-grey maybe?
+        border-radius: 1rem;
+        padding: 1.8em;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        position: sticky; // <<< Desktop sticky
+        top: 100px; // Desktop top offset
+        // Reset mobile styles that might conflict if applied globally
+        display: block;
+        width: auto;
+        border-top: none; // Ensure no top border on desktop
+
+        .cta-price-text-wrapper {
+             display: block; // Default block display for desktop
+        }
+
+        .price {
+            margin-bottom: 0.5rem;
+            p {
+                color: var(--txt-grey, #5B5B5B); // Use $grey-text
+                font-family: Aeonik, sans-serif;
+                font-size: 1.1875rem;
+                font-weight: 500;
+                line-height: normal;
+                margin: 0; // Reset margin
+                white-space: normal; // Allow wrapping on desktop
+                span {
+                    color: $primary-green; // Use $primary-green or $black
+                    font-family: Aeonik, sans-serif;
+                    font-size: 1.625rem;
+                    font-weight: 700;
+                    line-height: normal;
+                }
+            }
+        }
+        .cta-subtext {
+            display: block; // Ensure visible on desktop
+            color: var(--txt-grey, #5B5B5B); // Use $grey-text
+            font-family: Aeonik, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: normal;
+            margin: 0 0 1.5rem 0;
+        }
+        .cta-prebook-note {
+            color: var(--txt-grey, #5B5B5B);
+            font-family: Aeonik, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.4;
+            margin: 0 0 0.8rem 0;
+        }
+        .cta-button {
+            display: block;
+            width: 100%; // Full width button on desktop
+            background-color: $primary-green;
+            color: $white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.9em 1em;
+            font-family: Aeonik, sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            flex-shrink: 0; // Keep desktop shrink value if needed
+            white-space: normal; // Allow wrapping
+
+            &:hover {
+                background-color: $light-pink;
+                color: $primary-green;
+            }
+        }
+    }
+}
+// ======================================
+// END: Right Sticky Section Styles
+// ======================================
+
+
+// ======================================
+// START: Mobile Responsiveness Overrides
+// ======================================
+
+// Tablet view - Adjust basis (keep sticky)
+@media (max-width: 992px) {
+     .right-sticky-section {
+        flex-basis: calc(40% - 0.5rem);
+     }
+}
+
+// Mobile view - Fixed bottom bar
+@media (max-width: 767px) {
+    // --- Add padding to main content area to prevent overlap ---
+    // --- Place this rule outside .right-sticky-section ---
+    .main-content-container.container {
+        // Add padding-bottom roughly equal to the height of the fixed bar + some margin
+        // Estimate bar height: padding (0.8rem*2) + line-height (1.3rem) + border (1px) ~= 3rem + buffer
+        padding-bottom: 4.5rem; // Adjust this value as needed
+    }
+    // ---------------------------------------------------------
+
+    // Assume variables $primary-green, $white, $black, $grey-text, $cloud-grey, $light-pink are available
+
+// ======================================
+// START: Right Sticky Section Styles
+// ======================================
+.right-sticky-section {
+    flex-basis: calc(33.5% - 0.75rem); // Desktop width
+    min-width: 250px;
+    // No position:fixed here for desktop
+
+    .roomtype-cta-container {
+        // --- Desktop Styles ---
+        background-color: $white;
+        border: 1px solid #EAEAEA; // Use $cloud-grey maybe?
+        border-radius: 1rem;
+        padding: 1.8em;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        position: sticky; // <<< Desktop sticky
+        top: 100px; // Desktop top offset
+        // Reset mobile styles that might conflict if applied globally
+        display: block; // <<< Default desktop display
+        width: auto;
+        border-top: none;
+        text-align: left; // Default text align for desktop
+
+        .cta-price-text-wrapper {
+             display: block; // Default block display for desktop
+        }
+
+        .price {
+            margin-bottom: 0.1rem;
+            p {
+                color: var(--txt-grey, #5B5B5B); // Use $grey-text
+                font-family: Aeonik, sans-serif;
+                font-size: 1.1875rem;
+                font-weight: 500;
+                line-height: normal;
+                margin: 0;
+                white-space: normal;
+                span {
+                    color: $primary-green; // Use $primary-green or $black
+                    font-family: Aeonik, sans-serif;
+                    font-size: 1.625rem;
+                    font-weight: 700;
+                    line-height: normal;
+                }
+            }
+        }
+        .cta-subtext {
+            display: block; // Ensure visible on desktop
+            color: var(--txt-grey, #5B5B5B); // Use $grey-text
+            font-family: Aeonik, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: normal;
+            margin: 0 0 1rem 0;
+        }
+        .cta-prebook-note {
+            color: var(--txt-grey, #5B5B5B);
+            font-family: Aeonik, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.4;
+            margin: 0 0 0.6rem 0;
+            text-align: left;
+        }
+        .cta-button {
+            display: block;
+            width: 100%; // Full width button on desktop
+            background-color: $primary-green;
+            color: $white;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.9em 1em;
+            font-family: Aeonik, sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            flex-shrink: 0; // Reset shrink value
+            white-space: normal; // Allow wrapping
+
+            &:hover {
+                background-color: $light-pink;
+                color: $primary-green;
+            }
+        }
+    }
+}
+// ======================================
+// END: Right Sticky Section Styles
+// ======================================
+
+
+// ======================================
+// START: Mobile Responsiveness Overrides
+// ======================================
+
+// Tablet view - Adjust basis (keep sticky)
+@media (max-width: 992px) {
+     .right-sticky-section {
+        flex-basis: calc(40% - 0.5rem);
+     }
+}
+
+// Mobile view - Fixed bottom bar STACKED layout
+@media (max-width: 767px) {
+    // --- Add padding to main content area to prevent overlap ---
+    .main-content-container.container {
+        // Estimate bar height: padding + 3 lines + border + shadow ~= 6-7rem?
+        padding-bottom: 7rem; // <<< Adjust this value based on final bar height
+    }
+    // ---------------------------------------------------------
+
+    .right-sticky-section {
+        flex-basis: auto; width: 100%; min-width: auto;
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+        background-color: $white; box-shadow: none; margin-top: 0;
+        border: 1px solid $cloud-grey;
+        border-radius: 1.2rem 1.2rem 0rem 0rem;
+        overflow: hidden;
+
+        .roomtype-cta-container {
+            position: static; top: auto;
+            border-radius: 0; border: none; box-shadow: none;
+            border-top: 1px solid $cloud-grey; // Top border separation
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.05); // Top shadow
+            padding: 0.8rem 1rem; // Padding for the bar
+            display: flex; // <<< Use Flex
+            flex-direction: column; // <<< Stack vertically
+            align-items: center; // <<< Center items horizontally
+            justify-content: center; // <<< Center items vertically (if needed)
+            gap: 0.5rem; // <<< Gap between rows
+            text-align: center; // <<< Center text within rows
+        }
+
+        .cta-price-text-wrapper {
+            flex-grow: 0; // Reset grow
+            order: 1; // Price first
+            text-align: center;
+        }
+
+        .price {
+            margin-bottom: 0.4rem !important;
+            p {
+                font-size: 0.9rem; // Adjusted size
+                line-height: 1.2;
+                margin: 0;
+                white-space: nowrap;
+                span { font-size: 1.2rem; } // Adjusted size
+            }
+        }
+        .cta-subtext {
+             display: block; // <<< Make subtext visible
+             order: 2; // Subtext second
+             font-size: 0.74rem; // Slightly smaller on mobile
+             font-weight: 300; // Lighter weight
+             line-height: 1.2;
+             margin: 0.1rem 0 0.15rem 0; // Reduce top/bottom spacing
+             color: $grey-text;
+             text-align: center;
+        }
+        .cta-prebook-note {
+             order: 2;
+             font-size: 0.75rem;
+             font-weight: 500;
+             line-height: 1.3;
+             margin: 0.1rem 0 0.35rem 0;
+             color: $grey-text;
+             text-align: center;
+        }
+
+        .cta-button {
+            order: 3; // Button last
+            width: 90%; // <<< Button takes most width
+            max-width: 300px; // <<< Max width for button
+            flex-shrink: 0;
+            padding: 0.7em 1em; // Adjust button padding
+            font-size: 0.95rem; // Adjust button font size
+            line-height: 1.3;
+            white-space: nowrap;
+            margin: 0; // Reset margin
+        }
+
+    } // End mobile .right-sticky-section
+} // End mobile media query
+// ======================================
+// END: Mobile Responsiveness Overrides
+// ======================================
+} // End mobile media query
+// ======================================
+// END: Mobile Responsiveness Overrides
+// ======================================
+
+
+// Keep original --- General Responsiveness --- Media Queries
+@media (max-width: 992px) { .main-content-container.container { gap: 1rem; .left-content-section { flex-basis: calc(60% - 0.5rem); } .right-sticky-section { flex-basis: calc(40% - 0.5rem); } } .left-content-section .property-header h1 { font-size: 1.8rem; } }
+@media (max-width: 767px) {
+    .main-content-container.container { flex-direction: column; gap: 2em; align-items: stretch; }
+    .left-content-section { flex-basis: auto; width: 100%; }
+    
+    .left-content-section {
+        .property-header{
+            h1 { font-size: 1.6rem; }
+            margin-bottom: 1rem;
+        }
+    }
+    .left-content-section .description-section .description-text { -webkit-line-clamp: 5; max-height: calc(1.625rem * 5);}
+}
+
+
+// Add this rule to style.scss (adjust styles as desired)
+
+.roomtype-section {
+    .roomtype-item {
+        // ... existing styles ...
+        border: 1px solid $cloud-grey; // Default border
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; // Add transition
+
+        // Style for the selected item
+        &.selected {
+            border-color: $primary-green; // Use your primary color for the border
+            box-shadow: 0 4px 15px rgba($primary-green, 0.2); // Optional: Add a subtle glow/shadow
+
+            // Optionally change the select button style when selected
+            .select-button.selected {
+                background-color: $light-pink; // Example: Lighter green background
+                color: $primary-green;
+                cursor: default; // Indicate it's selected
+            }
+        }
+    }
+}
+
+// SCSS for the loading state (Nested Version)
+
+
+// --- Fullscreen Overlay Container ---
+.property-loading-container {
+  background-color: $primary-green;
+  height: 100vh; // Full viewport height
+  width: 100vw;  // Full viewport width
+  position: fixed; // Position relative to the viewport
+  inset: 0; // Shortcut for top: 0, left: 0, bottom: 0, right: 0
+  z-index: 10000; // High z-index to stay on top
+  display: flex; // Use flexbox for centering
+  justify-content: center; // Center child horizontally
+  align-items: center;    // Center child vertically
+  overflow: hidden; // Prevent scrollbars
+
+  // --- Container for the GIF (Nested) ---
+  // Often doesn't need specific styles when parent uses flex for centering
+  .loading-gif-container {
+    // Add padding or other container styles here if needed in the future
+  }
+
+  // --- Styles for the GIF Image (Nested) ---
+  .loading-gif {
+    display: block; // Removes extra space below the image
+    width: 100%; // Make the image responsive within its container/viewport width
+    max-width: 150px; // <<< Set a maximum width (e.g., 150px). Adjust as needed!
+                      // Prevents the GIF becoming too large on wide screens.
+    height: auto; // Maintain the image's aspect ratio automatically
+  }
+}
+
+
+
+/* ===== START: Copy Link Toast Styles ===== */
+.copy-toast {
+    position: fixed;       // Fixed position on the screen
+    bottom: 2rem;          // Distance from bottom
+    left: 50%;             // Center horizontally
+    transform: translateX(-50%); // Fine-tune horizontal centering
+    background-color: rgba($primary-green, 0.9); // Use your theme color with transparency
+    color: $white;         // White text
+    padding: 0.8rem 1.5rem; // Padding inside the toast
+    border-radius: 0.5rem;   // Rounded corners
+    font-size: 0.95rem;
+    font-weight: 500;
+    z-index: 1100;        // Ensure it's above most content (adjust if needed)
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    visibility: visible;
+    // Add a simple fade-in animation (optional)
+    animation: toastFadeIn 0.3s ease-out forwards;
+}
+
+// Optional fade-in keyframes
+@keyframes toastFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px); // Start slightly lower
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+/* ===== END: Copy Link Toast Styles ===== */

@@ -1,0 +1,128 @@
+// File: app/(admin)/components/Sidebar/Sidebar.scss
+@import '../../variables.scss'; // Import variables
+
+.admin-sidebar {
+    width: $sidebar-width;
+    background-color: $sidebar-bg;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid $border-color;
+    position: sticky; // Make sidebar sticky
+    top: 0;
+    height: 100vh; // Full viewport height
+
+    .sidebar-header {
+        margin-bottom: 2.5rem;
+        padding-left: 0.5rem; // Align with nav items
+        .logo-link {
+            display: inline-block; // For Image component
+            img { // Target the img tag rendered by Next/Image
+                object-fit: contain;
+            }
+        }
+    }
+
+    .sidebar-nav {
+        flex-grow: 1; // Pushes footer to the bottom
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                margin-bottom: 0.5rem;
+
+                .nav-link {
+                    display: flex;
+                    align-items: center;
+                    padding: 0.75rem 1rem;
+                    border-radius: 8px;
+                    text-decoration: none;
+                    color: $text-dark;
+                    font-weight: 500;
+                    font-size: 0.9375rem; // 15px
+                    transition: background-color 0.2s ease, color 0.2s ease;
+
+                    .nav-icon {
+                        margin-right: 0.875rem; // 14px
+                        // SVG color can be controlled via CSS if they are inline or use `currentColor`
+                    }
+
+                    &:hover {
+                        background-color: darken($sidebar-bg, 5%);
+                    }
+
+                    &.active {
+                        background-color: $primary-green;
+                        color: $white;
+                        font-weight: 600;
+                        // Icon color changes handled by different image source in component
+                    }
+                }
+            }
+        }
+    }
+
+    .sidebar-footer {
+        margin-top: auto; // Pushes to bottom if nav doesn't fill space
+        padding-top: 1.5rem;
+        border-top: 1px solid $border-color;
+
+        .logout-button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: transparent;
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            color: $text-dark;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+
+            .nav-icon {
+                margin-right: 0.875rem;
+            }
+
+            &:hover {
+                background-color: darken($sidebar-bg, 3%);
+                border-color: darken($border-color, 10%);
+            }
+        }
+    }
+}
+
+// Responsive Sidebar (example: hides on small screens, can be toggled with JS later)
+@media (max-width: $breakpoint-md) {
+    .admin-sidebar {
+        width: 100%;
+        height: auto; // No longer full height
+        position: static; // No longer sticky
+        border-right: none;
+        border-bottom: 1px solid $border-color;
+        padding: 1rem;
+
+        .sidebar-header {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .sidebar-nav ul {
+            display: flex;
+            justify-content: space-around; // Example horizontal layout
+            li {
+                margin-bottom: 0;
+                .nav-link {
+                    padding: 0.5rem;
+                    span { display: none; } // Hide text, show only icon
+                    .nav-icon { margin-right: 0; }
+                }
+            }
+        }
+        .sidebar-footer {
+            display: none; // Optionally hide logout on small nav, or integrate differently
+        }
+    }
+}

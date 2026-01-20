@@ -1,0 +1,112 @@
+.hubode-steps-container-main {
+    .hubode-steps.container {
+        background-color: $primary-green; // Example dark green color - REPLACE with your $dark-green variable
+        border-radius: 1.5rem; // Rounded corners
+        padding: 3.6em 6em; // Internal padding (adjust as needed)
+        color: $white; // Default text color for contrast
+        .heading-section {
+            text-align: center;
+            margin-bottom: 3em; // Space below heading section
+            h3 {
+                color: $light-pink;
+                text-align: center;
+                font-family: Aeonik;
+                font-size: 2.0625rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+            p {
+                color: $light-pink;
+                text-align: center;
+                font-family: Aeonik;
+                font-size: 1.0625rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5625rem;
+                /* 147.059% */
+            }
+            @media(max-width: 767px) {
+                margin-bottom: 1.5rem;
+            }
+        }
+        .steps-icon-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); // 3 columns for desktop
+            gap: 7em; // Gap between step items
+            .hubode-step-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center; // Center content horizontally
+                text-align: center;
+                .hubode-step-icon {
+                    margin: 3rem;
+                    img {
+                        width: 5.75rem;
+                        height: 5.75rem;
+                        aspect-ratio: 1/1;
+                        object-fit: contain;
+                    }
+                    @media(max-width: 767px) {
+                        margin: 1.5rem;
+                    }
+                }
+                h6 {
+                    color: $light-pink;
+                    text-align: center;
+                    font-family: Aeonik;
+                    font-size: 1.4375rem;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                }
+                p {
+                    color: $light-pink;
+                    text-align: center;
+                    font-family: Aeonik;
+                    font-size: 1rem;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5rem;
+                    /* 150% */
+                }
+            }
+        }
+        // --- Responsiveness ---
+        @media (max-width: 992px) {
+            // Smaller desktops / Tablets
+            padding: 3.5em 1.5em; // Reduce padding slightly
+            .steps-icon-container {
+                gap: 1.5em;
+            }
+            .heading-section h3 {
+                font-size: 2.2rem;
+            }
+            .step-item h6 {
+                font-size: 1.25rem;
+            }
+            .step-item p {
+                font-size: 0.95rem;
+            }
+        }
+        @media (max-width: 767px) {
+            // Mobile
+            .steps-icon-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5em; // Adjust vertical gap
+            }
+            .steps-icon-container .hubode-step-item:last-child {
+                grid-column: span 2;
+                justify-self: center;
+                max-width: 50%;
+            }
+            .heading-section h3 {
+                font-size: 2rem;
+            }
+            .step-item p {
+                max-width: 80%; // Allow slightly wider text on mobile
+            }
+        }
+    }
+}

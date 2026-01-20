@@ -1,0 +1,187 @@
+
+
+.footer-container-main {
+    background-color: $primary-green; // Using variable
+    color: $cloud-grey; // Using variable for default light text
+    padding: 4em 0 4em 0;
+    border-radius: 2.1875rem 2.1875rem 0rem 0rem;
+
+    .footer-container.container {
+        // Container styles if needed
+    }
+
+    .links-container-main {
+        display: grid;
+        grid-template-columns: 1.5fr repeat(4, 1fr);
+        gap: 2em;
+        margin-bottom: 3em;
+        padding-bottom: 2em;
+        border-bottom: 1px solid rgba($white, 0.1); // Subtle border using white with opacity
+    }
+
+    .footer-column {
+        h5 {
+            color: $light-pink;
+            margin-bottom: 1.2rem;
+            font-family: Aeonik;
+            font-size: 1.375rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8em;
+
+            a, p { // Style links (and potentially paragraphs if used elsewhere)
+                color: rgba(255, 255, 255, 0.60);
+                font-family: Aeonik;
+                font-size: 1.125rem;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 2rem; /* 227.778% */
+
+                &:hover {
+                    color: $white; // Brighter white on hover
+                }
+            }
+        }
+
+        &.contact-column {
+            .contact-links {
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                }
+
+                .contact-icon {
+                    display: inline-flex;
+                    width: 1.25rem;
+                    height: 1.25rem;
+
+                    svg {
+                        width: 100%;
+                        height: 100%;
+                        fill: currentColor;
+                    }
+                }
+            }
+        }
+    }
+
+    .logo-column {
+        .footer-logo-link {
+            display: inline-block;
+            margin-bottom: 1.5em;
+             img.footer-logo {
+                 height: 35px;
+                 width: auto;
+             }
+        }
+
+        .social-icons-container {
+            display: flex;
+            align-items: center;
+            gap: 1.31em;
+
+            a {
+                display: inline-block;
+                img {
+                    height: 20px;
+                    width: 20px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+
+    .bottom-text-container {
+        text-align: center;
+        margin-top: 2em;
+
+        h5 {
+            color: $light-pink;
+            text-align: center;
+            font-family: Aeonik;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        p {
+            margin-top: 1.4rem;
+            color: $light-pink;
+            text-align: center;
+            font-family: Aeonik;
+            font-size: 0.875rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+    }
+
+    // --- Responsiveness ---
+    @media (max-width: 1024px) { // Tablets
+        .links-container-main {
+             grid-template-columns: 1.5fr repeat(2, 1fr);
+             .column-4, .column-5 {
+                 // Decide how to handle these columns (hide, merge, etc.)
+                 // display: none;
+             }
+        }
+    }
+
+    @media (max-width: 767px) { // Mobile
+         padding: 3em 0 1.5em 0;
+
+         .links-container-main {
+              grid-template-columns: 1fr 1fr; // Example 2 columns for links below logo
+              gap: 1.5em;
+              padding-bottom: 1.5em;
+              margin-bottom: 2em;
+
+              .logo-column {
+                   grid-column: 1 / -1;
+                   margin-bottom: 1.5em;
+                   flex-direction: column;
+                   align-items: center;
+              }
+
+              .column-2 { grid-area: links1; }
+              .column-3 { grid-area: links2; }
+              .column-4 { grid-area: links3; }
+              .column-5 { grid-area: links4; }
+
+              // Example 2x2 layout for links
+              grid-template-areas:
+                "links1 links2"
+                "links3 links4";
+              grid-template-columns: 1fr 1fr;
+
+              // --- OR Stack all link columns vertically ---
+              // grid-template-columns: 1fr;
+              // grid-template-areas: "links1" "links2" "links3" "links4";
+              // .footer-column { margin-bottom: 1em; } // Add space if stacking vertically
+         }
+
+         .footer-column h5 {
+             font-size: 1rem;
+             margin-bottom: 1em;
+         }
+         .footer-column .links {
+              gap: 0.6em;
+              a, p { font-size: 0.9rem;}
+          }
+
+         .bottom-text-container {
+             margin-top: 1.5em;
+             h5 { font-size: 0.9rem;}
+             p { font-size: 0.8rem;}
+         }
+    }
+}

@@ -1,0 +1,400 @@
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+// Styles for TopSection and SectionTitle are assumed to exist elsewhere
+
+// ==============================
+// START: How it Works Section Styles
+// ==============================
+
+.how-it-works-section.container {
+    // Container likely handles max-width and padding
+    // May need text-align: center; if SectionTitle isn't centered by default
+    text-align: center;
+}
+
+.steps-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 3 columns on desktop
+    gap: 1.5rem; // Gap between cards
+    margin-top: 3rem; // Space below SectionTitle subtext
+    text-align: left; // Reset text alignment for card content
+}
+
+.step-item {
+    background-color: $white; // White background for the card
+    border: 1px solid $cloud-grey; // Use your light grey border color
+    border-radius: 1rem; // Rounded corners
+    padding: 2rem 1.5rem; // Padding inside the card
+    display: flex;
+    flex-direction: column; // Stack content vertically
+    align-items: flex-start; // Align content to the start (left)
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+         box-shadow: 0 8px 16px rgba(0,0,0,0.08); // Subtle shadow on hover
+         transform: translateY(-5px); // Subtle lift effect
+    }
+
+    .icon-container {
+        // Using inline-flex so it only takes the width/height specified
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px; // Adjust size as needed
+        height: 70px;
+        background-color: $primary-green; // Use your primary dark green/teal
+        border-radius: 0.8rem; // Rounded corners for the icon background
+        margin-bottom: 1rem; // Space below the icon container
+
+        img {
+            width: 35px; // Size of the actual icon inside
+            height: 35px;
+            object-fit: contain;
+             // Adjust filter to get the light pink/lavender color for icons
+             filter: brightness(0) saturate(100%) invert(89%) sepia(18%) saturate(664%) hue-rotate(302deg) brightness(109%) contrast(94%);
+        }
+    }
+
+    .step-title { // Corresponds to h5 tag
+        color: $primary-green; // Use your primary dark green/teal
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 1.3rem; // Adjust size as needed
+        font-weight: 700; // Bold title
+        margin: 0 0 0.1rem 0; // Space below title
+        line-height: 1.3;
+    }
+
+    p { // Styles for the descriptive paragraph
+        color: $grey-text; // Use your defined grey text color
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 0.95rem; // Adjust size
+        line-height: 1.6;
+        margin: 0; // Reset default paragraph margin
+    }
+}
+
+// --- Responsiveness for Steps Grid ---
+@media (max-width: 992px) { // Tablets
+    .steps-cards-container {
+        grid-template-columns: repeat(2, 1fr); // 2 columns
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) { // Mobile
+    .steps-cards-container {
+        grid-template-columns: 1fr; // 1 column (stack)
+        gap: 1.5rem; // Vertical gap when stacked
+    }
+
+    .step-item {
+        padding: 1.5rem 1.2rem; // Slightly reduce padding on mobile
+        align-items: center; // Center content on mobile
+        text-align: center; // Center text on mobile
+
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.2rem;
+            img { width: 30px; height: 30px; }
+        }
+
+        .step-title { font-size: 1.2rem; }
+        p { font-size: 0.9rem; }
+    }
+}
+// --- End Steps Grid Responsiveness ---
+
+// ==============================
+// END: How it Works Section Styles
+// ==============================
+
+
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+// Styles for Terms & Conditions Section
+.terms-conditions-container {
+    width: 100%; // Takes full width of its parent column by default
+    max-width: 70%; // <<< Limits width on larger screens (adjust percentage as needed, e.g., 60%, 75%)
+    margin-left: auto; // Center the container horizontally
+    margin-right: auto;
+    margin-top: 2rem; // Space below the SectionTitle/subtext
+    text-align: left; // Ensure text aligns left within this container
+
+    .section-subtitle { // Style for the "Terms and conditions" heading (h5)
+        color: $black;
+        text-align: center;
+        font-family: Aeonik;
+        font-size: 1.375rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 126.25%; /* 1.73594rem */
+        letter-spacing: 0.0275rem;
+
+        margin-bottom: 1rem;
+    }
+
+    .items-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem; // Vertical space between each term item
+    }
+
+    .term-item {
+        display: flex;
+        align-items: flex-start; // Align icon to the top of the text
+        gap: 1rem; // Space between icon and text
+
+        .term-icon {
+            flex-shrink: 0; // Prevent icon from shrinking
+            width: 24px; // Adjust size of icon container/icon
+            height: 24px;
+            // Optional: Add background/border if icon needs it
+            // background-color: $primary-green;
+            // border-radius: 50%;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+
+            img {
+                display: block; // Ensure image behaves well
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                 // If using filter to color a generic checkmark:
+                 // filter: brightness(0) saturate(100%) invert(26%) sepia(27%) saturate(1313%) hue-rotate(121deg) brightness(95%) contrast(91%); // Example green filter
+            }
+        }
+
+        p {
+            color: #666;
+font-family: Aeonik;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1.625rem; /* 162.5% */
+        }
+    }
+
+    // --- Responsiveness ---
+    @media (max-width: 992px) {
+        max-width: 85%; // Allow slightly more width on tablets
+    }
+
+    @media (max-width: 767px) { // Mobile
+        max-width: 100%; // Take full width on mobile
+        margin-top: 2rem; // Adjust top margin
+
+        .section-subtitle {
+             font-size: 1.3rem;
+             margin-bottom: 1.2rem;
+        }
+
+        .items-container {
+            gap: 1rem; // Slightly reduce gap
+        }
+
+        .term-item {
+            gap: 0.8rem; // Reduce gap between icon and text
+            .term-icon { width: 20px; height: 20px; }
+            p { font-size: 0.9rem; }
+        }
+    }
+    // --- End Responsiveness ---
+
+} // End .terms-conditions-container
+
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+// Styles for Referral Form Container & Form
+.referal-form-container {
+    margin-top: 3rem; // Space above the form
+    width: 100%;
+    max-width: 90%; // <<< Limit width on desktop (adjust percentage or use pixels)
+    margin-left: auto;  // <<< Center the container
+    margin-right: auto; // <<< Center the container
+}
+
+.referral-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; // Vertical gap between form rows
+}
+
+.form-row {
+    width: 100%;
+}
+
+// Styles for rows with two fields side-by-side
+.form-row-split {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Two equal columns
+    gap: 1.5rem; // Gap between the two fields
+}
+
+// Styles for individual field groups (label + input/select/textarea)
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem; // Space between label and input element
+}
+
+// Label Styles
+label:not([for="terms-agree"]) { // Exclude checkbox label for now
+    color: $black;
+    font-family: Aeonik, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+// Input and Select Styles
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid $cloud-grey; // Use your light grey border color
+    border-radius: 0.8rem; // Rounded corners like UI
+    background-color: #F9F9F9; // Very light grey background for inputs
+    font-family: Aeonik, sans-serif;
+    font-size: 0.95rem;
+    color: $black;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    appearance: none; // Remove default select dropdown arrow for custom styling if needed later
+
+    &::placeholder {
+        color: lighten($grey-text, 15%);
+        opacity: 1;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $primary-green;
+        box-shadow: 0 0 0 2px lighten($primary-green, 40%);
+    }
+}
+
+// Style for the select dropdown appearance (optional basic arrow)
+select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.7rem center;
+    background-repeat: no-repeat;
+    background-size: 1.2em 1.2em;
+    padding-right: 2.5rem; // Make space for the arrow
+}
+
+// Styles for Terms and Conditions Row
+.form-row-terms {
+    margin-top: 0.5rem; // Space above terms row
+}
+
+.form-group-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    input[type="checkbox"] {
+        width: 1.15em; // Size of checkbox
+        height: 1.15em;
+        border-radius: 0.25em;
+        border: 1.5px solid $cloud-grey;
+        appearance: none; // Remove default appearance
+        cursor: pointer;
+        position: relative;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+
+        &:checked {
+            background-color: $primary-green;
+            border-color: $primary-green;
+             background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+             background-size: 100% 100%;
+             background-position: center;
+             background-repeat: no-repeat;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px lighten($primary-green, 40%);
+        }
+    }
+
+    label[for="terms-agree"] {
+        color: $grey-text;
+        font-family: Aeonik, sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        cursor: pointer;
+
+        a {
+            color: $primary-green;
+            text-decoration: underline;
+            font-weight: 500;
+
+            &:hover {
+                color: $primary-green;
+            }
+        }
+    }
+}
+
+
+// Submit Button Row Styles
+.form-row-submit {
+    display: flex;
+    justify-content: center; // Keep button centered horizontally
+    margin-top: 1rem; // Space above button
+}
+
+.submit-button {
+    background-color: $primary-green;
+    color: $white;
+    border: none;
+    border-radius: 0.6rem;
+    // padding: 0.9rem 3rem; // Remove fixed padding or adjust
+    padding: 0.9rem 4rem; // <<< Increased horizontal padding for wider button
+    min-width: 250px; // <<< Optional: Set a minimum width
+    width: auto; // <<< Allow button to size based on content + padding
+    font-family: Aeonik, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        background-color: darken($primary-green, 8%);
+        transform: translateY(-2px);
+    }
+}
+
+// --- Responsiveness for Referral Form ---
+@media (max-width: 767px) { // Mobile
+    .referal-form-container {
+        max-width: 100%; // <<< Take full width on mobile
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .referral-form {
+        gap: 1.2rem; // Reduce gap between rows
+    }
+    .form-row-split {
+        grid-template-columns: 1fr; // Stack fields in split rows
+        gap: 1.2rem; // Keep vertical gap consistent
+    }
+    .form-row-submit {
+         // Keep button centered
+    }
+    .submit-button {
+        width: 100%; // <<< Make button full width again on mobile
+        max-width: 350px; // <<< Re-apply max width for mobile if desired
+        padding: 0.9rem 1.5rem; // <<< Adjust mobile padding back if needed
+        min-width: auto; // <<< Reset min-width
+    }
+}
+// --- End Referral Form Responsiveness ---

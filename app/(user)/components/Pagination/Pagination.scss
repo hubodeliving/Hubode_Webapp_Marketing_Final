@@ -1,0 +1,76 @@
+// app/(user)/components/Pagination/Pagination.scss
+
+// Define variables or import them
+$primary-green: #006400; // Example Green
+$white: #fff;
+$black: #333;
+$grey-text: #666;
+$cloud-grey: #f0f0f0;
+$disabled-grey: #ccc;
+
+.pagination-container {
+  display: flex;
+  justify-content: center; // Center the pagination controls
+  align-items: center;
+  padding: 2rem 0 3rem; // Add padding top/bottom
+  gap: 0.5rem; // Space between links/buttons
+  flex-wrap: wrap; // Allow wrapping on smaller screens if needed
+}
+
+.page-link {
+  display: inline-flex; // Use inline-flex for alignment
+  align-items: center;
+  justify-content: center;
+  padding: 0.6em 1em;
+  min-width: 38px; // Ensure a minimum size for clickability
+  min-height: 38px;
+  border: 1px solid $cloud-grey;
+  border-radius: 6px; // Slightly rounded corners
+  background-color: $white;
+  color: $primary-green;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover:not(.disabled):not(.active) {
+    background-color: lighten($primary-green, 55%);
+    border-color: lighten($primary-green, 40%);
+    color: darken($primary-green, 10%);
+  }
+
+  &.active {
+    background-color: $primary-green;
+    border-color: $primary-green;
+    color: $white;
+    font-weight: 700;
+    cursor: default;
+  }
+
+  &.disabled {
+    color: $disabled-grey;
+    border-color: $cloud-grey;
+    background-color: $white;
+    cursor: not-allowed;
+    opacity: 0.7;
+    pointer-events: none; // Prevent clicks on disabled links
+  }
+
+  // Specific styling for prev/next can be added if needed
+  &.prev, &.next {
+     // Slightly wider perhaps?
+     // padding: 0.6em 1.2em;
+  }
+}
+
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6em 0.5em;
+  min-height: 38px;
+  color: $grey-text;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,423 @@
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+// Optional container styles if needed
+.our-core-values-section-container {
+    // background-color: $cloud-grey; // Example: light background for the whole section
+    // padding-top: 3rem;
+    // padding-bottom: 3rem;
+    // margin-bottom: 3rem; // If using this wrapper for margin
+}
+
+.our-core-values-section.container {
+    // Styles for the inner container if needed (e.g., max-width, padding handled by .container)
+}
+
+// Styles for the cards container
+.our-core-values-cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); // 4 columns on desktop
+    gap: 1.5rem; // Gap between cards
+}
+
+// Styles for each individual card
+.core-value-item {
+    background-color: $white; // White background for the card
+    border: 1px solid $cloud-grey; // Light grey border
+    border-radius: 1rem; // Rounded corners
+    padding: 2rem 1.5rem; // Padding inside the card
+    text-align: center; // Center align all content within the card
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+         box-shadow: 0 8px 16px rgba(0,0,0,0.08); // Slightly stronger shadow on hover
+         transform: translateY(-5px); // Subtle lift effect
+    }
+
+    .icon-container {
+        display: inline-flex; // Allows centering and specific sizing
+        align-items: center;
+        justify-content: center;
+        width: 80px; // Fixed size for the dark square
+        height: 80px;
+        background-color: $primary-green; // Use your primary dark green/teal
+        border-radius: 0.8rem; // Rounded corners for the icon background
+        margin-bottom: 1.1rem; // Space below the icon container
+
+        img {
+            width: 40px; // Size of the actual icon inside
+            height: 40px;
+            object-fit: contain;
+             // filter: brightness(0) invert(1); // Uncomment if icon file is dark and needs to be white
+             filter: brightness(0) saturate(100%) invert(89%) sepia(18%) saturate(664%) hue-rotate(302deg) brightness(109%) contrast(94%); // Example filter to make icon light pink/lavender like UI - ADJUST HUE-ROTATE/COLORS
+        }
+    }
+
+    .core-val-title { // Corresponds to h5 tag
+        color: $primary-green; // Use your primary dark green/teal
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 1.3rem; // Adjust size as needed
+        font-weight: 700; // Bold title
+        margin: 0 0 0.1rem 0; // Space below title
+    }
+
+    p { // Styles for the descriptive paragraph
+        color: $grey-text; // Use your defined grey text color
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 0.95rem; // Adjust size
+        line-height: 1.6;
+        margin: 0; // Reset default paragraph margin
+    }
+}
+
+// --- Responsiveness for Core Values Grid ---
+@media (max-width: 1024px) { // Smaller Desktops / Large Tablets
+    .our-core-values-cards-container {
+        grid-template-columns: repeat(2, 1fr); // 2 columns
+        gap: 1.5rem; // Maintain or adjust gap
+    }
+}
+
+@media (max-width: 600px) { // Mobile
+    .our-core-values-cards-container {
+        grid-template-columns: 1fr; // 1 column (stack)
+        gap: 1.5rem; // Vertical gap when stacked
+    }
+
+    .core-value-item {
+        padding: 1.5rem 1.2rem; // Slightly reduce padding on mobile
+
+        .icon-container {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 1.2rem;
+            img { width: 35px; height: 35px; }
+        }
+
+        .core-val-title { font-size: 1.2rem; }
+        p { font-size: 0.9rem; }
+    }
+}
+// --- End Core Values Grid Responsiveness ---
+
+
+// File: your-page-style.scss or global.scss
+
+// Assume variables like $primary-green, $black, $grey-text, $cloud-grey are defined
+// For example:
+// $primary-green: #1A3B34;
+// $black: #000;
+// $grey-text: #585858;
+// $cloud-grey: #E3E5E6;
+
+// ====================================================
+// START: Founders Section Styles
+// ====================================================
+.founders-cards-section-container {
+    // Outer wrapper usually for vertical spacing (handled by margin-bottom class)
+    // and centering the .container if needed.
+    // Add padding if needed: padding: 3rem 0;
+}
+
+.founders-cards-section.container {
+    // This container handles max-width and horizontal padding
+    // text-align: center; // If SectionTitle component needs to be centered within here
+}
+
+.founders-cards-container {
+    display: flex;
+    flex-wrap: wrap; // Allow cards to wrap on smaller screens if needed
+    gap: 0.95rem;    // Gap between founder cards
+    margin-top: 2.5rem; // Space below the SectionTitle
+}
+
+.founder-item {
+    display: flex;
+    flex-basis: calc(50% - (0.95rem / 2)); // Each card takes roughly 50% considering the gap
+    flex-grow: 1; // Allow items to grow if there's space (e.g., if only one item)
+    min-width: 300px; // Minimum width before wrapping or becoming too squished
+    background-color: $white;
+    border-radius: 1.25rem; // Rounded corners for the card
+    border: 1px solid $cloud-grey; // Subtle border
+    padding: 1.5rem; // Padding inside the card
+    gap: 1.25rem; // Gap between image and content sections within the card
+
+    .left-section.image-section {
+        flex-basis: 38%; // Image takes roughly 35-40% of the card's width
+        flex-shrink: 0; // Prevent image section from shrinking too much
+        border-radius: 0.8rem; // Rounded corners for the image itself
+        overflow: hidden;
+        background-color: $cloud-grey; // Placeholder color
+        aspect-ratio: 3 / 4; // Maintain a portrait-like aspect ratio for the image
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; // Ensures image covers the area, might crop
+        }
+    }
+
+    .right-section.content-section {
+        flex-basis: calc(62% - 1.25rem); // Remaining width minus the gap
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; // Align content to top on desktop
+        align-items: flex-start;
+        gap: 0.5rem; // Gap between name, designation, and content list
+        position: relative;
+        padding-right: 2.75rem;
+
+        h3 { // Founder's Name
+            color: $primary-green;
+            font-family: Aeonik, sans-serif; // Use your desired font
+            font-size: 1.5rem; // Adjust size
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        p.designation {
+            color: $grey-text;
+            font-family: Aeonik, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.4;
+            margin: 0 0 0.35rem 0; // Tight gap above social icons
+            text-transform: capitalize; // As seen in UI
+        }
+
+        .email-link {
+            font-family: Aeonik, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: $primary-green;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 0.9rem;
+            transition: color 0.2s ease;
+
+            &:hover,
+            &:focus-visible {
+                text-decoration: underline;
+            }
+        }
+
+        .title-with-linkedin {
+            display: block;
+            position: static;
+        }
+
+        .linkedin-icon {
+            position: absolute;
+            top: 0.25rem;
+            right: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.85rem;
+            height: 1.85rem;
+            border-radius: 0.4rem;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+
+            &:hover,
+            &:focus-visible {
+                transform: scale(1.05);
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        ul.content-list { // For the bullet points
+            list-style: none; // Remove default browser bullets
+            padding-left: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem; // Space between list items
+
+            li {
+                color: $grey-text;
+                font-family: Aeonik, sans-serif;
+                font-size: 0.95rem;
+                line-height: 1.5;
+                padding-left: 1.5em; // Indent for custom bullet
+                position: relative;
+
+                &::before { // Custom bullet point
+                    content: '•';
+                    color: $primary-green; // Bullet color
+                    font-weight: bold;
+                    display: inline-block;
+                    position: absolute;
+                    left: 0;
+                    top: 0; // Adjust if needed for vertical alignment
+                    font-size: 1.1em; // Slightly larger bullet
+                }
+            }
+        }
+    }
+
+    // --- Responsiveness for individual founder cards ---
+    @media (max-width: 1280px) { // Tablet - Cards might still be side-by-side or start stacking
+        flex-basis: calc(50% - (0.95rem / 2)); // Still aim for two columns if space
+
+        .left-section.image-section {
+            flex-basis: 40%;
+        }
+        .right-section.content-section {
+            flex-basis: calc(60% - 1.25rem);
+            padding-right: 2.25rem;
+            h3 { font-size: 1.35rem; }
+            p.designation { font-size: 0.85rem; }
+            .email-link { font-size: 0.85rem; }
+            .title-with-linkedin { gap: 0.6rem; }
+            ul.content-list li { font-size: 0.9rem; }
+        }
+    }
+
+    @media (max-width: 1280px) { // Mobile - Stack image and content within each card
+        flex-direction: column; // Stack image above content
+        align-items: center; // Center content when stacked
+        padding: 1.2rem;
+        gap: 1rem;
+
+        .left-section.image-section {
+            flex-basis: auto; // Reset basis
+            width: 70%;     // Control image width when stacked
+            max-width: 200px; // Max width for the image
+            aspect-ratio: 1 / 1.3; // Make it square or adjust as needed
+        }
+        .right-section.content-section {
+            flex-basis: auto; // Reset basis
+            width: 100%;
+            text-align: left; // Keep copy left-aligned on mobile as well
+            padding-right: 0;
+            align-items: flex-start;
+
+            .title-with-linkedin {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                margin-bottom: 0.35rem;
+            }
+
+            .linkedin-icon {
+                position: static;
+                align-self: flex-start;
+                margin-top: 0;
+            }
+
+            ul.content-list li {
+                text-align: left; // Keep list items left-aligned for readability
+            }
+        }
+    }
+} // End .founder-item
+
+// --- Overall container responsiveness ---
+@media (max-width: 767px) { // Mobile - Stack the cards themselves
+    .founders-cards-container {
+        flex-direction: column;
+        gap: 1.5rem; // Vertical gap between stacked cards
+    }
+    .founder-item {
+        min-width: 0; // Allow full width stacking
+    }
+}
+// ==================================================
+// END: Founders Section Styles
+// ==================================================
+// File: your-page-style.scss or global.scss
+
+// Assume variables like $primary-green, $black, $grey-text, $container-padding are defined
+// For example:
+// $primary-green: #1A3B34;
+// $black: #000;
+// $grey-text: #585858;
+
+// ====================================================
+// START: Founders Story Section Styles
+// ====================================================
+.founders-story-section-container {
+    // General wrapper for the section
+    // Add padding if needed, e.g., padding: 3rem 0;
+}
+
+.founders-story-section.container {
+    // This container handles max-width and horizontal padding for the content.
+    // If SectionTitle isn't centered by default, you might need:
+    text-align: center; // Center the SectionTitle within this container
+}
+
+.founders-story-section .content-container {
+    max-width: 780px; // Limit the width of the text block for readability
+    margin: 2.5rem auto 0 auto; // Space below SectionTitle and center the block
+    text-align: left; // Align text to the left within this content block
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem; // Consistent vertical gap between paragraphs
+    text-align: center;
+
+    p { // Default paragraph styling for this section
+        color: $grey-text; // Standard text color
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 1.1rem; // Base font size for paragraphs
+        line-height: 1.7;  // Comfortable line height
+        margin: 0;
+
+        @media (max-width: 767px) {
+            font-size: 1rem; // Slightly smaller on mobile
+        }
+    }
+
+    .intro-text {
+        font-style: italic; // Italicize the introductory paragraph
+        color: $grey-text; // Keep standard text color or make slightly lighter if desired
+
+        .quote-text {
+            display: block; // Put quote on its own line
+            font-style: italic; // Ensure quote is also italic
+            color: $primary-green; // Make quote text darker/black as per UI
+            font-weight: 500; // Slightly bolder for the quote
+            margin-top: 0.5em; // Space above the quote
+        }
+    }
+
+    .highlight-text { // For "That's how Hubodé was born."
+        color: $primary-green; // Darker text
+        font-weight: 700; // Bold
+        font-size: 1.15rem; // Slightly larger
+        text-align: center; // Center this specific paragraph
+        margin-top: 1rem; // Add some space above it
+        margin-bottom: 0.5rem; // Space below it before the final paragraph
+
+        span.brand-name, strong { // If "Hubodé" needs specific styling like green
+            color: $primary-green;
+            font-weight: 700; // Ensure it remains bold
+        }
+         @media (max-width: 767px) {
+            font-size: 1.05rem;
+         }
+    }
+
+    .outro-text { // For the final concluding paragraph
+        text-align: center; // Center this paragraph
+        color: $grey-text;
+        font-size: 1.05rem; // Slightly smaller or same as main paragraphs
+         @media (max-width: 767px) {
+            font-size: 0.95rem;
+         }
+    }
+}
+// ==================================================
+// END: Founders Story Section Styles
+// ==================================================

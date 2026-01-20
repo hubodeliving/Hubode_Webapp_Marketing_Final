@@ -1,0 +1,181 @@
+// File: app/(user)/(auth)/verify-otp/style.scss
+// Using globally defined variables: $primary-green, $white, $black, $grey-text, $cloud-grey
+
+.otp-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background-color: $white;
+    font-family: 'Aeonik', sans-serif; // Base font
+    box-sizing: border-box;
+}
+
+.otp-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+}
+
+.otp-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $black;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem; 
+}
+
+.otp-subtitle {
+    font-size: 0.95rem;
+    color: $grey-text;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+
+    .otp-email {
+        font-weight: 600;
+        color: $black;
+    }
+}
+
+.otp-input-fields {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem; // Space before potential error message
+
+    .otp-input {
+        width: 50px;
+        height: 55px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $black;
+        background-color: #F9FAFB;
+        border: 1px solid $cloud-grey;
+        border-radius: 8px;
+        caret-color: $primary-green;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-green;
+            box-shadow: 0 0 0 2px rgba($primary-green, 0.15);
+        }
+        &.error {
+            border-color: #D32F2F;
+            background-color: lighten(#D32F2F, 45%);
+        }
+        &.loading {
+            background-color: darken(#F9FAFB, 3%);
+            cursor: not-allowed;
+        }
+    }
+}
+
+.form-feedback.otp-error {
+    color: #D32F2F;
+    font-size: 0.875rem;
+    margin-top: -0.5rem; // Pull up slightly if there was margin below inputs
+    margin-bottom: 1.5rem; // Space before resend section
+}
+
+.resend-otp-section {
+    font-size: 0.9rem;
+    color: $grey-text;
+    margin-bottom: 1.5rem; // Space before the "Back" button
+
+    p {
+        margin-bottom: 0.3rem;
+    }
+
+    .resend-button {
+        background: none;
+        border: none;
+        color: $primary-green;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 0.25rem;
+
+        &:hover:not(.disabled) {
+            text-decoration: underline;
+        }
+        &.disabled {
+            color: $grey-text;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    }
+}
+
+// CORRECTED STYLING AND PLACEMENT FOR BACK BUTTON
+.back-button {
+    display: flex; // To align icon and text
+    align-items: center;
+    justify-content: center; // Center the button itself if it's block
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    color: $primary-green; // As per UI
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.5rem 1rem; // Give some padding for easier clicking
+    margin-top: 1rem; // Space above the back button
+
+    svg {
+        stroke: currentColor; // Icon takes the button's text color
+        width: 1em; // Size icon relative to font size
+        height: 1em;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+
+// --- Responsive Design ---
+@media (max-width: 576px) {
+    .otp-page-container {
+        min-height: 100vh;
+        min-height: 100svh; // modern mobile viewport unit
+        padding: 1.25rem 1rem;
+        justify-content: center; // center vertically on mobile
+    }
+
+    .otp-content-wrapper {
+        max-width: 360px; // tighten for small screens
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .otp-title {
+        font-size: 1.5rem;
+        margin-top: 0; // avoid pushing content down
+    }
+
+    .otp-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .otp-input-fields {
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+        .otp-input {
+            width: 42px;
+            height: 48px;
+            font-size: 1.2rem;
+            padding: 0; // ensure real height, no square tricks
+        }
+    }
+
+    .back-button {
+        margin-top: 1.25rem; // Ensure enough space on mobile
+    }
+}

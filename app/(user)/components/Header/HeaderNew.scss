@@ -1,0 +1,6 @@
+@use '../../../styles/_variables' as vars;
+
+.header-container-main {
+    height: 10vh;
+    background-color: vars.$primary-green;
+} 

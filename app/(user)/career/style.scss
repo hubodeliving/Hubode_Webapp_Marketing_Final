@@ -1,0 +1,137 @@
+// Assume variables like $primary-green, $white, $black, $grey-text, $cloud-grey
+// are globally available or imported.
+
+// --- TopSection Styles (Assuming they exist elsewhere) ---
+
+// ==============================
+// START: Career Cards Section Styles
+// ==============================
+
+.career-cards-container.container {
+    // Container likely handles max-width and padding
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // <<< 2 columns on desktop
+    gap: 2rem; // Gap between cards
+}
+
+.career-card-item {
+    background-color: $white;
+    border: 1px solid $cloud-grey; // Use your light grey border color
+    border-radius: 1rem; // Rounded corners
+    padding: 1.8rem; // Padding inside the card
+    display: flex;
+    flex-direction: column; // Stack content vertically
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.07); // Subtle shadow on hover
+        transform: translateY(-4px); // Subtle lift effect
+    }
+
+    h2 {
+        color: $primary-green; // Use your primary color
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 1.4rem; // Adjust size
+        font-weight: 600; // Semi-bold
+        line-height: 1.4;
+        margin: 0 0 0.6rem 0; // Space below title
+    }
+
+    .exp-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem; // Space between detail lines
+        margin-bottom: 0.5rem; // Space below details, above button
+        flex-grow: 1; // Allow this section to push button down
+
+        p {
+            color: var(--txt-grey, #5B5B5B);
+            font-family: Aeonik;
+            font-size: 1.125rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5625rem;
+
+            span { // Style for the labels like "Experience required :"
+                color: var(--txt-grey, #5B5B5B);
+                font-family: Aeonik;
+                font-size: 1.125rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 1.5625rem; /* 138.889% */
+            }
+        }
+
+        .skills-text-content {
+            font-weight: 500!important;
+        }
+    }
+
+    .know-more-button { // Styling the anchor tag like a button
+        display: inline-flex; // Align icon and text
+        align-items: center;
+        gap: 0.6rem; // Space between icon and text
+        background-color: transparent; // No background
+        border: none; // No border
+        padding: 0.5rem 0; // Padding top/bottom, no horizontal padding needed for alignment
+        color: $primary-green; // Button text color
+        font-family: Aeonik, sans-serif;
+        font-size: 1rem; // Adjust size
+        font-weight: 500; // Medium weight
+        cursor: pointer;
+        text-decoration: none; // Remove underline from link
+        margin-top: auto; // Push button to the bottom
+        align-self: flex-start; // Align button itself to the left
+        transition: color 0.2s ease;
+
+        img {
+            width: 1.2em; // Size relative to font size
+            height: 1.2em;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+             // If arrow SVG needs color change:
+             // filter: brightness(0) saturate(100%) invert(26%) sepia(27%) saturate(1313%) hue-rotate(121deg) brightness(95%) contrast(91%); // Example green filter
+        }
+
+        &:hover {
+            color: darken($primary-green, 10%); // Darken text on hover
+            img {
+                transform: translateX(4px); // Slight arrow move effect
+            }
+        }
+    }
+}
+
+// --- Responsiveness for Career Cards Grid ---
+@media (max-width: 992px) { // Tablets
+    .career-cards-container.container {
+        grid-template-columns: repeat(2, 1fr); // Keep 2 columns maybe? Or switch to 1 earlier
+        gap: 1.5rem;
+    }
+    .career-card-item h2 { font-size: 1.3rem; }
+    .career-card-item .know-more-button { font-size: 0.95rem; }
+}
+
+@media (max-width: 767px) { // Mobile
+    .career-cards-container.container {
+        grid-template-columns: 1fr; // <<< 1 column (stack)
+        gap: 1.5rem; // Vertical gap
+    }
+    .career-card-item {
+        padding: 1.5rem; // Adjust padding
+    }
+     .career-card-item h2 { font-size: 1.25rem; }
+}
+// --- End Career Cards Grid Responsiveness ---
+
+// ==============================
+// END: Career Cards Section Styles
+// ==============================
+
+
+// In your style.scss file (or relevant stylesheet)
+
+// In your style.scss file (or relevant stylesheet)
+
+// In your style.scss file (or relevant stylesheet)
+

@@ -1,0 +1,151 @@
+{
+    "projectId": "6835a17e003670687efb",
+    "projectName": "Hubode Webapp",
+    "functions": [
+        {
+            "$id": "684159b0003dfdc33264",
+            "name": "sendRentReminders",
+            "runtime": "node-16.0",
+            "path": "appwrite-functions/send-rent-reminders",
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "schedule": "0 8 * * *",
+            "timeout": 15,
+            "execute": [
+                "any"
+            ],
+            "enabled": true,
+            "logging": true,
+            "scopes": [
+                "users.read",
+                "databases.read",
+                "execution.write"
+            ],
+            "specification": "s-0.5vcpu-512mb",
+            "variables": {
+                "APPWRITE_ENDPOINT": "${APPWRITE_ENDPOINT}",
+                "APPWRITE_PROJECT_ID": "${APPWRITE_PROJECT_ID}",
+                "APPWRITE_API_KEY": "${APPWRITE_API_KEY}",
+                "APPWRITE_DATABASE_ID": "${APPWRITE_DATABASE_ID}",
+                "APPWRITE_TENANCIES_COLLECTION_ID": "${APPWRITE_TENANCIES_COLLECTION_ID}",
+                "APPWRITE_PROFILES_COLLECTION_ID": "${APPWRITE_PROFILES_COLLECTION_ID}",
+                "APPWRITE_ADMIN_SETTINGS_COLLECTION_ID": "${APPWRITE_ADMIN_SETTINGS_COLLECTION_ID}",
+                "ADMIN_SETTINGS_DOCUMENT_ID": "${ADMIN_SETTINGS_DOCUMENT_ID}"
+            }
+        },
+        {
+            "$id": "send-login-otp",
+            "name": "send-login-otp",
+            "runtime": "node-16.0",
+            "path": "appwrite-functions/send-login-otp",
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "schedule": "",
+            "timeout": 15,
+            "execute": [
+                "users"
+            ],
+            "enabled": true,
+            "logging": true,
+            "scopes": [
+                "users.read",
+                "tokens.write",
+                "messages.write"
+            ],
+            "variables": {
+                "APPWRITE_ENDPOINT": "${APPWRITE_ENDPOINT}",
+                "APPWRITE_PROJECT_ID": "${APPWRITE_PROJECT_ID}",
+                "APPWRITE_API_KEY": "${APPWRITE_API_KEY}"
+            }
+        },
+        {
+            "$id": "otp-cleanup-function",
+            "name": "otp-cleanup-function",
+            "runtime": "node-16.0",
+            "path": "appwrite-functions/otp-cleanup-function",
+            "entrypoint": "main.js",
+            "commands": "npm install",
+            "schedule": "0 3 * * *",
+            "timeout": 15,
+            "execute": [
+                "any"
+            ],
+            "enabled": true,
+            "logging": true,
+            "scopes": [
+                "databases.read",
+                "databases.write"
+            ],
+            "specification": "s-0.5vcpu-512mb",
+            "variables": {
+                "APPWRITE_ENDPOINT": "${APPWRITE_ENDPOINT}",
+                "APPWRITE_PROJECT_ID": "${APPWRITE_PROJECT_ID}",
+                "APPWRITE_API_KEY": "${APPWRITE_API_KEY}",
+                "APPWRITE_DATABASE_ID": "${APPWRITE_DATABASE_ID}",
+                "APPWRITE_OTP_COLLECTION_ID": "${APPWRITE_OTP_COLLECTION_ID}"
+            }
+        },
+        {
+            "$id": "69103b81000c2ac41cd6",
+            "name": "initiate-email-change",
+            "runtime": "node-16.0",
+            "specification": "s-0.5vcpu-512mb",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "scopes": [
+                "databases.write",
+                "messages.write",
+                "users.write"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "main.js",
+            "commands": "npm install",
+            "path": "appwrite-functions/initiate-email-change",
+            "variables": {
+                "APPWRITE_ENDPOINT": "${APPWRITE_ENDPOINT}",
+                "APPWRITE_PROJECT_ID": "${APPWRITE_PROJECT_ID}",
+                "APPWRITE_API_KEY": "${APPWRITE_API_KEY}",
+                "APPWRITE_DATABASE_ID": "${APPWRITE_DATABASE_ID}",
+                "APPWRITE_EMAIL_CHANGE_COLLECTION_ID": "${APPWRITE_EMAIL_CHANGE_COLLECTION_ID}"
+            }
+        },
+        {
+            "$id": "send-receipt-email",
+            "name": "send-receipt-email",
+            "runtime": "node-16.0",
+            "path": "appwrite-functions/send-receipt-email",
+            "entrypoint": "main.js",
+            "commands": "npm install",
+            "schedule": "",
+            "timeout": 15,
+            "execute": [
+                "any"
+            ],
+            "enabled": true,
+            "logging": true,
+            "scopes": [
+                "users.read",
+                "users.write",
+                "messages.write"
+            ],
+            "events": [
+                "databases.6835d416000286ca37d5.collections.683c0a5b0037dbfbaae0.documents.*.create"
+            ],
+            "specification": "s-0.5vcpu-512mb",
+            "variables": {
+                "APPWRITE_ENDPOINT": "${APPWRITE_ENDPOINT}",
+                "APPWRITE_PROJECT_ID": "${APPWRITE_PROJECT_ID}",
+                "APPWRITE_API_KEY": "${APPWRITE_API_KEY}",
+                "APPWRITE_DATABASE_ID": "${NEXT_PUBLIC_APPWRITE_DATABASE_ID}",
+                "APPWRITE_RESERVATIONS_COLLECTION_ID": "${NEXT_PUBLIC_APPWRITE_RESERVATIONS_COLLECTION_ID}"
+            }
+        }
+    ],
+    "collections": [],
+    "buckets": []
+}

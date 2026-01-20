@@ -1,0 +1,224 @@
+.find-your-space-container-main { // Added -main suffix for consistency
+    .find-your-space {
+  
+      .properties-container {
+        display: grid;
+        gap: 1.1em;          // Base gap
+        margin-top: 2.5rem;  // Space below SectionTitle
+  
+        /* -------- Layout based on item count -------- */
+        &.count-4-plus { grid-template-columns: repeat(4, 1fr); }
+        &.count-3      { grid-template-columns: repeat(3, 1fr); }
+        &.count-2      { grid-template-columns: repeat(2, 1fr); }
+  
+        /* ONLY CHANGE ►—————— */
+        &.count-1 {
+          grid-template-columns: repeat(4, 1fr);
+  
+          .property-card-link {          // Center the lone card
+            grid-column: 2 / span 2;     // ← was “span 2” before
+            justify-self: center;
+            width: 100%;
+            max-width: 500px;            // Optional max-width for single item
+          }
+        }
+        /* —————— ◄ ONLY CHANGE */
+  
+        /* -------- Link Wrapper -------- */
+        .property-card-link {
+          display: block;
+          text-decoration: none;
+          color: inherit;
+          border-radius: 1rem;
+          transition: box-shadow .3s ease, transform .3s ease;
+  
+          &:hover        { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,.08); }
+          &:focus-visible{ outline: 2px solid $primary-green; outline-offset: 2px; }
+        }
+  
+        /* -------- Card -------- */
+        .property-card {
+          border: 1px solid #EAEAEA;
+          border-radius: 1rem;
+          overflow: hidden;
+          background-color: $white;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+  
+          .card-image-container img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+          }
+  
+          .card-content {
+            padding: 1em 1.2em;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+  
+            .location,
+            .bed-info-row {
+              gap: .5em;
+              margin-bottom: .5rem;
+
+              img { width: 1.1625rem; height: 1.1625rem; aspect-ratio: 1/1; }
+              p  { color: $grey-text; font-family: Aeonik,sans-serif; font-size: .9375rem; line-height: 1.5; margin: 0; }
+            }
+  
+            h5 { color: $black; font-family: Aeonik,sans-serif; font-size: 1.375rem; font-weight: 500; margin: 0 0 1rem; line-height: 1.3; }
+  
+            .room-types-container {
+              display: flex;
+              justify-content: flex-start;
+              flex-wrap: wrap;
+              gap: 1em;
+              border: 1px solid #EAEAEA;
+              border-width: 1px 0;
+              padding: .5em 0;
+              margin-bottom: 1rem;
+  
+              .type {
+                display: flex;
+                align-items: center;
+                gap: .36em;
+                color: $grey-text; font-family: Aeonik,sans-serif; font-size: .8125rem; line-height: 1.5;
+  
+                .type-icon {
+                  height: 1.25rem;
+                  width: auto;
+                  max-width: 1.8625rem;
+                  object-fit: contain;
+                }
+              }
+            }
+  
+            .rent-amount {
+              margin-top: auto;
+              text-align: center;
+              padding-top: .5em;
+              color: $primary-green; font-family: Aeonik,sans-serif; font-size: 1.0625rem; font-weight: 500; line-height: 1.5;
+  
+              span { color: $primary-green; font-size: 1.2625rem; font-weight: 700; }
+            }
+          }
+        }
+
+        .property-card-link.coming-soon {
+          cursor: default;
+          height: 100%;
+
+          .property-card--coming-soon {
+            height: 100%;
+            border: 1px solid #EAEAEA;
+            border-radius: 1rem;
+            background-color: $white;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+
+            .card-image-container {
+              position: relative;
+              flex: 1;
+              background: linear-gradient(180deg, #1A3B34 0%, #5AA494 100%);
+
+              img {
+                display: none;
+              }
+
+              .coming-soon-overlay {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+                text-align: center;
+                background: transparent;
+
+                .coming-soon-meta {
+                  color: #EDD3E3;
+                  width: 100%;
+                  max-width: 18rem;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 0.85rem;
+
+                  .coming-soon-location {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.45rem;
+                    font-family: Aeonik, sans-serif;
+                    font-size: 1.0625rem;
+                    font-weight: 500;
+                    margin: 0;
+                    color: inherit;
+
+                    &__icon {
+                      width: 1.25rem;
+                      height: 1.25rem;
+                      filter: brightness(0) invert(1);
+                    }
+
+                    &__text {
+                      color: inherit;
+                      margin: 0;
+                      line-height: 1.35;
+                    }
+                  }
+
+                  .coming-soon-label {
+                    font-family: Aeonik, sans-serif;
+                    font-size: clamp(1.75rem, 2.1vw, 2.3rem);
+                    font-weight: 600;
+                    margin: 0;
+                    line-height: 1.15;
+                    letter-spacing: 0.01em;
+                    text-shadow: 0 5px 16px rgba(0,0,0,0.35);
+                    white-space: nowrap;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+  
+      /* -------- Responsiveness -------- */
+      @media (max-width: 1024px) {
+        .properties-container {
+          &.count-4-plus, &.count-3, &.count-2, &.count-1 {
+            grid-template-columns: repeat(2, 1fr) !important;
+  
+            .property-card-link {
+              grid-column: auto;
+              justify-self: auto;
+              max-width: none;
+            }
+          }
+        }
+      }
+  
+      @media (max-width: 767px) {
+        .properties-container {
+          &.count-4-plus, &.count-3, &.count-2, &.count-1 {
+            grid-template-columns: 1fr !important;
+  
+            .property-card-link {
+              grid-column: auto;
+              justify-self: auto;
+              max-width: 400px;
+              margin-left: auto;
+              margin-right: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  

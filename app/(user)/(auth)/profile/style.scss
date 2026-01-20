@@ -1,0 +1,374 @@
+// ==============================
+// START: Profile Page Styles
+// ==============================
+
+.profile-page-container-main {
+    min-height: 100vh;
+
+    .profile-page-container.container {
+        width: 100%;
+        padding: 0 2rem;
+      }
+      
+      // Top Section with Title and Profile Card
+      .top-section {
+        margin-bottom: 2rem;
+      
+        h1 {
+          color: $black;
+          font-family: Aeonik, sans-serif;
+          font-size: 2.5rem;
+          font-weight: 700;
+          line-height: 1.2;
+          margin: 0 0 2rem 0;
+        }
+      }
+      
+      // Profile Card Styles
+      .profile-card {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        width: fit-content;
+      
+        .profile-icon {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          background-color: $primary-green;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $white;
+          font-family: Aeonik, sans-serif;
+          font-size: 2rem;
+          font-weight: 600;
+          flex-shrink: 0;
+        }
+      
+        .profile-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+      
+          h5 {
+            color: $black;
+            font-family: Aeonik, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.2;
+          }
+      
+          .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            width: fit-content;
+            transition: opacity 0.2s ease;
+      
+            &:hover {
+              opacity: 0.7;
+            }
+      
+            img {
+              width: 16px;
+              height: 16px;
+              object-fit: contain;
+            }
+      
+            p {
+              color: $grey-text;
+              font-family: Aeonik, sans-serif;
+              font-size: 0.9rem;
+              font-weight: 400;
+              margin: 0;
+            }
+          }
+        }
+      }
+      
+      // Purchase History Button Container
+      .buttons-container {
+        margin-bottom: 3rem;
+        width: fit-content;
+      
+        .purchase-history-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.8rem 1.5rem;
+          background-color: transparent;
+          border: 1px solid $cloud-grey;
+          border-radius: 0.4rem;
+          cursor: pointer;
+          font-family: Aeonik, sans-serif;
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: $black;
+          transition: background-color 0.2s ease, border-color 0.2s ease;
+          width: fit-content;
+      
+          &:hover {
+            background-color: lighten($cloud-grey, 5%);
+            border-color: darken($cloud-grey, 10%);
+          }
+      
+          img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+          }
+      
+          p {
+            margin: 0;
+            line-height: 1.2;
+          }
+        }
+      }
+      
+      // Personal Details Section
+      .personal-details-container {
+        width: 100%;
+        max-width: 500px; // Limiting width to match the UI design (40% of container)
+      
+        h2 {
+          color: $black;
+          font-family: Aeonik, sans-serif;
+          font-size: 1.8rem;
+          font-weight: 600;
+          line-height: 1.2;
+          margin: 0 0 2rem 0;
+        }
+      
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          margin-bottom: 1.5rem;
+      
+          label {
+            color: $black;
+            font-family: Aeonik, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+      
+          input[type="tel"],
+          input[type="email"] {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid $cloud-grey;
+            border-radius: 0.8rem;
+            background-color: #FBFBFB;
+            font-family: Aeonik, sans-serif;
+            font-size: 0.95rem;
+            color: $black;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease;
+      
+            &:focus {
+              outline: none;
+              border-color: $primary-green;
+            }
+      
+            &[readonly] {
+              background-color: #F5F5F5;
+              cursor: default;
+            }
+          }
+        }
+      
+        // Action Buttons Container
+        .action-buttons-container {
+          display: flex;
+          gap: 1rem;
+          margin-top: 2.5rem;
+          flex-wrap: wrap;
+          width: 100%;
+      
+          .edit-profile-btn,
+          .change-password-btn {
+            padding: 0.9rem 2rem;
+            border-radius: 0.6rem;
+            font-family: Aeonik, sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            min-width: 160px;
+            text-align: center;
+            flex: 1;
+          }
+      
+          .edit-profile-btn {
+            background-color: transparent;
+            color: $primary-green;
+            border: 1px solid $primary-green;
+      
+            &:hover {
+              background-color: lighten($cloud-grey, 5%);
+              border-color: darken($cloud-grey, 10%);
+            }
+          }
+      
+          .change-password-btn {
+            background-color: $primary-green;
+            color: $white;
+      
+            &:hover {
+              background-color: $light-pink;
+              color: $primary-green;
+            }
+          }
+        }
+      }
+      
+      // ==============================
+      // RESPONSIVE STYLES
+      // ==============================
+      
+      @media (max-width: 992px) {
+        .profile-page-container.container {
+          padding: 0 1.5rem;
+        }
+      
+        .personal-details-container {
+          max-width: 600px; // Slightly wider on tablets
+        }
+      
+        .top-section h1 {
+          font-size: 2.2rem;
+        }
+      }
+      
+      @media (max-width: 767px) {
+        .profile-page-container-main {
+          padding: 1.5rem 0;
+        }
+      
+        .profile-page-container.container {
+          padding: 0 1rem;
+        }
+      
+        .top-section {
+          margin-bottom: 1.5rem;
+      
+          h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+          }
+        }
+      
+        .profile-card {
+          gap: 1rem;
+      
+          .profile-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+          }
+      
+          .profile-info {
+            h5 {
+              font-size: 1.3rem;
+            }
+      
+            .logout-btn {
+              img {
+                width: 14px;
+                height: 14px;
+              }
+      
+              p {
+                font-size: 0.85rem;
+              }
+            }
+          }
+        }
+      
+        .buttons-container {
+          margin-bottom: 2rem;
+      
+          .purchase-history-btn {
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+          }
+        }
+      
+        .personal-details-container {
+          max-width: 100%; // Full width on mobile
+      
+          h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+          }
+      
+          .form-group {
+            margin-bottom: 1.25rem;
+          }
+      
+          .action-buttons-container {
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 2rem;
+      
+            .edit-profile-btn,
+            .change-password-btn {
+              width: 100%;
+              min-width: unset;
+            }
+          }
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .profile-page-container-main {
+          padding: 1rem 0;
+        }
+      
+        .top-section h1 {
+          font-size: 1.8rem;
+        }
+      
+        .profile-card {
+          .profile-info h5 {
+            font-size: 1.2rem;
+          }
+        }
+      
+        .personal-details-container {
+          h2 {
+            font-size: 1.4rem;
+          }
+      
+          .form-group {
+            input[type="tel"],
+            input[type="email"] {
+              padding: 0.8rem 1rem;
+              font-size: 0.9rem;
+            }
+          }
+      
+          .action-buttons-container {
+            .edit-profile-btn,
+            .change-password-btn {
+              padding: 0.8rem 1.5rem;
+              font-size: 0.95rem;
+            }
+          }
+        }
+      }
+      
+      // ==============================
+      // END: Profile Page Styles
+      // ==============================
+  }
+  

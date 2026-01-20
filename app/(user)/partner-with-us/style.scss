@@ -1,0 +1,668 @@
+.partner-hero-page {
+    width: 100%;
+    color: $black;
+    .container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+    .hero-top {
+        width: 100%;
+        padding: clamp(5rem, 6vw, 6.5rem) 0 clamp(1.75rem, 2.5vw, 2.5rem);
+    }
+    .title-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        text-align: center;
+        max-width: 920px;
+        margin: 0 auto;
+        h1 {
+            margin: 0;
+            color: var(--brandcolor, #1A3B34);
+            font-family: Aeonik, sans-serif;
+            font-size: clamp(2rem, 1vw + 2rem, 2.5625rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        p {
+            margin: 0;
+            color: var(--txt-grey, #5B5B5B);
+            font-family: Aeonik, sans-serif;
+            font-size: clamp(1rem, 0.5vw + 0.95rem, 1.125rem);
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 900px;
+        }
+    }
+    .btn-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+    }
+    .hero-btn {
+        &.small-button {
+            min-width: 12.5rem;
+            padding: 0.75rem 1.6rem;
+            border-radius: 0.75rem;
+            font-family: Aeonik, sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.5;
+            border: 1.5px solid transparent;
+        }
+    }
+    .hero-btn--ghost.small-button {
+        background: $white;
+        color: $primary-green;
+        border-color: $primary-green;
+        &:hover {
+            background: lighten($primary-green, 55%);
+            color: $primary-green;
+        }
+    }
+    .hero-btn--solid.small-button {
+        background: $primary-green;
+        color: $white;
+        border-color: $primary-green;
+        &:hover {
+            background: darken($primary-green, 6%);
+            color: $white;
+        }
+    }
+    .hero-visual {
+        width: 100%;
+        padding-bottom: clamp(2.25rem, 3vw, 3.5rem);
+    }
+    .feature-card {
+        position: relative;
+        width: 100%;
+        min-height: clamp(22rem, 5vw, 34rem);
+        aspect-ratio: 16 / 9;
+        border-radius: 0rem 0rem 1.9rem 1.9rem!important;
+        overflow: hidden;
+        background: #0f1f1b;
+    }
+    .feature-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .feature-overlay {
+        position: absolute;
+        inset: 0;
+        padding: clamp(3rem, 4vw, 4rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        gap: 1rem;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.35) 50%, rgba(0, 0, 0, 0.25) 100%);
+        h2 {
+            margin: 0;
+            color: var(--white, #FFF);
+            font-family: Aeonik, sans-serif;
+            font-size: clamp(1.5rem, 0.9vw + 1.2rem, 1.875rem);
+            font-weight: 700;
+            line-height: 1.2;
+            max-width: 820px;
+        }
+        p {
+            margin: 0;
+            color: var(--white, #FFF);
+            font-family: Aeonik, sans-serif;
+            font-size: clamp(1rem, 0.45vw + 0.9rem, 1.125rem);
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 640px;
+        }
+    }
+    @media (max-width: 900px) {
+        .title-section {
+            gap: 1rem;
+        }
+        .feature-overlay {
+            padding: 1.75rem;
+        }
+    }
+    @media (max-width: 640px) {
+        .btn-row {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .hero-btn {
+            width: 100%;
+        }
+        .feature-card {
+            min-height: 21rem;
+            aspect-ratio: 4 / 3;
+            border-radius: 1.25rem;
+        }
+        .feature-overlay {
+            align-items: flex-start;
+            text-align: left;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.35) 100%);
+            h2,
+            p {
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+// ==============================
+// START: How it Works Section Styles
+// ==============================
+.how-it-works-section.container {
+    // Container likely handles max-width and padding
+    // May need text-align: center; if SectionTitle isn't centered by default
+    text-align: center;
+}
+
+.how-it-works-section-container {
+    .how-it-works-section {
+        .sub-bold {
+            color: $primary-green;
+            text-align: center;
+            font-family: Aeonik;
+            font-size: 1.0625rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5625rem;
+            /* 147.059% */
+            margin-top: -1.5rem;
+        }
+    }
+}
+
+.how-it-works-2 {
+    .how-it-works-section {
+        .steps-cards-container {
+            .step-item {
+                align-items: flex-start;
+            }
+        }
+    }
+}
+
+.steps-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 3 columns on desktop
+    gap: 1.5rem; // Gap between cards
+    margin-top: 3rem; // Space below SectionTitle subtext
+    text-align: left; // Reset text alignment for card content
+}
+
+.step-item {
+    background-color: $white; // White background for the card
+    border: 1px solid $cloud-grey; // Use your light grey border color
+    border-radius: 1rem; // Rounded corners
+    padding: 2rem 1.5rem; // Padding inside the card
+    display: flex;
+    flex-direction: column; // Stack content vertically
+    align-items: center; // Align content to the start (left)
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08); // Subtle shadow on hover
+        transform: translateY(-5px); // Subtle lift effect
+    }
+    .icon-container {
+        // Using inline-flex so it only takes the width/height specified
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px; // Adjust size as needed
+        height: 70px;
+        background-color: $primary-green; // Use your primary dark green/teal
+        border-radius: 0.8rem; // Rounded corners for the icon background
+        margin-bottom: 1rem; // Space below the icon container
+        img {
+            width: 35px; // Size of the actual icon inside
+            height: 35px;
+            object-fit: contain;
+            // Adjust filter to get the light pink/lavender color for icons
+            filter: brightness(0) saturate(100%) invert(89%) sepia(18%) saturate(664%) hue-rotate(302deg) brightness(109%) contrast(94%);
+        }
+    }
+    .step-title {
+        // Corresponds to h5 tag
+        color: $primary-green; // Use your primary dark green/teal
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 1.3rem; // Adjust size as needed
+        font-weight: 700; // Bold title
+        margin: 0 0 0.1rem 0; // Space below title
+        line-height: 1.3;
+    }
+    p {
+        // Styles for the descriptive paragraph
+        color: $grey-text; // Use your defined grey text color
+        font-family: Aeonik, sans-serif; // Use your desired font
+        font-size: 0.95rem; // Adjust size
+        line-height: 1.6;
+        margin: 0; // Reset default paragraph margin
+        text-align: center;
+    }
+}
+
+// --- Responsiveness for Steps Grid ---
+@media (max-width: 992px) {
+    // Tablets
+    .steps-cards-container {
+        grid-template-columns: repeat(2, 1fr); // 2 columns
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    // Mobile
+    .steps-cards-container {
+        grid-template-columns: 1fr; // 1 column (stack)
+        gap: 1.5rem; // Vertical gap when stacked
+    }
+    .step-item {
+        padding: 1.5rem 1.2rem; // Slightly reduce padding on mobile
+        align-items: center; // Center content on mobile
+        text-align: center; // Center text on mobile
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.2rem;
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .step-title {
+            font-size: 1.2rem;
+        }
+        p {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+// --- End Steps Grid Responsiveness ---
+// ==============================
+// END: How it Works Section Styles
+// ==============================
+// ==============================
+// START: What You Gain Section
+// ==============================
+.what-you-gain-section-container {
+    width: 100%;
+    background: $white;
+    .what-you-gain-section {
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: clamp(1rem, 4vw, 5rem);
+    }
+    .content-section {
+        flex: 0 1 55%;
+        max-width: 620px;
+        align-self: center;
+        h4 {
+            margin: 0 0 1.75rem;
+            color: var(--brandcolor, #1A3B34);
+            font-family: Aeonik, sans-serif;
+            font-size: clamp(2rem, 1vw + 1.75rem, 2.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+    }
+    .points-container {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .point-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .point-icon {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: var(--brandcolor, #1A3B34);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        img {
+            width: 1.05rem;
+            height: 1.05rem;
+            object-fit: contain;
+        }
+    }
+    .point-text {
+        margin: 0;
+        color: var(--grey-text, #585858);
+        font-family: Aeonik, sans-serif;
+        font-size: clamp(1rem, 0.4vw + 0.95rem, 1.25rem);
+        font-weight: 400;
+        line-height: 1.5625rem;
+    }
+    .image-container {
+        flex: 0 1 55%;
+        max-width: none;
+        width: 100%;
+        border-radius: clamp(1rem, 1.25vw, 1.75rem);
+        overflow: hidden;
+        background: transparent;
+        min-height: clamp(10rem, 10vw, 30rem);
+        aspect-ratio: 4 / 3;
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+    }
+    @media (max-width: 1024px) {
+        .what-you-gain-section {
+            flex-direction: column;
+            text-align: left;
+        }
+        .image-container {
+            max-width: 100%;
+            flex-basis: auto;
+        }
+    }
+    @media (max-width: 640px) {
+        padding: 2.5rem 0;
+        .content-section {
+            width: 100%;
+            h4 {
+                font-size: clamp(1.75rem, 5vw, 2.25rem);
+                text-align: left;
+            }
+        }
+        .points-container {
+            gap: 1.1rem;
+        }
+        .point-item {
+            gap: 0.85rem;
+        }
+        .point-text {
+            font-size: 1.05rem;
+        }
+    }
+}
+
+// ==============================
+// END: What You Gain Section
+// ==============================
+// ==============================
+// START: What We Take Care Of Section
+// ==============================
+.what-we-take-care-of-container {
+    width: 100%;
+    background: $white;
+    .what-we-take-care-of-section {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2rem, 3vw, 3.5rem);
+    }
+    .care-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: clamp(1.25rem, 1.5vw, 1.75rem);
+    }
+    .care-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.125rem;
+        align-items: stretch;
+    }
+    .care-card__image {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: clamp(1rem, 1.2vw, 1.5rem);
+        overflow: hidden;
+        background: #e4ebe7;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+    .care-card__text {
+        border-radius: 1.5rem;
+        border: 1px solid rgba(26, 59, 52, 0.15);
+        padding: 0.875rem 1.1875rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 4.875rem;
+        p {
+            margin: 0;
+            color: var(--brandcolor, #1A3B34);
+            text-align: center;
+            font-family: Aeonik, sans-serif;
+            font-size: clamp(1rem, 0.4vw + 0.95rem, 1.125rem);
+            font-weight: 700;
+            line-height: 1.5625rem;
+        }
+    }
+    @media (max-width: 1200px) {
+        .care-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (max-width: 900px) {
+        .care-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 540px) {
+        .care-grid {
+            grid-template-columns: 1fr;
+        }
+        .care-card__text {
+            padding: 0.85rem 1rem;
+        }
+    }
+}
+
+// ==============================
+// END: What We Take Care Of Section
+// ==============================
+// ==============================
+// START: Contact Section
+// ==============================
+.contact-section-container {
+    width: 100%;
+    background: $white;
+    .contact-section {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: clamp(2rem, 4vw, 5rem);
+    }
+    .contact-left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        h5 {
+            margin: 0;
+            color: $grey-text;
+            font-family: Aeonik, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        h2 {
+            margin: 0;
+            color: var(--brandcolor, #1A3B34);
+            font-family: Aeonik, sans-serif;
+            font-size: clamp(2rem, 2vw + 1rem, 2.5rem);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        p {
+            margin: 0;
+            color: var(--grey-text, #585858);
+            font-family: Aeonik, sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 480px;
+        }
+        .email-pill {
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.4rem;
+            border-radius: 0.85rem;
+            border: 1.5px solid var(--brandcolor, #1A3B34);
+            background: $white;
+            align-self: flex-start;
+            width: fit-content;
+            text-decoration: none;
+            color: var(--brandcolor, #1A3B34);
+            font-family: Aeonik, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.2;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            img {
+                width: 1.2rem;
+                height: 1.2rem;
+                object-fit: contain;
+            }
+            span {
+                margin: 0;
+            }
+            &:hover {
+                background: var(--brandcolor, #1A3B34);
+                color: $white;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+    .contact-right {
+        flex: 1.1;
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+        .form-row {
+            width: 100%;
+        }
+        .form-row-split {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        label {
+            color: $black;
+            font-family: Aeonik, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border-radius: 0.85rem;
+            border: 1px solid $cloud-grey;
+            background: #fbfbfb;
+            font-family: Aeonik, sans-serif;
+            font-size: 0.95rem;
+            color: $black;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-sizing: border-box;
+            &::placeholder {
+                color: lighten($grey-text, 15%);
+            }
+            &:focus {
+                outline: none;
+                border-color: $primary-green;
+                box-shadow: 0 0 0 2px lighten($primary-green, 40%);
+            }
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url('/images/down-arrow-green.svg');
+            background-repeat: no-repeat;
+            background-position: calc(100% - 1rem) center;
+            background-size: 1rem;
+            padding-right: 2.5rem;
+            color: lighten($grey-text, 10%);
+            &:valid {
+                color: $black;
+            }
+        }
+        textarea {
+            resize: vertical;
+            min-height: 180px;
+        }
+        .form-row-submit {
+            margin-top: 0.5rem;
+        }
+        .submit-button {
+            background: var(--brandcolor, #1A3B34);
+            color: $white;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 0.95rem 2.75rem;
+            font-family: Aeonik, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            &:hover {
+                background: darken($primary-green, 8%);
+                transform: translateY(-1px);
+            }
+        }
+    }
+    @media (max-width: 900px) {
+        .contact-section {
+            flex-direction: column;
+        }
+        .contact-left {
+            text-align: center;
+            align-items: center;
+            .contact-desc {
+                max-width: 100%;
+            }
+        }
+        .contact-right {
+            width: 100%;
+        }
+    }
+    @media (max-width: 600px) {
+        .form-row-split {
+            grid-template-columns: 1fr;
+        }
+        .contact-form {
+            gap: 1.1rem;
+        }
+    }
+}
+
+// ==============================
+// END: Contact Section
+// ==============================
