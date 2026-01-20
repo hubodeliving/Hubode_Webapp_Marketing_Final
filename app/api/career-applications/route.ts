@@ -5,7 +5,7 @@ export const runtime = 'nodejs';
 
 const MAX_CV_SIZE_BYTES = 2 * 1024 * 1024;
 const BREVO_API_URL = 'https://api.brevo.com/v3/smtp/email';
-const DEFAULT_RECIPIENT = 'fenarkhan7@gmail.com';
+const DEFAULT_RECIPIENT = 'hr@hubodeliving.com';
 
 const sendApplicationEmail = async ({
   toEmail,
@@ -70,6 +70,9 @@ const sendApplicationEmail = async ({
     const errorText = await response.text().catch(() => '');
     throw new Error(`Brevo send failed: ${response.status} ${errorText}`);
   }
+
+  const responseJson = await response.json().catch(() => null);
+  return responseJson;
 };
 
 export async function POST(request: Request) {
@@ -125,7 +128,14 @@ export async function POST(request: Request) {
     const createdDocument = await writeClient.create(submission);
 
     const recipientEmail = process.env.BREVO_RECIPIENT_EMAIL || DEFAULT_RECIPIENT;
-    await sendApplicationEmail({
+    console.log('[career-applications] Sending email via Brevo', {
+      senderEmail: process.env.BREVO_SENDER_EMAIL,
+      recipientEmail,
+      jobTitle,
+      jobSlug,
+    });
+
+    const brevoResponse = await sendApplicationEmail({
       toEmail: recipientEmail,
       applicantName: `${firstName} ${lastName}`.trim(),
       applicantEmail: email,
@@ -136,6 +146,7 @@ export async function POST(request: Request) {
       attachmentName: cvFile.name,
       attachmentBase64: buffer.toString('base64'),
     });
+    console.log('[career-applications] Brevo response:', brevoResponse);
 
     return NextResponse.json(
       { success: true, message: 'Application submitted successfully!', data: createdDocument },
