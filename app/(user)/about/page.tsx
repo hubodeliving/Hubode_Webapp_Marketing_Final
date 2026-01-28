@@ -60,16 +60,13 @@ We built this so you can live fully for 30 days at a time.
     paragraph="To reshape how people experience shared living by creating spaces that honour individuality, spark connection, and offer peace without compromise.
 We exist to replace chaos with calm, transactions with trust, and isolation with an honest community.
 "
-    imageUrl="/images/abt-img-card2.png" // Use the correct image path
-    imageAlt="Comfortable modern room with bed and desk"
-    reverse={true}
+    showImage={false}
 />
 
 <AboutSection
     title="Our Vision"
     paragraph="To revolutionise urban living by building a smart, connected ecosystem where everyone finds a Hubode - wherever they go."
-    imageUrl="/images/abt-img-card3.png" // Use the correct image path
-    imageAlt="Comfortable modern room with bed and desk"
+    showImage={false}
 />
 
     <div className="our-core-values-section-container flex items-center justify-center margin-bottom">

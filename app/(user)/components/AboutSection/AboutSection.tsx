@@ -5,9 +5,10 @@ import './as.scss'; // Assuming styles are in as.scss in the same folder
 interface AboutSectionProps {
   title: string;
   paragraph: string;
-  imageUrl: string;
+  imageUrl?: string;
   imageAlt?: string; // Optional alt text
   reverse?: boolean; // Optional prop to reverse layout
+  showImage?: boolean;
 }
 
 const AboutSection: React.FC<AboutSectionProps> = ({
@@ -15,7 +16,8 @@ const AboutSection: React.FC<AboutSectionProps> = ({
   paragraph,
   imageUrl,
   imageAlt = 'Descriptive image', // Default alt text
-  reverse = false // Default to false (text left, image right)
+  reverse = false, // Default to false (text left, image right)
+  showImage = true
 }) => {
 
   const textContent = (
@@ -25,16 +27,16 @@ const AboutSection: React.FC<AboutSectionProps> = ({
     </div>
   );
 
-  const imageContent = (
+  const imageContent = showImage && imageUrl ? (
     <div className="image-section">
       <img src={imageUrl} alt={imageAlt} />
     </div>
-  );
+  ) : null;
 
   return (
     // You might already have these wrapper classes from your page structure
     <div className='about-section-container flex items-center justify-center margin-bottom'>
-      <div className="about-section container">
+      <div className={`about-section container${showImage ? '' : ' text-only'}`}>
         {/* Conditionally render order based on the 'reverse' prop */}
         {reverse ? (
           <>
