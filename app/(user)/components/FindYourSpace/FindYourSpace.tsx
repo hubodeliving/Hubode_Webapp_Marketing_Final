@@ -127,8 +127,8 @@ const typeIconMap: { [key: string]: string } = {
               <div className='find-your-space container'>
                   <SectionTitle
                       // title="Find Your Space"
-                      title="Book Now"
-                      subtext="Pick your room. Pack your bags. Hubodé is waiting."
+                      title="Explore Life at Hubode"
+                      subtext="Choose your space. Shape your plans. Hubode awaits."
                   />
                   <p style={{ textAlign: 'center', marginTop: '2rem' }}>No properties available at the moment.</p>
               </div>
@@ -217,7 +217,11 @@ const typeIconMap: { [key: string]: string } = {
                               );
                             })}
                           </div>
-                          <h6 className='rent-amount'>From <span>₹{priceLabel}/month</span></h6>
+                          <div className="early-access-pricing">
+                            <p className="early-access-label">Early access pricing</p>
+                            <h6 className="rent-amount">From <span>₹8,999/month</span></h6>
+                            <p className="early-access-note">Unlocked via waitlist</p>
+                          </div>
                         </div>
                       </div>
                     );

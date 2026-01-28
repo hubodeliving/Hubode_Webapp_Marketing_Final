@@ -101,8 +101,37 @@
               text-align: center;
               padding-top: .5em;
               color: $primary-green; font-family: Aeonik,sans-serif; font-size: 1.0625rem; font-weight: 500; line-height: 1.5;
-  
+
               span { color: $primary-green; font-size: 1.2625rem; font-weight: 700; }
+            }
+
+            .early-access-pricing {
+              margin-top: auto;
+              text-align: center;
+              padding-top: .5em;
+            }
+
+            .early-access-label {
+              margin: 0;
+              color: $grey-text;
+              font-family: Aeonik, sans-serif;
+              font-size: 0.875rem;
+              font-weight: 500;
+              line-height: 1.4;
+            }
+
+            .early-access-pricing .rent-amount {
+              margin-top: 0;
+              padding-top: 0.2em;
+            }
+
+            .early-access-note {
+              margin: 0.2rem 0 0;
+              color: $grey-text;
+              font-family: Aeonik, sans-serif;
+              font-size: 0.75rem;
+              font-weight: 400;
+              line-height: 1.4;
             }
           }
         }

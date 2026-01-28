@@ -321,7 +321,7 @@ const Header = ({ isAltTheme = false }: HeaderProps) => {
               onClick={triggerWaitlistPopup}
               className="desktop-button"
             >
-              Prebook Now
+              Join Waitlist
             </button>
             <Link
               href="/contact"
@@ -413,7 +413,7 @@ const Header = ({ isAltTheme = false }: HeaderProps) => {
               className="btn-mobile"
               onClick={triggerWaitlistPopup}
             >
-              Prebook Now
+              Join Waitlist
             </button>
             <Link
               href="/contact"
