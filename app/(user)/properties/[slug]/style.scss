@@ -105,11 +105,11 @@
     // Keep original Features/Amenities Section styles
     .features-section {
         .features-items-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem 1.5rem; margin-top: 1.5rem; overflow: hidden; transition: max-height 0.4s ease-in-out; max-height: 15rem; }
-        &.expanded { .features-items-container { max-height: 30rem; } }
+        &.expanded { .features-items-container { max-height: none; overflow: visible; } }
         .feature-item { display: flex; align-items: center; gap: 0.8rem; .feature-icon-container { flex-shrink: 0; } .feature-icon { width: 2.5rem; height: 2.5rem; object-fit: contain; display: block; } p { font-family: Aeonik, sans-serif; font-size: 0.95rem; color: $black; margin: 0; line-height: 1.3; font-weight: 400; } }
         .view-all-amenities-button { display: inline-block; margin-top: 2rem; padding: 0.6rem 1.8rem; background-color: transparent; border: 1.5px solid $primary-green; color: $primary-green; border-radius: 0.5rem; font-family: Aeonik, sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; text-align: center; transition: background-color 0.2s ease, color 0.2s ease; &:hover { background-color: lighten($primary-green, 50%); } }
         @media (max-width: 992px) { .features-items-container { gap: 1.5rem 1.2rem; } }
-        @media (max-width: 767px) { .features-items-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; max-height: 18rem; } &.expanded .features-items-container { max-height: 40rem; } .feature-item { gap: 0.6rem; .feature-icon { width: 2rem; height: 2rem; } p { font-size: 0.9rem; } } .view-all-amenities-button { margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.9rem; } }
+        @media (max-width: 767px) { .features-items-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; max-height: 18rem; } &.expanded .features-items-container { max-height: none; overflow: visible; } .feature-item { gap: 0.6rem; .feature-icon { width: 2rem; height: 2rem; } p { font-size: 0.9rem; } } .view-all-amenities-button { margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.9rem; } }
         @media (max-width: 480px) { .features-items-container { gap: 1.2rem 0.8rem; } .feature-item p { font-size: 0.85rem; } }
     }
 
