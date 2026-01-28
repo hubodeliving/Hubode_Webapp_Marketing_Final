@@ -955,16 +955,20 @@ export default function PropertyDetailPage({ params }: PageProps) {
                             <div className="price">
                                 <p>{selectedTierPrice !== null ? (<>Selected Tier: <span>₹{selectedTierPrice.toLocaleString('en-IN')}</span> /month</>) : (<>From <span>₹{lowestTierPrice !== null ? lowestTierPrice.toLocaleString('en-IN') : (propertyData?.priceFrom || '')}</span> /month</>)}</p>
                             </div>
-                            <p className="cta-prebook-note">Prebook pricing applies only when you reserve now.</p>
+                            <p className="cta-prebook-note">Early access pricing is available exclusively to waitlist members</p>
 
                             {isCheckingReservation ? ( <p className="cta-subtext loading-reservation">Checking reservation status...</p>
                             ) : userReservation && userReservation.selectedTierKey === selectedTierKey ? (<>
                                 <p className="cta-subtext-booked">Request received! Our team will contact you for next steps.</p>
                                 <Button text="Already Joined" className="cta-button booked" disabled={true} />
                             </>) : (<>
-                                <p className="cta-subtext">{selectedTierKey ? `Join the waitlist for this room type and we'll reach out as soon as it's available.` : propertyData?.priceDescription}</p>
+                                <p className="cta-subtext">
+                                    {selectedTierKey
+                                        ? `Join the waitlist for this room type and we'll reach out as soon as it's available.`
+                                        : 'Select your preferred room type to join the waitlist and get priority access when bookings open. A minimum stay of 3 months applies.'}
+                                </p>
                                 <Button
-                                    text={selectedTierKey ? "Join Waitlist" : "Choose Room Type"}
+                                    text={selectedTierKey ? "Join Waitlist" : "Select room type"}
                                     href={!selectedTierKey ? "#room-types" : undefined}
                                     className="cta-button"
                                     onClick={selectedTierKey ? handleBookNow : handleScrollToRooms}
