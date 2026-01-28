@@ -97,6 +97,13 @@
     max-width: 640px;
 }
 
+.waitlist-subtext-note {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--txt-grey, #5B5B5B);
+}
+
 .waitlist-form {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -25,6 +25,7 @@ interface FormState {
   phone: string;
   occupation: string;
   comingFrom: string;
+  moveInTimeline: string;
   propertyName: string;
   propertyLocation: string;
   roomType: string;
@@ -35,6 +36,7 @@ const initialFormState: FormState = {
   phone: '',
   occupation: '',
   comingFrom: '',
+  moveInTimeline: '',
   propertyName: '',
   propertyLocation: '',
   roomType: '',
@@ -87,6 +89,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
         phone: '',
         occupation: '',
         comingFrom: '',
+        moveInTimeline: '',
       }));
       setErrorMessage(null);
       setSuccessMessage(null);
@@ -139,7 +142,11 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!formData.name.trim() || !formData.phone.trim() || !formData.occupation.trim() || !formData.comingFrom.trim()) {
+    if (!formData.name.trim()
+        || !formData.phone.trim()
+        || !formData.occupation.trim()
+        || !formData.comingFrom.trim()
+        || !formData.moveInTimeline.trim()) {
       setErrorMessage('Please fill out every field to join the waitlist.');
       setSuccessMessage(null);
       return;
@@ -185,6 +192,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
         phone: '',
         occupation: '',
         comingFrom: '',
+        moveInTimeline: '',
       }));
       setSuccessMessage("Thanks! You're on the list - we'll be in touch soon.");
     } catch (error) {
@@ -203,7 +211,12 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
     : 'Calicut, get ready! Hubode is coming soon.';
   const titleCopy = isPropertyMode ? 'Join the Waitlist' : 'Find Your New Home';
   const subtextCopy = isPropertyMode
-    ? 'Drop your info to reserve a spot for this room type. We will reach out as soon as it opens up.'
+    ? (
+        <>
+          Share your details to join the waitlist for this room type. We'll reach out as soon as bookings open.
+          <span className="waitlist-subtext-note">Pricing and availability may change after launch.</span>
+        </>
+      )
     : 'Be the first to experience a new standard of co-living. Sign up for exclusive early access, special launch offers, and updates.';
 
   return (
@@ -263,7 +276,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
                 id="waitlist-name"
                 name="name"
                 type="text"
-                placeholder="Enter your First Name"
+                placeholder="Enter your Name"
                 value={formData.name}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
@@ -315,12 +328,28 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
               />
             </div>
 
+            <div className="waitlist-form-row">
+              <label htmlFor="waitlist-move-in">Move-in Timeline</label>
+              <select
+                id="waitlist-move-in"
+                name="moveInTimeline"
+                value={formData.moveInTimeline}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+              >
+                <option value="" disabled>When you're planning to move in</option>
+                <option value="Immediately">Immediately</option>
+                <option value="1-3 months">1-3 months</option>
+                <option value="3+ months">3+ months</option>
+              </select>
+            </div>
+
             {errorMessage && <p className="waitlist-feedback error">{errorMessage}</p>}
             {successMessage && <p className="waitlist-feedback success">{successMessage}</p>}
 
             <div className="waitlist-actions">
               <button type="submit" className="primary" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send'}
+                {isSubmitting ? 'Sending...' : 'Join Waitlist'}
               </button>
               <button type="button" className="secondary" onClick={handleDismiss}>
                 Continue to Site

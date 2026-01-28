@@ -6,6 +6,7 @@ interface WaitlistRequestBody {
   phone?: string;
   occupation?: string;
   comingFrom?: string;
+  moveInTimeline?: string;
   source?: string;
   propertyName?: string;
   propertyLocation?: string;
@@ -23,12 +24,13 @@ export async function POST(request: Request) {
     const phone = sanitize(body.phone);
     const occupation = sanitize(body.occupation);
     const comingFrom = sanitize(body.comingFrom);
+    const moveInTimeline = sanitize(body.moveInTimeline);
     const source = sanitize(body.source) || 'waitlist-popup';
     const propertyName = sanitize(body.propertyName);
     const propertyLocation = sanitize(body.propertyLocation);
     const roomType = sanitize(body.roomType);
 
-    if (!name || !phone || !occupation || !comingFrom) {
+    if (!name || !phone || !occupation || !comingFrom || !moveInTimeline) {
       return NextResponse.json(
         { error: 'All fields are required.' },
         { status: 400 }
@@ -40,6 +42,7 @@ export async function POST(request: Request) {
       phone,
       occupation,
       comingFrom,
+      moveInTimeline,
       source,
       propertyName,
       propertyLocation,

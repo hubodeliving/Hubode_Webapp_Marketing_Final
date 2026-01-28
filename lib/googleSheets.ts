@@ -61,6 +61,7 @@ export interface WaitlistEntry {
   phone: string;
   occupation: string;
   comingFrom: string;
+  moveInTimeline: string;
   source?: string;
   propertyName?: string;
   propertyLocation?: string;
@@ -77,6 +78,7 @@ export async function appendWaitlistEntry(entry: WaitlistEntry) {
     entry.phone,
     entry.occupation,
     entry.comingFrom,
+    entry.moveInTimeline,
     entry.source ?? 'waitlist-popup',
     entry.propertyName ?? '',
     entry.propertyLocation ?? '',
@@ -85,7 +87,7 @@ export async function appendWaitlistEntry(entry: WaitlistEntry) {
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: formatSheetRange('A:I'),
+    range: formatSheetRange('A:J'),
     valueInputOption: 'USER_ENTERED',
     insertDataOption: 'INSERT_ROWS',
     requestBody: {
