@@ -9,6 +9,13 @@ import HubodeSteps from "./components/HubodeSteps/HubodeSteps";
 import FaqSection from "./components/FaqSection/FaqSection";
 import GallerySection from "./components/GallerySection/GallerySection";
 import ScrollToHash from "./components/ScrollToHash/ScrollToHash";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Hubode Living | Community-First Co-Living Spaces",
+  description:
+    "Hubode is a community-first co-living brand for in-betweeners - makers, thinkers, interns, creatives - offering thoughtfully designed shared living and spaces built for belonging.",
+};
 
 export const dynamic = 'force-dynamic'; // Force dynamic rendering
 export const revalidate = 60; // Still use ISR to revalidate every 60 seconds
