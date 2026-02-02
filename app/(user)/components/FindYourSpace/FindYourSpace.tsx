@@ -21,6 +21,7 @@ export const revalidate = 60; // Still use ISR to revalidate every 60 seconds
   interface PropertyCardData {
       _id: string;
       propertyName: string;
+      badgeText?: string | null;
       featuredImage: { // Structure matches GROQ projection
           alt?: string;
           asset: { _ref: string; url?: string };
@@ -51,6 +52,7 @@ export const revalidate = 60; // Still use ISR to revalidate every 60 seconds
     *[_type == "property" && published == true] | order(_createdAt desc) [0...4] {
       _id,
       propertyName,
+      badgeText,
       featuredImage {alt, asset->{_ref, url}},
       "locationName": linkedLocation->name, // Fetch name from referenced location
       "roomTypeNames": roomTypes[].occupancyName, // Get only the names
@@ -187,6 +189,9 @@ const typeIconMap: { [key: string]: string } = {
                             src={urlFor(property.featuredImage)}
                             alt={property.featuredImage.alt || property.propertyName}
                           />
+                          {property.badgeText && (
+                            <span className="property-badge">{property.badgeText}</span>
+                          )}
                         </div>
                         <div className="card-content">
                           <div className="location flex items-center">
@@ -235,6 +240,9 @@ const typeIconMap: { [key: string]: string } = {
                                 src={urlFor(property.featuredImage)}
                                 alt={property.featuredImage.alt || property.propertyName}
                               />
+                              {property.badgeText && (
+                                <span className="property-badge">{property.badgeText}</span>
+                              )}
                               <div className="coming-soon-overlay">
                                 <div className="coming-soon-meta">
                                   {/* <div className="coming-soon-location flex items-center">

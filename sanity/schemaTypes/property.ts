@@ -88,6 +88,13 @@ export default defineType({
       ]
     }),
     defineField({
+      name: 'badgeText',
+      title: 'Badge Text',
+      type: 'string',
+      description: 'Optional pill text shown on property cards and featured image.',
+      group: 'gallery',
+    }),
+    defineField({
       name: 'galleryImages',
       title: 'Gallery Images (Grid & Lightbox)',
       type: 'array',

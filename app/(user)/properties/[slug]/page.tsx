@@ -93,6 +93,7 @@ type RoomTierForRender = {
 interface PropertyDetail {
     _id: string;
     propertyName: string;
+    badgeText?: string | null;
     coverImage: SanityImage;
     featuredImage: SanityImage;
     galleryImages?: SanityImage[];
@@ -136,6 +137,7 @@ const propertyDetailQuery = groq`
   *[_type == "property" && slug.current == $slug && published == true][0] {
     _id, propertyName, coverImage {alt, asset->{_ref, url}},
     featuredImage {alt, asset->{_ref, url}}, galleryImages[]{alt, asset->{_ref, url}},
+    badgeText,
     topSectionTitle, topSectionSubtext, propertyLocationText, bedCount, bedPostText, description,
     amenities[]{ _key, text, icon{alt, asset->{_ref, url}} },
     locationAccess,
@@ -590,6 +592,9 @@ export default function PropertyDetailPage({ params }: PageProps) {
                             {featuredGalleryImage && (
                                 <div className="featured-image img-item" onClick={() => openLightbox(0)}>
                                     <img src={featuredGalleryImage.src} alt={featuredGalleryImage.alt} />
+                                    {propertyData?.badgeText && (
+                                        <span className="property-badge">{propertyData.badgeText}</span>
+                                    )}
                                 </div> )}
                         </div>
                         <div className="right-section">

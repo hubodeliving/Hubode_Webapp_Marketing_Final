@@ -53,6 +53,25 @@
             aspect-ratio: 16/10;
             object-fit: cover;
           }
+
+          .card-image-container {
+            position: relative;
+          }
+
+          .property-badge {
+            position: absolute;
+            top: 0.9rem;
+            left: 0.9rem;
+            background: $primary-green;
+            color: $white;
+            font-family: Aeonik, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.01em;
+          }
   
           .card-content {
             padding: 1em 1.2em;
@@ -158,6 +177,10 @@
                 display: none;
               }
 
+              .property-badge {
+                z-index: 2;
+              }
+
               .coming-soon-overlay {
                 position: absolute;
                 inset: 0;
@@ -245,6 +268,15 @@
               margin-left: auto;
               margin-right: auto;
             }
+          }
+        }
+
+        .property-card {
+          .property-badge {
+            top: 0.7rem;
+            left: 0.7rem;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
           }
         }
       }

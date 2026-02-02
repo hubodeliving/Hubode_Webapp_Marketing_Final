@@ -45,6 +45,22 @@
 
         &:hover img { transform: scale(1.03); }
     }
+
+    .property-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: $primary-green;
+        color: $white;
+        font-family: Aeonik, sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+        letter-spacing: 0.01em;
+        z-index: 2;
+    }
     .image4 { position: relative; .all-image-icon { position: absolute; bottom: 1em; right: 1em; background-color: rgba(0, 0, 0, 0.6); color: $white; display: flex; align-items: center; gap: 0.5em; padding: 0.5em 0.8em; border-radius: 0.5rem; z-index: 2; cursor: pointer; transition: background-color 0.2s ease; img { width: 18px; height: 18px; object-fit: contain; transform: none !important; filter: brightness(0) invert(1); transition: none; } span { font-family: Aeonik, sans-serif; font-size: 0.9rem; font-weight: 600; line-height: 1; } &:hover { background-color: rgba(0, 0, 0, 0.8); } } }
     @media (max-width: 1024px) {
         .left-section, .right-section {
@@ -64,6 +80,12 @@
         .left-section .featured-image { aspect-ratio: 16 / 10; height: auto; }
         .right-section { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, auto); }
         .image4 .all-image-icon { bottom: 0.8em; right: 0.8em; padding: 0.4em 0.6em; img { width: 16px; height: 16px;} span { font-size: 0.8rem;} }
+        .property-badge {
+            top: 0.7rem;
+            left: 0.7rem;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+        }
     }
 }
 
