@@ -142,8 +142,8 @@ const typeIconMap: { [key: string]: string } = {
               <div className='find-your-space container'>
                   <SectionTitle
                       // title="Find Your Space"
-                      title="Book Now"
-                      subtext="Pick your room. Pack your bags. Hubode is waiting."
+                      title="Book now to Explore Life at Hubode"
+                      subtext="Choose your space. Shape your plans. Hubode awaits."
                   />
                   <p style={{ textAlign: 'center', marginTop: '2rem', color: 'red' }}>{fetchError}</p>
               </div>
@@ -167,8 +167,8 @@ const typeIconMap: { [key: string]: string } = {
           <div className='find-your-space container'>
               <SectionTitle
                   // title="Find Your Space"
-                  title="Book Now"
-                  subtext="Pick your room. Pack your bags. Hubode is waiting."
+                  title="Book now to Explore Life at Hubode"
+                  subtext="Choose your space. Shape your plans. Hubode awaits."
               />
 
               {/* Use fetched properties */}
