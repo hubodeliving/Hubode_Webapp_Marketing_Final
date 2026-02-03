@@ -203,7 +203,7 @@ subtext="At Hubode, our core values of safety, community, diversity, and persona
 
                 <div className="content-container">
                     <p className="intro-text">
-                        It all began with a quiet question in an apartment in an Apartment in London:
+                        It all began with a quiet question in an Apartment in London:
                         <span className="quote-text">“If I had studied in India… where would I have stayed?”</span>
                     </p>
 

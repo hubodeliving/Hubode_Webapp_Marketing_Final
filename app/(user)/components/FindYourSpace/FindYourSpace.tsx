@@ -129,7 +129,7 @@ const typeIconMap: { [key: string]: string } = {
               <div className='find-your-space container'>
                   <SectionTitle
                       // title="Find Your Space"
-                      title="Book now to Explore Life at Hubode"
+                      title="Explore Life at Hubode"
                       subtext="Choose your space. Shape your plans. Hubode awaits."
                   />
                   <p style={{ textAlign: 'center', marginTop: '2rem' }}>No properties available at the moment.</p>
@@ -144,7 +144,7 @@ const typeIconMap: { [key: string]: string } = {
               <div className='find-your-space container'>
                   <SectionTitle
                       // title="Find Your Space"
-                      title="Book now to Explore Life at Hubode"
+                      title="Explore Life at Hubode"
                       subtext="Choose your space. Shape your plans. Hubode awaits."
                   />
                   <p style={{ textAlign: 'center', marginTop: '2rem', color: 'red' }}>{fetchError}</p>
@@ -169,7 +169,7 @@ const typeIconMap: { [key: string]: string } = {
           <div className='find-your-space container'>
               <SectionTitle
                   // title="Find Your Space"
-                  title="Book now to Explore Life at Hubode"
+                  title="Explore Life at Hubode"
                   subtext="Choose your space. Shape your plans. Hubode awaits."
               />
 

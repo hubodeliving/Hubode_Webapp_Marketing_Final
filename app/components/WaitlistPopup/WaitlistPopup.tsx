@@ -328,7 +328,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
               />
             </div>
 
-            <div className="waitlist-form-row">
+            <div className="waitlist-form-row move-in-row">
               <label htmlFor="waitlist-move-in">Move-in Timeline</label>
               <select
                 id="waitlist-move-in"
