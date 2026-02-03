@@ -344,9 +344,6 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
               </select>
             </div>
 
-            {errorMessage && <p className="waitlist-feedback error">{errorMessage}</p>}
-            {successMessage && <p className="waitlist-feedback success">{successMessage}</p>}
-
             <div className="waitlist-actions">
               <button type="submit" className="primary" disabled={isSubmitting}>
                 {isSubmitting ? 'Sending...' : 'Join Waitlist'}
@@ -355,6 +352,9 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
                 Continue to Site
               </button>
             </div>
+
+            {errorMessage && <p className="waitlist-feedback error">{errorMessage}</p>}
+            {successMessage && <p className="waitlist-feedback success">{successMessage}</p>}
           </form>
         </div>
       </div>
