@@ -314,7 +314,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
               </select>
             </div>
 
-            <div className="waitlist-form-row">
+            <div className="waitlist-form-row coming-from-row">
               <label htmlFor="waitlist-coming-from">Coming From</label>
               <input
                 id="waitlist-coming-from"
