@@ -85,6 +85,7 @@
                 color: $grey-text;
                 margin-bottom: 1rem;
                 line-height: 1.6;
+                text-align: justify;
             }
 
             &__body {
@@ -98,6 +99,7 @@
             color: $grey-text;
             line-height: 1.6;
             margin: 0;
+            text-align: justify;
         }
 
         .policy-block-list {
@@ -121,6 +123,7 @@
                 li {
                     color: $grey-text;
                     line-height: 1.6;
+                    text-align: justify;
                 }
             }
         }
