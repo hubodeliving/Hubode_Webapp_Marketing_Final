@@ -8,7 +8,7 @@ const KeyFtSection = () => {
     { title: "Flexible Living", img: "/images/kf2.jpg" },
     { title: "Custom Room Options", img: "/images/kf3.jpg" },
     { title: "Common Spaces", img: "/images/kf4.jpg" },
-    { title: "Fully Furnished", img: "/images/kf5.png" },
+    { title: "Fully Furnished", img: "/images/kf5.jpg" },
     { title: "Prime Locations", img: "/images/kf6.jpg" }
   ];
 
