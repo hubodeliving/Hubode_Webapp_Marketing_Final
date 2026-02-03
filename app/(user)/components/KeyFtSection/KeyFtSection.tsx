@@ -4,7 +4,7 @@ import './kft.scss';
 const KeyFtSection = () => {
   // Updated features array to include image paths
   const features = [
-    { title: "Community Focused", img: "/images/kf1.png" }, // Replace with actual paths
+    { title: "Community Focused", img: "/images/kf1.jpg" }, // Replace with actual paths
     { title: "Flexible Living", img: "/images/kf2.jpg" },
     { title: "Custom Room Options", img: "/images/kf3.jpg" },
     { title: "Common Spaces", img: "/images/kf4.jpg" },
