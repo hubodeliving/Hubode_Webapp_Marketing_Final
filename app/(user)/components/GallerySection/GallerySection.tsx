@@ -8,6 +8,7 @@ export const revalidate = 900; // refresh Instagram data every 15 minutes
 const INSTAGRAM_USERNAME = 'hubodeliving';
 const INSTAGRAM_PROFILE_URL = `https://www.instagram.com/${INSTAGRAM_USERNAME}/`;
 const INSTAGRAM_API_URL = `https://www.instagram.com/api/v1/users/web_profile_info/?username=${INSTAGRAM_USERNAME}`;
+const INSTAGRAM_GRAPH_API_URL = 'https://graph.instagram.com/me/media';
 const INSTAGRAM_HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
   Accept: 'application/json',
@@ -59,6 +60,29 @@ async function fetchImageAsDataUrl(url: string): Promise<string | null> {
 
 async function fetchInstagramPosts(): Promise<InstagramPost[]> {
   try {
+    const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+    if (accessToken) {
+      const graphUrl = `${INSTAGRAM_GRAPH_API_URL}?fields=id,caption,media_url,thumbnail_url,media_type,permalink&access_token=${accessToken}`;
+      const graphResponse = await fetch(graphUrl, { next: { revalidate } });
+      if (!graphResponse.ok) {
+        throw new Error(`Instagram Graph request failed with status ${graphResponse.status}`);
+      }
+
+      const graphPayload = await graphResponse.json();
+      const graphPosts = (graphPayload?.data || []).slice(0, 4).map((item: any, index: number) => {
+        const imageUrl = item.media_type === 'VIDEO' ? item.thumbnail_url : item.media_url;
+        if (!imageUrl) return null;
+        return {
+          id: item.id || `ig-post-${index}`,
+          imageUrl,
+          caption: item.caption || 'Hubode Living on Instagram',
+          permalink: item.permalink || INSTAGRAM_PROFILE_URL,
+        } as InstagramPost;
+      }).filter(Boolean) as InstagramPost[];
+
+      if (graphPosts.length) return graphPosts;
+    }
+
     const response = await fetch(INSTAGRAM_API_URL, {
       headers: INSTAGRAM_HEADERS,
       next: { revalidate },

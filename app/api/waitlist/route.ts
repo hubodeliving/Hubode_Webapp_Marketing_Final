@@ -37,7 +37,9 @@ export async function POST(request: Request) {
       );
     }
 
-    await appendWaitlistEntry({
+    const webhookUrl = process.env.GOOGLE_WAITLIST_WEBHOOK;
+    const payload = {
+      timestamp: new Date().toISOString(),
       name,
       phone,
       occupation,
@@ -47,7 +49,32 @@ export async function POST(request: Request) {
       propertyName,
       propertyLocation,
       roomType,
-    });
+    };
+
+    if (webhookUrl) {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text().catch(() => '');
+        throw new Error(`Webhook error: ${response.status} ${errorText}`);
+      }
+    } else {
+      await appendWaitlistEntry({
+        name,
+        phone,
+        occupation,
+        comingFrom,
+        moveInTimeline,
+        source,
+        propertyName,
+        propertyLocation,
+        roomType,
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
