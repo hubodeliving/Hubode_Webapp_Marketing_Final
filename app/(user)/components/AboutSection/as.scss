@@ -50,6 +50,28 @@
     margin: 0 auto;
 }
 
+.about-section.container.text-only .content-section h3 {
+    color: $black;
+    text-align: center;
+    font-family: Aeonik, sans-serif;
+    font-size: 2.0625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 0.4em;
+}
+
+.about-section.container.text-only .content-section p {
+    color: $grey-text;
+    text-align: center;
+    font-family: Aeonik, sans-serif;
+    font-size: 1.0625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5625rem;
+    margin: 0;
+}
+
 .image-section {
     img {
         display: block; // Remove extra space below image
@@ -83,4 +105,7 @@
          h3 { font-size: 1.8rem; } // Slightly smaller heading on mobile
          p { font-size: 0.95rem; } // Slightly smaller text on mobile
     }
+
+    .about-section.container.text-only .content-section h3 { font-size: 2rem; }
+    .about-section.container.text-only .content-section p { font-size: 1rem; }
 }
