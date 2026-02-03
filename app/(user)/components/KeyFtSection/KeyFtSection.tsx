@@ -9,7 +9,7 @@ const KeyFtSection = () => {
     { title: "Custom Room Options", img: "/images/kf3.jpg" },
     { title: "Common Spaces", img: "/images/kf4.jpg" },
     { title: "Fully Furnished", img: "/images/kf5.png" },
-    { title: "Prime Locations", img: "/images/kf6.png" }
+    { title: "Prime Locations", img: "/images/kf6.jpg" }
   ];
 
   return (
