@@ -4,9 +4,9 @@ import SectionTitle from '../SectionTitle/SectionTitle'; // Import the reusable 
 
 // Define data for the cards
 const unitTypes = [
-  { title: "Single Room", img: "/images/single-room-image.png" }, // Replace with actual image paths
-  { title: "Twin Sharing", img: "/images/twin-room.png" },
-  { title: "4 - Sharing", img: "/images/four-sharing-room-image.png" } // Using '4-Share' for consistency if it matches data
+  { title: "Single Room", img: "/images/single-room.jpeg" }, // Replace with actual image paths
+  { title: "Twin Sharing", img: "/images/twin-room.jpeg" },
+  { title: "4 - Sharing", img: "/images/four-sharing-room-image.jpeg" } // Using '4-Share' for consistency if it matches data
 ];
 
 const TypeOfUnits = () => {
