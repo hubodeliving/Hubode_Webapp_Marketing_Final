@@ -51,7 +51,7 @@ And not everyone needs another overpriced studio.
 Hubode is for the in-betweeners. The makers, thinkers, interns, creatives, coders, and coffee-after-midnight types. 
 We built this so you can live fully for 30 days at a time.
 "
-    imageUrl="/images/abt-img-card1.png" // Use the correct image path
+    imageUrl="/images/abt-image.jpeg" // Use the correct image path
     imageAlt="Comfortable modern room with bed and desk"
 />
 
