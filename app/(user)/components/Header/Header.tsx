@@ -210,13 +210,6 @@ const Header = ({ isAltTheme = false }: HeaderProps) => {
     closeAllMenus();
   };
 
-  const triggerWaitlistPopup = () => {
-    closeAllMenus();
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('open-waitlist-popup'));
-    }
-  };
-
     const userMenuItems = currentUser
       ? [
           { text: "Profile", href: "/profile" },
@@ -316,13 +309,13 @@ const Header = ({ isAltTheme = false }: HeaderProps) => {
         {/* ------------------ desktop buttons & USER MENU ------------------ */}
         <div className="right-side-container desktop-nav">
           <div className="buttons-container flex items-center">
-            <button
-              type="button"
-              onClick={triggerWaitlistPopup}
+            <Link
+              href="/properties/hubode-roots2"
+              onClick={closeAllMenus}
               className="desktop-button"
             >
               Join Waitlist
-            </button>
+            </Link>
             <Link
               href="/contact"
               onClick={closeAllMenus}
@@ -408,13 +401,13 @@ const Header = ({ isAltTheme = false }: HeaderProps) => {
           </nav>
 
           <div className="mobile-menu-buttons">
-            <button
-              type="button"
+            <Link
+              href="/properties/hubode-roots2"
               className="btn-mobile"
-              onClick={triggerWaitlistPopup}
+              onClick={closeAllMenus}
             >
               Join Waitlist
-            </button>
+            </Link>
             <Link
               href="/contact"
               className="btn-mobile btn-green"

@@ -95,9 +95,8 @@ export default function RootLayout({
   useEffect(() => {
     if (!isClientCheckDone) return;
     try {
-      const hasDismissedPopup = sessionStorage.getItem(WAITLIST_SESSION_KEY) === 'true';
-      const isOnHomepage = window.location.pathname === '/';
-      setShowWaitlistPopup(isOnHomepage && !hasDismissedPopup);
+      // Disable auto-opening the initial waitlist popup on page load.
+      setShowWaitlistPopup(false);
     } catch (error) {
       console.error("Waitlist popup session storage check failed:", error);
       setShowWaitlistPopup(false);
