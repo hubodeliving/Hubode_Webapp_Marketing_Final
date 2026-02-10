@@ -94,19 +94,19 @@
             .steps-icon-container {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                gap: 2.5em; // Adjust vertical gap
+                gap: 1.6em; // Tighter gap for mobile
             }
             .steps-icon-container .hubode-step-item:last-child {
                 grid-column: span 2;
                 justify-self: center;
-                max-width: 50%;
+                max-width: 70%;
             }
-            .heading-section h3 {
-                font-size: 2rem;
-            }
-            .step-item p {
-                max-width: 80%; // Allow slightly wider text on mobile
-            }
+            .heading-section h3 { font-size: 1.75rem; }
+            .heading-section p { font-size: 0.95rem; }
+            .hubode-step-item h6 { font-size: 0.95rem; }
+            .hubode-step-item p { font-size: 0.9rem; max-width: 90%; }
+            .hubode-step-icon { margin: 0.6rem; }
+            .hubode-step-icon img { width: 3.5rem !important; height: 3.5rem !important; }
         }
     }
 }
