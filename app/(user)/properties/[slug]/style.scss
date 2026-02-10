@@ -120,7 +120,7 @@
     // Keep original .description-section styles
     .description-section {
         h4 { color: $black; font-family: Aeonik, sans-serif; font-size: 1.4375rem; font-weight: 700; line-height: normal; margin-bottom: 1rem; }
-        .description-text { color: $grey-text; font-family: Aeonik, sans-serif; font-size: 1.0625rem; font-weight: 400; line-height: 1.625rem; margin-bottom: 0.8rem; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; max-height: calc(1.625rem * 4); transition: max-height 0.4s ease-out; text-align: justify; &.expanded { -webkit-line-clamp: unset; max-height: 1000px; } }
+        .description-text { color: $grey-text; font-family: Aeonik, sans-serif; font-size: 1.0625rem; font-weight: 400; line-height: 1.625rem; margin-bottom: 0.8rem; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; max-height: calc(1.625rem * 4); transition: max-height 0.4s ease-out; text-align: left; &.expanded { -webkit-line-clamp: unset; max-height: 1000px; } }
         .read-more-button { background: none; border: none; padding: 0; color: $primary-green; font-family: Aeonik, sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4em; .arrow { width: 1em; height: 1em; transition: transform 0.3s ease; &.up { transform: rotate(180deg); } } }
     }
 
