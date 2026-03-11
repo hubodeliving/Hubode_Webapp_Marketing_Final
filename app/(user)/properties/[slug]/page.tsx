@@ -132,6 +132,14 @@ interface ReservationDocument extends Models.Document {
     reservationTimestamp: string;
 }
 
+interface PropertyWaitlistContext {
+    propertyName: string;
+    propertyLocationShort: string;
+    roomTypeOptions: Array<{ id: string; label: string; rate?: string }>;
+    selectedRoomTypeId?: string | null;
+    selectedRoomRate?: string;
+}
+
 // --- GROQ Query ---
 const propertyDetailQuery = groq`
   *[_type == "property" && slug.current == $slug && published == true][0] {
@@ -222,19 +230,35 @@ export default function PropertyDetailPage({ params }: PageProps) {
             (group.tiers || []).map(tier => ({
                 id: tier._key,
                 label: `${group.occupancyName === 'Double' || group.occupancyName === 'Duo' ? 'Twin' : group.occupancyName} - ${tier.tierName}`,
+                rate: (() => {
+                    const prices: number[] = [];
+                    if (typeof tier.pricePerMonth === 'number' && tier.pricePerMonth > 0) prices.push(tier.pricePerMonth);
+                    if (typeof tier.bunkPricing?.upperBunkPrice === 'number' && tier.bunkPricing.upperBunkPrice > 0) prices.push(tier.bunkPricing.upperBunkPrice);
+                    if (typeof tier.bunkPricing?.lowerBunkPrice === 'number' && tier.bunkPricing.lowerBunkPrice > 0) prices.push(tier.bunkPricing.lowerBunkPrice);
+                    tier.sqftOptions?.forEach((option) => {
+                        if (typeof option?.pricePerMonth === 'number' && option.pricePerMonth > 0) {
+                            prices.push(option.pricePerMonth);
+                        }
+                    });
+                    if (prices.length === 0) return undefined;
+                    return `INR ${Math.min(...prices).toLocaleString('en-IN')} / month`;
+                })(),
             }))
         );
     }, [propertyData?.roomTypes]);
 
-    const propertyWaitlistContext = useMemo(() => {
+    const propertyWaitlistContext = useMemo<PropertyWaitlistContext | undefined>(() => {
         if (!propertyName) return undefined;
         return {
             propertyName,
             propertyLocationShort: propertyLocationLabel,
             roomTypeOptions: waitlistRoomOptions,
             selectedRoomTypeId: selectedTierKey,
+            selectedRoomRate: selectedTierPrice !== null
+                ? `INR ${selectedTierPrice.toLocaleString('en-IN')} / month`
+                : waitlistRoomOptions.find((option) => option.id === selectedTierKey)?.rate,
         };
-    }, [propertyName, propertyLocationLabel, waitlistRoomOptions, selectedTierKey]);
+    }, [propertyName, propertyLocationLabel, waitlistRoomOptions, selectedTierKey, selectedTierPrice]);
 
     const handleShare = useCallback(async () => {
         const currentUrl = window.location.href;
@@ -996,7 +1020,7 @@ export default function PropertyDetailPage({ params }: PageProps) {
                 isVisible={isWaitlistPopupOpen}
                 onClose={() => setIsWaitlistPopupOpen(false)}
                 mode="property"
-                source="roombooking"
+                source="room-booking"
                 propertyContext={propertyWaitlistContext}
             />
 

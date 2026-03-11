@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
+import { escapeHtml, sendBrevoEmail } from '@/lib/brevo';
 import { appendWaitlistEntry } from '@/lib/googleSheets';
+
+export const runtime = 'nodejs';
 
 interface WaitlistRequestBody {
   name?: string;
+  email?: string;
   phone?: string;
   occupation?: string;
   comingFrom?: string;
@@ -11,16 +15,190 @@ interface WaitlistRequestBody {
   propertyName?: string;
   propertyLocation?: string;
   roomType?: string;
+  roomRate?: string;
 }
 
 function sanitize(value?: string) {
   return typeof value === 'string' ? value.trim() : '';
 }
 
+function sanitizeEmail(value?: string) {
+  return sanitize(value).toLowerCase();
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function buildWaitlistConfirmationEmail({
+  recipientName,
+  propertyName,
+  propertyLocation,
+  roomType,
+  roomRate,
+  moveInTimeline,
+  phone,
+  email,
+  source,
+  submittedAt,
+  siteUrl,
+}: {
+  recipientName: string;
+  propertyName: string;
+  propertyLocation: string;
+  roomType: string;
+  roomRate: string;
+  moveInTimeline: string;
+  phone: string;
+  email: string;
+  source: string;
+  submittedAt: string;
+  siteUrl: string;
+}) {
+  const brand = {
+    green: '#193C35',
+    pink: '#EDD3E3',
+    grey: '#585858',
+    cloud: '#E3E5E6',
+    white: '#FFFFFF',
+  };
+
+  const logoUrl = `${siteUrl}/images/Logo-green.svg`;
+  const title = propertyName
+    ? 'Your booking request has been noted'
+    : 'You are on the Hubode waitlist';
+  const subject = propertyName
+    ? `Booking request received for ${propertyName}`
+    : 'Your Hubode waitlist request has been received';
+  const sourceLabel = source
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+
+  const summaryRows = [
+    propertyName ? ['Property', propertyName] : null,
+    propertyLocation ? ['Location', propertyLocation] : null,
+    roomType ? ['Room type', roomType] : null,
+    roomRate ? ['Indicative monthly rent', roomRate] : null,
+    ['Move-in timeline', moveInTimeline],
+    ['Phone', phone],
+    ['Email', email],
+    ['Requested on', submittedAt],
+    ['Submission type', sourceLabel],
+  ].filter(Boolean) as Array<[string, string]>;
+
+  const summaryHtml = summaryRows
+    .map(
+      ([label, value]) => `
+        <tr>
+          <td style="padding: 12px 0; border-bottom: 1px solid ${brand.cloud}; color: ${brand.grey}; font-size: 14px; width: 42%;">
+            ${escapeHtml(label)}
+          </td>
+          <td style="padding: 12px 0; border-bottom: 1px solid ${brand.cloud}; color: #111111; font-size: 14px; font-weight: 600;">
+            ${escapeHtml(value)}
+          </td>
+        </tr>
+      `
+    )
+    .join('');
+
+  const introCopy = propertyName
+    ? `We've received your booking request for ${propertyName}${roomType ? `, ${roomType}` : ''}.`
+    : 'We have received your Hubode waitlist request.';
+
+  const nextStepsCopy = propertyName
+    ? 'Our team will review the request and contact you shortly with the next steps for availability, pricing confirmation, and move-in process.'
+    : 'Our team will contact you shortly with updates, launch details, and the next steps.';
+
+  return {
+    subject,
+    html: `
+      <!doctype html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>${escapeHtml(subject)}</title>
+        </head>
+        <body style="margin: 0; padding: 0; background: ${brand.cloud}; font-family: Arial, sans-serif; color: #111111;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background: ${brand.cloud}; padding: 28px 12px;">
+            <tr>
+              <td align="center">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width: 680px; background: ${brand.white}; border-radius: 24px; overflow: hidden;">
+                  <tr>
+                    <td style="background: ${brand.white}; padding: 28px 32px 20px; border-bottom: 1px solid ${brand.cloud};">
+                      <img src="${logoUrl}" alt="Hubode Living" width="148" style="display: block; width: 148px; max-width: 100%; height: auto;" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 32px;">
+                      <div style="display: inline-block; padding: 8px 12px; border-radius: 999px; background: ${brand.pink}; color: ${brand.green}; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">
+                        Booking Confirmation
+                      </div>
+                      <h1 style="margin: 20px 0 12px; font-size: 30px; line-height: 1.15; color: ${brand.green};">
+                        ${escapeHtml(title)}
+                      </h1>
+                      <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.7; color: #111111;">
+                        Hi ${escapeHtml(recipientName)},
+                      </p>
+                      <p style="margin: 0 0 12px; font-size: 16px; line-height: 1.7; color: ${brand.grey};">
+                        ${escapeHtml(introCopy)} Your submission has been noted successfully.
+                      </p>
+                      <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.7; color: ${brand.grey};">
+                        ${escapeHtml(nextStepsCopy)}
+                      </p>
+
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border: 1px solid ${brand.cloud}; border-radius: 18px; padding: 0 20px; background: #fafafa;">
+                        <tr>
+                          <td style="padding: 20px 20px 8px; font-size: 18px; font-weight: 700; color: ${brand.green};">
+                            Request summary
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 0 20px 20px;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                              ${summaryHtml}
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top: 24px; background: ${brand.green}; border-radius: 18px;">
+                        <tr>
+                          <td style="padding: 22px 24px;">
+                            <p style="margin: 0 0 8px; color: ${brand.white}; font-size: 16px; font-weight: 700;">What happens next</p>
+                            <p style="margin: 0; color: rgba(255,255,255,0.88); font-size: 14px; line-height: 1.7;">
+                              Our team will get in touch shortly for the further process. If you need to update anything in this request, reply to this email and we’ll take it forward.
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0 32px 32px;">
+                      <p style="margin: 0; font-size: 13px; line-height: 1.7; color: ${brand.grey};">
+                        Hubode Living<br />
+                        Community-first co-living spaces built for belonging.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+      </html>
+    `,
+  };
+}
+
 export async function POST(request: Request) {
   try {
     const body: WaitlistRequestBody = await request.json();
     const name = sanitize(body.name);
+    const email = sanitizeEmail(body.email);
     const phone = sanitize(body.phone);
     const occupation = sanitize(body.occupation);
     const comingFrom = sanitize(body.comingFrom);
@@ -29,18 +207,28 @@ export async function POST(request: Request) {
     const propertyName = sanitize(body.propertyName);
     const propertyLocation = sanitize(body.propertyLocation);
     const roomType = sanitize(body.roomType);
+    const roomRate = sanitize(body.roomRate);
 
-    if (!name || !phone || !occupation || !comingFrom || !moveInTimeline) {
+    if (!name || !email || !phone || !occupation || !comingFrom || !moveInTimeline) {
       return NextResponse.json(
         { error: 'All fields are required.' },
         { status: 400 }
       );
     }
 
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { error: 'A valid email address is required.' },
+        { status: 400 }
+      );
+    }
+
     const webhookUrl = process.env.GOOGLE_WAITLIST_WEBHOOK;
+    const timestamp = new Date().toISOString();
     const payload = {
-      timestamp: new Date().toISOString(),
+      timestamp,
       name,
+      email,
       phone,
       occupation,
       comingFrom,
@@ -49,6 +237,7 @@ export async function POST(request: Request) {
       propertyName,
       propertyLocation,
       roomType,
+      roomRate,
     };
 
     if (webhookUrl) {
@@ -65,6 +254,7 @@ export async function POST(request: Request) {
     } else {
       await appendWaitlistEntry({
         name,
+        email,
         phone,
         occupation,
         comingFrom,
@@ -73,10 +263,52 @@ export async function POST(request: Request) {
         propertyName,
         propertyLocation,
         roomType,
+        roomRate,
       });
     }
 
-    return NextResponse.json({ success: true });
+    let emailSent = true;
+    let warning: string | undefined;
+
+    try {
+      const siteUrl = new URL(request.url).origin;
+      const submittedAt = new Intl.DateTimeFormat('en-IN', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      }).format(new Date(timestamp));
+      const replyToEmail = process.env.BREVO_REPLY_TO_EMAIL || process.env.BREVO_SENDER_EMAIL;
+      const emailTemplate = buildWaitlistConfirmationEmail({
+        recipientName: name,
+        propertyName,
+        propertyLocation,
+        roomType,
+        roomRate,
+        moveInTimeline,
+        phone,
+        email,
+        source,
+        submittedAt,
+        siteUrl,
+      });
+
+      await sendBrevoEmail({
+        to: [{ email, name }],
+        replyTo: replyToEmail
+          ? {
+              email: replyToEmail,
+              name: process.env.BREVO_REPLY_TO_NAME || process.env.BREVO_SENDER_NAME || 'Hubode Living',
+            }
+          : undefined,
+        subject: emailTemplate.subject,
+        htmlContent: emailTemplate.html,
+      });
+    } catch (emailError) {
+      emailSent = false;
+      warning = 'Your request was saved, but the confirmation email could not be sent right now.';
+      console.error('[api/waitlist] Confirmation email failed:', emailError);
+    }
+
+    return NextResponse.json({ success: true, emailSent, warning });
   } catch (error) {
     console.error('[api/waitlist] Failed to append row:', error);
     return NextResponse.json(

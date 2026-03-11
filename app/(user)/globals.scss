@@ -8,6 +8,12 @@ body {
     position: relative;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 // app/globals.scss
 // --- Aeonik Font Definitions ---
 // Thin (Weight 100)
@@ -209,18 +215,24 @@ $breakpoint-xs: 480px;
     }
 }
 
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1.25rem, 2vw, 2rem);
+    padding-right: clamp(1.25rem, 2vw, 2rem);
+}
+
 @media (max-width: 790.98px) {
-    // Target screens just below 640px
     .container {
-        padding-left: 1.5rem; // Add 1rem (16px) padding on the left
-        padding-right: 1.5rem; // Add 1rem (16px) padding on the right
-        // Adjust the '1rem' value if you prefer different padding (e.g., 1.5rem)
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
 }
 
-@media(max-width:1300px) {
+@media (min-width: 1440px) {
     .container {
-        padding-left: 1.4rem;
-        padding-right: 1.4rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 }

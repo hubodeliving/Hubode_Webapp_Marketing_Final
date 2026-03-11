@@ -8,8 +8,9 @@ type WaitlistMode = 'general' | 'property';
 interface PropertyPopupContext {
   propertyName: string;
   propertyLocationShort: string;
-  roomTypeOptions: Array<{ id: string; label: string }>;
+  roomTypeOptions: Array<{ id: string; label: string; rate?: string }>;
   selectedRoomTypeId?: string | null;
+  selectedRoomRate?: string;
 }
 
 interface WaitlistPopupProps {
@@ -22,6 +23,7 @@ interface WaitlistPopupProps {
 
 interface FormState {
   name: string;
+  email: string;
   phone: string;
   occupation: string;
   comingFrom: string;
@@ -29,10 +31,12 @@ interface FormState {
   propertyName: string;
   propertyLocation: string;
   roomType: string;
+  roomRate: string;
 }
 
 const initialFormState: FormState = {
   name: '',
+  email: '',
   phone: '',
   occupation: '',
   comingFrom: '',
@@ -40,6 +44,7 @@ const initialFormState: FormState = {
   propertyName: '',
   propertyLocation: '',
   roomType: '',
+  roomRate: '',
 };
 
 const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
@@ -86,6 +91,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
       setFormData((prev) => ({
         ...prev,
         name: '',
+        email: '',
         phone: '',
         occupation: '',
         comingFrom: '',
@@ -117,6 +123,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
         propertyName: propertyContext.propertyName,
         propertyLocation: propertyContext.propertyLocationShort,
         roomType: shouldSyncRoomType ? selectedLabel : (prev.roomType || selectedLabel),
+        roomRate: propertyContext.selectedRoomRate || prev.roomRate,
       };
     });
   }, [isVisible, isPropertyMode, propertyContext, defaultRoomTypeLabel]);
@@ -135,7 +142,18 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => {
+      if (name === 'roomType' && isPropertyMode) {
+        const selectedOption = normalizedRoomTypeOptions.find((option) => option.label === value);
+        return {
+          ...prev,
+          roomType: value,
+          roomRate: selectedOption?.rate || '',
+        };
+      }
+
+      return { ...prev, [name]: value };
+    });
     setErrorMessage(null);
     setSuccessMessage(null);
   };
@@ -143,11 +161,19 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!formData.name.trim()
+        || !formData.email.trim()
         || !formData.phone.trim()
         || !formData.occupation.trim()
         || !formData.comingFrom.trim()
         || !formData.moveInTimeline.trim()) {
       setErrorMessage('Please fill out every field to join the waitlist.');
+      setSuccessMessage(null);
+      return;
+    }
+    const normalizedEmail = formData.email.trim().toLowerCase();
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail);
+    if (!isValidEmail) {
+      setErrorMessage('Please enter a valid email address.');
       setSuccessMessage(null);
       return;
     }
@@ -169,19 +195,25 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          email: normalizedEmail,
           source: submissionSource,
         }),
       });
 
+      let responseData: { warning?: string; emailSent?: boolean; error?: string } | null = null;
+      try {
+        responseData = await response.json();
+      } catch (err) {
+        responseData = null;
+      }
+
       if (!response.ok) {
         let message = 'Unable to submit right now.';
-        try {
-          const data = await response.json();
-          if (data?.error) {
-            message = data.error;
-          }
-        } catch (err) {
-          // ignore parse errors
+        if (responseData?.warning) {
+          message = responseData.warning;
+        }
+        if (responseData?.error) {
+          message = responseData.error;
         }
         throw new Error(message);
       }
@@ -189,12 +221,17 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
       setFormData((prev) => ({
         ...prev,
         name: '',
+        email: '',
         phone: '',
         occupation: '',
         comingFrom: '',
         moveInTimeline: '',
       }));
-      setSuccessMessage("Thanks! You're on the list - we'll be in touch soon.");
+      setSuccessMessage(
+        responseData?.emailSent === false
+          ? 'Request saved. We could not send the confirmation email right now, but our team has your details.'
+          : "Thanks! Your booking request has been noted and a confirmation email is on its way."
+      );
     } catch (error) {
       console.error('Waitlist submission failed:', error);
       setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
@@ -281,6 +318,20 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 autoComplete="given-name"
+              />
+            </div>
+
+            <div className="waitlist-form-row">
+              <label htmlFor="waitlist-email">Email</label>
+              <input
+                id="waitlist-email"
+                name="email"
+                type="email"
+                placeholder="Enter your Email Address"
+                value={formData.email}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+                autoComplete="email"
               />
             </div>
 

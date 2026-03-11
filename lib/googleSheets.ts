@@ -58,6 +58,7 @@ function formatSheetRange(range: string) {
 
 export interface WaitlistEntry {
   name: string;
+  email: string;
   phone: string;
   occupation: string;
   comingFrom: string;
@@ -66,6 +67,7 @@ export interface WaitlistEntry {
   propertyName?: string;
   propertyLocation?: string;
   roomType?: string;
+  roomRate?: string;
 }
 
 export async function appendWaitlistEntry(entry: WaitlistEntry) {
@@ -75,6 +77,7 @@ export async function appendWaitlistEntry(entry: WaitlistEntry) {
   const values = [[
     new Date().toISOString(),
     entry.name,
+    entry.email,
     entry.phone,
     entry.occupation,
     entry.comingFrom,
@@ -83,11 +86,12 @@ export async function appendWaitlistEntry(entry: WaitlistEntry) {
     entry.propertyName ?? '',
     entry.propertyLocation ?? '',
     entry.roomType ?? '',
+    entry.roomRate ?? '',
   ]];
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: formatSheetRange('A:J'),
+    range: formatSheetRange('A:L'),
     valueInputOption: 'USER_ENTERED',
     insertDataOption: 'INSERT_ROWS',
     requestBody: {
