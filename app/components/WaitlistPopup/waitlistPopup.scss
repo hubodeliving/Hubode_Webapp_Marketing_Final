@@ -65,6 +65,7 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     padding-right: 0.25rem;
+    padding-bottom: 0.9rem;
     @media(max-width: 768px) {
         gap: 0.5rem;
     }
@@ -163,6 +164,8 @@
     grid-column: 1 / span 2;
     font-size: 0.95rem;
     margin: 0;
+    padding-bottom: 0.15rem;
+    line-height: 1.55;
     font-family: 'Aeonik', sans-serif;
     &.error {
         color: #c6524e;

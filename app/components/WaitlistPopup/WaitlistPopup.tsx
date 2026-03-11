@@ -61,6 +61,8 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
   const [isClosing, setIsClosing] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastSelectedRoomTypeRef = useRef<string | null>(null);
+  const modalContentRef = useRef<HTMLDivElement | null>(null);
+  const feedbackRef = useRef<HTMLParagraphElement | null>(null);
   const isPropertyMode = mode === 'property' && Boolean(propertyContext);
 
   const normalizedRoomTypeOptions = propertyContext?.roomTypeOptions ?? [];
@@ -127,6 +129,27 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
       };
     });
   }, [isVisible, isPropertyMode, propertyContext, defaultRoomTypeLabel]);
+
+  useEffect(() => {
+    if (!isVisible || (!errorMessage && !successMessage)) return;
+
+    const timeoutId = window.setTimeout(() => {
+      feedbackRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+
+      const container = modalContentRef.current;
+      if (container) {
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    }, 40);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [errorMessage, successMessage, isVisible]);
 
   if (!isVisible) {
     return null;
@@ -265,7 +288,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
           </svg>
         </button>
 
-        <div className="waitlist-modal-content">
+        <div className="waitlist-modal-content" ref={modalContentRef}>
           <p className="waitlist-eyebrow">{eyebrowCopy}</p>
           <h3 id="waitlist-title" className="waitlist-title">{titleCopy}</h3>
           <p id="waitlist-subtext" className="waitlist-subtext">
@@ -404,8 +427,8 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
               </button>
             </div>
 
-            {errorMessage && <p className="waitlist-feedback error">{errorMessage}</p>}
-            {successMessage && <p className="waitlist-feedback success">{successMessage}</p>}
+            {errorMessage && <p ref={feedbackRef} className="waitlist-feedback error">{errorMessage}</p>}
+            {successMessage && <p ref={feedbackRef} className="waitlist-feedback success">{successMessage}</p>}
           </form>
         </div>
       </div>
