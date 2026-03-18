@@ -22,12 +22,12 @@ export function escapeHtml(value: string) {
 }
 
 export async function sendBrevoEmail(payload: BrevoEmailPayload) {
-  const senderEmail = process.env.BREVO_SENDER_EMAIL;
-  const senderName = process.env.BREVO_SENDER_NAME || 'Hubode Living';
-  const apiKey = process.env.BREVO_API_KEY;
+  const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
+  const senderName = process.env.BREVO_SENDER_NAME?.trim() || 'Hubode Living';
+  const apiKey = process.env.BREVO_API_KEY?.trim();
 
   if (!senderEmail || !apiKey) {
-    throw new Error('Missing Brevo configuration.');
+    throw new Error(`Missing Brevo configuration. SenderEmail present: ${!!senderEmail}, APIKey present: ${!!apiKey}`);
   }
 
   const response = await fetch(BREVO_API_URL, {

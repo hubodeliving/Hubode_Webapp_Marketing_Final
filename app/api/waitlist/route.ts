@@ -346,8 +346,10 @@ export async function POST(request: Request) {
       });
     } catch (emailError) {
       emailSent = false;
-      warning = 'Your request was saved, but the confirmation email could not be sent right now.';
-      console.error('[api/waitlist] Confirmation email failed:', emailError);
+      const debugError = emailError instanceof Error ? emailError.message : String(emailError);
+      warning = `Your request was saved, but the confirmation email could not be sent right now.`;
+      console.error('[api/waitlist] Confirmation email failed:', debugError);
+      return NextResponse.json({ success: true, emailSent, warning, debugError });
     }
 
     return NextResponse.json({ success: true, emailSent, warning });
