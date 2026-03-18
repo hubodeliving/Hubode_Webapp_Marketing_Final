@@ -166,11 +166,9 @@ function buildWaitlistConfirmationEmail({
               <td align="center">
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" class="email-card" style="max-width: 680px; background: ${brand.white}; border-radius: 24px; overflow: hidden;">
                   <tr>
-                    <td style="background: ${brand.white}; padding: 28px 32px 20px; border-bottom: 1px solid ${brand.cloud};">
-                      <div class="brand-wordmark" style="font-size: 38px; line-height: 1; font-weight: 800; letter-spacing: -1.6px; color: ${brand.green};">
-                        hubode
-                      </div>
-                      <div class="brand-caption" style="margin-top: 8px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: ${brand.grey};">
+                    <td style="background: ${brand.green}; padding: 32px 32px 28px; border-radius: 24px 24px 0 0;">
+                      <img src="https://www.hubodeliving.com/images/footer-logo.svg" alt="Hubode" width="160" style="display: block; border: 0; max-width: 100%; height: auto; margin: 0;" />
+                      <div class="brand-caption" style="margin-top: 12px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: ${brand.softGreen}; opacity: 0.9;">
                         Community-first living
                       </div>
                     </td>
