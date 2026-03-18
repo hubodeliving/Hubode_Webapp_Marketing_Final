@@ -372,7 +372,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
               />
             </div>
 
-            <div className="waitlist-form-row">
+            <div className="waitlist-form-row pursuit-row">
               <label htmlFor="waitlist-occupation">Pursuit</label>
               <select
                 id="waitlist-occupation"
@@ -411,7 +411,7 @@ const WaitlistPopup: React.FC<WaitlistPopupProps> = ({
                 onChange={handleInputChange}
                 disabled={isSubmitting}
               >
-                <option value="" disabled>When you're planning to move in</option>
+                <option value="" disabled>Choose timeline</option>
                 <option value="Immediately">Immediately</option>
                 <option value="1-3 months">1-3 months</option>
                 <option value="3+ months">3+ months</option>

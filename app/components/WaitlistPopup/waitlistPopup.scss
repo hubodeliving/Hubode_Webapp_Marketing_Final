@@ -239,13 +239,14 @@
     .waitlist-form-row {
         grid-column: span 1;
     }
-    .waitlist-form-row.move-in-row {
-        grid-column: 1 / -1;
-    }
     .waitlist-form-row.full-width {
         grid-column: 1 / -1;
     }
+    .waitlist-form-row.pursuit-row {
+        grid-column-start: 1;
+    }
     .waitlist-form-row.coming-from-row {
+        grid-column: 1 / -1;
         order: 99;
     }
     .waitlist-form-row.move-in-row {
