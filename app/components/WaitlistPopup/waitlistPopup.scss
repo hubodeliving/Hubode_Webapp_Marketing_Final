@@ -61,6 +61,8 @@
 .waitlist-modal-content {
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
     gap: 1.25rem;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -251,17 +253,16 @@
     }
     .waitlist-actions {
         order: 100;
-    }
-    .waitlist-feedback {
-        grid-column: 1 / -1;
-    }
-    .waitlist-actions {
         flex-direction: row;
         gap: 0.75rem;
         button {
             width: auto;
             flex: 1;
         }
+    }
+    .waitlist-feedback {
+        grid-column: 1 / -1;
+        order: 101;
     }
     .waitlist-eyebrow {
         font-size: 1.05rem;
